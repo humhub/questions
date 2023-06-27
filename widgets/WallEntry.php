@@ -8,13 +8,13 @@
 namespace humhub\modules\questions\widgets;
 
 use humhub\modules\content\widgets\stream\WallStreamModuleEntryWidget;
+use humhub\modules\questions\helpers\Url;
 
 /**
  * Question WallEntry Widget is used to display a question inside the stream.
  *
- * This Widget will used by the Poll Model in Method getWallOut().
+ * This Widget is used by the Question Model in Method getWallOut().
  *
- * @since 0.5
  * @author Luke
  */
 class WallEntry extends WallStreamModuleEntryWidget
@@ -22,12 +22,12 @@ class WallEntry extends WallStreamModuleEntryWidget
     /**
      * @inheritdoc
      */
-    public $createRoute = '/questions/question/create-form';
+    public $createRoute = Url::ROUTE_QUESTION_CREATE_FORM;
 
     /**
      * @inheritdoc
      */
-    public $editRoute = '/questionss/questions/edit';
+    public $editRoute = Url::ROUTE_QUESTION_EDIT;
 
     /**
      * @inheritdoc
@@ -44,9 +44,16 @@ class WallEntry extends WallStreamModuleEntryWidget
      */
     public function renderContent()
     {
-        return $this->render('entry', ['question' => $this->model,
-            'user' => $this->model->content->createdBy,
-            'contentContainer' => $this->model->content->container]);
+        return $this->render('entry', [
+            'question' => $this->model,
+            'options' => [
+                'data' => [
+                    'poll' => $this->model->id,
+                    'content-component' => 'questions.Question',
+                    'content-key' => $this->model->content->id
+                ]
+            ]
+        ]);
     }
 
     /**

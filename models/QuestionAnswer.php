@@ -7,9 +7,9 @@
 
 namespace humhub\modules\questions\models;
 
+use humhub\modules\content\components\ContentActiveRecord;
 use humhub\modules\content\widgets\richtext\RichText;
 use humhub\modules\questions\permissions\CreateQuestion;
-use humhub\modules\content\components\ContentActiveRecord;
 use Yii;
 use yii\db\ActiveQuery;
 
@@ -28,16 +28,10 @@ use yii\db\ActiveQuery;
  */
 class QuestionAnswer extends ContentActiveRecord
 {
-
     /**
      * @inheritdoc
      */
     protected $createPermission = CreateQuestion::class;
-
-    /**
-     * @inheritdoc
-     */
-    public $moduleId = 'questions';
 
     /**
      * @inheritdoc
@@ -53,7 +47,8 @@ class QuestionAnswer extends ContentActiveRecord
     public function rules()
     {
         return [
-            [['answer'], 'required'],
+            [['question_id', 'answer'], 'required'],
+            [['question_id'], 'integer'],
             [['answer'], 'string'],
         ];
     }
@@ -64,8 +59,7 @@ class QuestionAnswer extends ContentActiveRecord
     public function attributeLabels()
     {
         return [
-            'question' => Yii::t('QuestionsModule.base', 'Question'),
-            'description' => Yii::t('QuestionsModule.base', 'Description'),
+            'answer' => Yii::t('QuestionsModule.base', 'Answer')
         ];
     }
 

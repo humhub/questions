@@ -8,6 +8,7 @@
 namespace humhub\modules\questions\widgets;
 
 use humhub\modules\content\widgets\WallCreateContentForm;
+use humhub\modules\questions\helpers\Url;
 use humhub\modules\questions\models\Question;
 use humhub\modules\questions\permissions\CreateQuestion;
 use humhub\modules\space\models\Space;
@@ -19,7 +20,7 @@ class WallCreateForm extends WallCreateContentForm
     /**
      * @inheritdoc
      */
-    public $submitUrl = '/questions/question/create';
+    public $submitUrl = Url::ROUTE_QUESTION_CREATE;
 
     /**
      * @inheritdoc

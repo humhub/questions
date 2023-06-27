@@ -1,0 +1,67 @@
+<?php
+/**
+ * @link https://www.humhub.org/
+ * @copyright Copyright (c) HumHub GmbH & Co. KG
+ * @license https://www.humhub.com/licences
+ */
+
+namespace humhub\modules\questions\controllers;
+
+use humhub\modules\content\components\ContentContainerController;
+use humhub\modules\questions\models\Question;
+use humhub\modules\questions\models\QuestionAnswer;
+use Yii;
+use yii\web\ForbiddenHttpException;
+use yii\web\NotFoundHttpException;
+use yii\web\Response;
+
+/**
+ * QuestionController handles all question related actions.
+ *
+ * @package humhub.modules.questions.controllers
+ * @author Luke
+ */
+class AnswerController extends ContentContainerController
+{
+
+    /**
+     * @param int $qid
+     * @param int|null $id
+     * @return array|string|Response
+     * @throws ForbiddenHttpException
+     */
+    public function actionEdit($qid, $id = null)
+    {
+        $question = Question::findOne($qid);
+
+        if ($question === null) {
+            throw new NotFoundHttpException();
+        }
+
+        if ($id === null) {
+            $answer = new QuestionAnswer($this->contentContainer);
+            $answer->question_id = $question->id;
+        } else {
+            $answer = QuestionAnswer::find()
+                ->where(['id' => $id, 'question_id' => $qid])
+                ->one();
+        }
+
+        if ($answer === null) {
+            throw new NotFoundHttpException();
+        }
+
+        if (!$answer->content->canEdit()) {
+            throw new ForbiddenHttpException('Access denied!');
+        }
+
+        if ($answer->load(Yii::$app->request->post()) && $answer->validate() && $answer->save()) {
+            $this->asJson(['success' => true]);
+        }
+
+        return $this->renderAjax('form', [
+            'answer' => $answer
+        ]);
+    }
+
+}

@@ -7,6 +7,7 @@
 
 namespace humhub\modules\questions;
 
+use humhub\modules\content\components\ActiveQueryContent;
 use humhub\modules\content\components\ContentContainerActiveRecord;
 use humhub\modules\questions\models\Question;
 use humhub\modules\space\models\Space;
@@ -66,6 +67,32 @@ class Module extends ContentContainerModule
     public function getContentContainerDescription(ContentContainerActiveRecord $container)
     {
         return Yii::t('QuestionsModule.base', 'Allows to create questions.');
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function disable()
+    {
+        $this->deleteRecords(Question::find());
+        parent::disable();
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function disableContentContainer(ContentContainerActiveRecord $container)
+    {
+        $this->deleteRecords(Question::find()->contentContainer($container));
+        parent::disableContentContainer($container);
+    }
+
+    private function deleteRecords(ActiveQueryContent $query)
+    {
+        foreach ($query->each() as $question) {
+            /* @var Question $question */
+            $question->hardDelete();
+        }
     }
 
 }
