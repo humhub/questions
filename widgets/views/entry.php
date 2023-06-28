@@ -10,6 +10,7 @@ use humhub\modules\content\widgets\richtext\RichText;
 use humhub\modules\questions\assets\QuestionsAssets;
 use humhub\modules\questions\helpers\Url;
 use humhub\modules\questions\models\Question;
+use humhub\modules\questions\widgets\Answers;
 use humhub\widgets\Button;
 use yii\web\View;
 
@@ -30,7 +31,9 @@ QuestionsAssets::register($this);
         ->action('addAnswer', Url::toCreateAnswer($question)) ?>
 
     <?= Button::info(Yii::t('QuestionsModule.base', 'See all answers'))
-        ->action('loadAnswers')
+        ->action('loadAnswers', Url::toLoadAllAnswers($question))
         ->cssClass('active') ?>
+
+    <?= Answers::widget(['question' => $question]) ?>
 
 <?= Html::endTag('div') ?>

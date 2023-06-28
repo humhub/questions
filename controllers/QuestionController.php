@@ -9,6 +9,8 @@ namespace humhub\modules\questions\controllers;
 
 use humhub\modules\content\components\ContentContainerController;
 use humhub\modules\questions\models\Question;
+use humhub\modules\questions\widgets\Answers;
+use humhub\modules\questions\widgets\AnswersExceptBest;
 use humhub\modules\questions\widgets\WallCreateForm;
 use humhub\modules\stream\actions\StreamEntryResponse;
 use Yii;
@@ -93,6 +95,23 @@ class QuestionController extends ContentContainerController
                 'class' => 'content_edit'
             ]
         ]);
+    }
+
+    public function actionLoadExceptBest($id)
+    {
+        $this->forcePostRequest();
+
+        $question = Question::findOne($id);
+
+        if ($question === null) {
+            throw new NotFoundHttpException();
+        }
+
+        if (!$question->content->canView()) {
+            throw new ForbiddenHttpException('Access denied!');
+        }
+
+        return AnswersExceptBest::widget(['question' => $question]);
     }
 
 }

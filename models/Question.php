@@ -9,11 +9,11 @@ namespace humhub\modules\questions\models;
 
 use humhub\modules\content\widgets\richtext\RichText;
 use humhub\modules\questions\permissions\CreateQuestion;
+use humhub\modules\questions\services\AnswerService;
 use humhub\modules\questions\widgets\WallEntry;
 use humhub\modules\search\interfaces\Searchable;
 use humhub\modules\content\components\ContentActiveRecord;
 use Yii;
-use yii\db\ActiveQuery;
 
 /**
  * Question model class.
@@ -22,8 +22,6 @@ use yii\db\ActiveQuery;
  * @property integer $id
  * @property string $question
  * @property string $description
- *
- * @property-read QuestionAnswer[] $answers
  *
  * @package humhub.modules.questions.models
  * @author Luke
@@ -100,11 +98,6 @@ class Question extends ContentActiveRecord implements Searchable
         ];
     }
 
-    public function getAnswers(): ActiveQuery
-    {
-        return $this->hasMany(QuestionAnswer::class, ['question_id' => 'id']);
-    }
-
     /**
      * @inheritdoc
      */
@@ -127,6 +120,11 @@ class Question extends ContentActiveRecord implements Searchable
             'description' => $this->description,
             'itemAnswers' => trim($itemAnswers)
         ];
+    }
+
+    public function getAnswerService(): AnswerService
+    {
+        return new AnswerService($this);
     }
 
 }

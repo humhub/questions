@@ -72,7 +72,15 @@ humhub.module('questions.Question', function (module, require, $) {
     }
 
     Question.prototype.loadAnswers = function (evt) {
+        const that = this;
 
+        client.post(evt).then(function (response) {
+            that.$.find('.except-best-answers').html(response.html);
+            evt.$trigger.remove();
+        }).catch(function (e) {
+            module.log.error(e, true);
+            loader.reset(evt.$trigger);
+        });
     }
 
     module.export = Question;

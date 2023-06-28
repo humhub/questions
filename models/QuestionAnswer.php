@@ -20,6 +20,8 @@ use yii\db\ActiveQuery;
  * @property int $id
  * @property int $question_id
  * @property string $answer
+ * @property int $votes_count
+ * @property bool $is_best
  *
  * @property-read Question $question
  *

@@ -3,8 +3,12 @@ humhub.module('questions.Answer', function (module, require, $) {
 
     const Answer = Widget.extend();
 
-    Answer.prototype.vote = function () {
+    Answer.prototype.voteUp = function (evt) {
+        console.log('Answer voting UP');
+    }
 
+    Answer.prototype.voteDown = function (evt) {
+        console.log('Answer voting DOWN');
     }
 
     Answer.prototype.best = function () {

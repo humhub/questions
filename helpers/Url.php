@@ -17,6 +17,7 @@ class Url extends BaseUrl
     const ROUTE_QUESTION_CREATE = '/questions/question/create';
     const ROUTE_QUESTION_CREATE_FORM = '/questions/question/create-form';
     const ROUTE_QUESTION_EDIT = '/questions/question/edit';
+    const ROUTE_QUESTION_LOAD_ANSWERS = '/questions/question/load-except-best';
 
     const ROUTE_ANSWER_EDIT = '/questions/answer/edit';
 
@@ -33,6 +34,11 @@ class Url extends BaseUrl
     public static function toEditQuestion(Question $question): string
     {
         return static::create(static::ROUTE_QUESTION_EDIT, ['id' => $question->id], $question->content->container);
+    }
+
+    public static function toLoadAllAnswers(Question $question): string
+    {
+        return static::create(static::ROUTE_QUESTION_LOAD_ANSWERS, ['id' => $question->id], $question->content->container);
     }
 
     public static function toCreateAnswer(Question $question): string

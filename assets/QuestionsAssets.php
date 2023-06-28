@@ -23,4 +23,13 @@ class QuestionsAssets extends AssetBundle
         'js/humhub.questions.Question.js',
         'js/humhub.questions.Answer.js',
     ];
+
+    /**
+     * @inheritdoc
+     */
+    public $css = [
+        'css/questions.min.css',
+    ];
+
+    public $forceCopy = true;
 }
