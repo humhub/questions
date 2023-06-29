@@ -20,6 +20,7 @@ class Url extends BaseUrl
     const ROUTE_QUESTION_LOAD_ANSWERS = '/questions/question/load-except-best';
 
     const ROUTE_ANSWER_EDIT = '/questions/answer/edit';
+    const ROUTE_ANSWER_VOTE = '/questions/answer/vote';
 
     private static function create($route, $params = [], ContentContainerActiveRecord $container = null)
     {
@@ -51,4 +52,13 @@ class Url extends BaseUrl
         return static::create(static::ROUTE_ANSWER_EDIT, ['qid' => $answer->question->id, 'id' => $answer->id], $answer->content->container);
     }
 
+    public static function toVoteUpAnswer(QuestionAnswer $answer): string
+    {
+        return static::create(static::ROUTE_ANSWER_VOTE, ['id' => $answer->id, 'vote' => 'up'], $answer->content->container);
+    }
+
+    public static function toVoteDownAnswer(QuestionAnswer $answer): string
+    {
+        return static::create(static::ROUTE_ANSWER_VOTE, ['id' => $answer->id, 'vote' => 'down'], $answer->content->container);
+    }
 }

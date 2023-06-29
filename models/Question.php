@@ -107,6 +107,22 @@ class Question extends ContentActiveRecord implements Searchable
         RichText::postProcess($this->description, $this);
     }
 
+    /**
+     * @inheritdoc
+     */
+    public function beforeDelete()
+    {
+        if (!parent::beforeDelete()) {
+            return false;
+        }
+
+        foreach ($this->getAnswerService()->getAll() as $answer) {
+            $answer->hardDelete();
+        }
+
+        return true;
+    }
+
     public function getSearchAttributes()
     {
         $itemAnswers = '';

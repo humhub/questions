@@ -10,16 +10,14 @@
 
 use humhub\libs\Html;
 use humhub\modules\questions\models\QuestionAnswer;
-use humhub\widgets\Button;
+use humhub\modules\questions\widgets\VoteButton;
 ?>
 <?= Html::beginTag('div', $options) ?>
 
-    <?= Button::defaultType()->icon('caret-up')
-        ->action('voteUp') ?>
+    <?= VoteButton::widget(['answer' => $answer, 'type' => 'up']) ?>
 
-    <div><?= (int) $answer->votes_count ?></div>
+    <div><?= (int) $answer->votes_summary ?></div>
 
-    <?= Button::defaultType()->icon('caret-down')
-        ->action('voteDown') ?>
+    <?= VoteButton::widget(['answer' => $answer, 'type' => 'down']) ?>
 
 <?= Html::endTag('div') ?>

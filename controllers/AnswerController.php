@@ -11,6 +11,7 @@ use humhub\modules\content\components\ContentContainerController;
 use humhub\modules\questions\models\Question;
 use humhub\modules\questions\models\QuestionAnswer;
 use humhub\modules\questions\widgets\Answer;
+use humhub\modules\questions\widgets\AnswerVoting;
 use Yii;
 use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
@@ -73,6 +74,30 @@ class AnswerController extends ContentContainerController
 
         return $this->renderAjax('form', [
             'answer' => $answer
+        ]);
+    }
+
+    public function actionVote($id, $vote)
+    {
+        $answer = QuestionAnswer::findOne($id);
+
+        if ($answer === null) {
+            throw new NotFoundHttpException();
+        }
+
+        if (!$answer->getVoteService()->canVote()) {
+            throw new ForbiddenHttpException();
+        }
+
+        if (!$answer->getVoteService()->vote($vote)) {
+            return $this->asJson(['success' => false]);
+        }
+
+        $answer->refresh();
+
+        return $this->asJson([
+            'success' => true,
+            'content' => AnswerVoting::widget(['answer' => $answer])
         ]);
     }
 

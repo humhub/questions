@@ -10,6 +10,7 @@ namespace humhub\modules\questions\models;
 use humhub\modules\content\components\ContentActiveRecord;
 use humhub\modules\content\widgets\richtext\RichText;
 use humhub\modules\questions\permissions\CreateQuestion;
+use humhub\modules\questions\services\VoteService;
 use Yii;
 use yii\db\ActiveQuery;
 
@@ -20,7 +21,7 @@ use yii\db\ActiveQuery;
  * @property int $id
  * @property int $question_id
  * @property string $answer
- * @property int $votes_count
+ * @property int $votes_summary
  * @property bool $is_best
  *
  * @property-read Question $question
@@ -77,6 +78,11 @@ class QuestionAnswer extends ContentActiveRecord
     {
         parent::afterSave($insert, $changedAttributes);
         RichText::postProcess($this->answer, $this);
+    }
+
+    public function getVoteService(): VoteService
+    {
+        return new VoteService($this);
     }
 
 }

@@ -9,6 +9,8 @@ namespace humhub\modules\questions\services;
 
 use humhub\modules\questions\models\Question;
 use humhub\modules\questions\models\QuestionAnswer;
+use humhub\modules\user\models\User;
+use Yii;
 use yii\db\ActiveQuery;
 
 class AnswerService
@@ -23,7 +25,7 @@ class AnswerService
     public function getQuery(): ActiveQuery
     {
         return $this->question->hasMany(QuestionAnswer::class, ['question_id' => 'id'])
-            ->orderBy(['votes_count' => SORT_DESC, 'question_answer.id' => SORT_DESC]);
+            ->orderBy(['votes_summary' => SORT_DESC, 'question_answer.id' => SORT_DESC]);
     }
 
     /**
@@ -50,5 +52,20 @@ class AnswerService
     public function getCount(): int
     {
         return $this->getQuery()->count();
+    }
+
+    public function canSelectBest(?User $user = null): bool
+    {
+        // TODO: Implement permission "User can select best answer (Q&A)"
+        return false;
+    }
+
+    public function canVote(?User $user = null): bool
+    {
+        if ($user === null && !Yii::$app->user->isGuest) {
+            $user = Yii::$app->user->getIdentity();
+        }
+
+        return $user instanceof User;
     }
 }

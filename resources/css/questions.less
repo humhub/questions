@@ -32,12 +32,18 @@
 }
 
 .questions-answer-voting {
+  width: 46px;
+  height: 125px;
   button {
     width: 46px;
     height: 46px;
     background: #fff;
     border-radius: 50%;
     box-shadow: 1px 1px 3px #ccc;
+    &.active, &:active, &:hover {
+      background: var(--background-color-highlight);
+      box-shadow: none;
+    }
     .fa {
       font-size: 28px;
       color: #333;

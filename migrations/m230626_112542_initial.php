@@ -27,7 +27,7 @@ class m230626_112542_initial extends Migration
             'id' => $this->primaryKey(),
             'question_id' => $this->integer()->notNull(),
             'answer' => $this->text(),
-            'votes_count' => $this->integer()->defaultValue(0)->notNull(),
+            'votes_summary' => $this->integer()->defaultValue(0)->notNull(),
             'is_best' => $this->boolean()->defaultValue(0)->notNull()
         ]);
         $this->safeAddForeignKey('fk_questions_question_id', 'question_answer', 'question_id', 'question', 'id', 'CASCADE');
@@ -38,6 +38,7 @@ class m230626_112542_initial extends Migration
             'user_id' => $this->integer()->notNull(),
             'type' => $this->tinyInteger()->notNull()
         ]);
+        $this->safeAddPrimaryKey('pk_question_answer_vote', 'question_answer_vote', 'answer_id,user_id');
         $this->safeAddForeignKey('fk_questions_answer_id', 'question_answer_vote', 'answer_id', 'question_answer', 'id', 'CASCADE');
         $this->safeAddForeignKey('fk_questions_user_id', 'question_answer_vote', 'user_id', 'user', 'id', 'CASCADE');
         $this->safeCreateIndex('idx_type', 'question_answer_vote', 'type');
