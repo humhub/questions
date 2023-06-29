@@ -11,6 +11,7 @@
 use humhub\libs\Html;
 use humhub\modules\questions\models\QuestionAnswer;
 use humhub\modules\questions\widgets\AnswerVoting;
+use humhub\modules\questions\widgets\BestAnswerButton;
 use humhub\modules\user\widgets\Image;
 use humhub\widgets\TimeAgo;
 
@@ -32,6 +33,7 @@ use humhub\widgets\TimeAgo;
             ]) ?></small>
         </div>
         <?= $answer->answer ?>
+        <?= BestAnswerButton::widget(['answer' => $answer]) ?>
     </div>
 
 <?= Html::endTag('div') ?>

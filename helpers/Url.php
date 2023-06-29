@@ -21,6 +21,7 @@ class Url extends BaseUrl
 
     const ROUTE_ANSWER_EDIT = '/questions/answer/edit';
     const ROUTE_ANSWER_VOTE = '/questions/answer/vote';
+    const ROUTE_ANSWER_SELECT_BEST = '/questions/answer/select-best';
 
     private static function create($route, $params = [], ContentContainerActiveRecord $container = null)
     {
@@ -60,5 +61,10 @@ class Url extends BaseUrl
     public static function toVoteDownAnswer(QuestionAnswer $answer): string
     {
         return static::create(static::ROUTE_ANSWER_VOTE, ['id' => $answer->id, 'vote' => 'down'], $answer->content->container);
+    }
+
+    public static function toSelectBestAnswer(QuestionAnswer $answer): string
+    {
+        return static::create(static::ROUTE_ANSWER_SELECT_BEST, ['id' => $answer->id], $answer->content->container);
     }
 }

@@ -30,9 +30,11 @@ QuestionsAssets::register($this);
     <?= Button::info(Yii::t('QuestionsModule.base', 'Answer the question'))
         ->action('addAnswer', Url::toCreateAnswer($question)) ?>
 
-    <?= Button::info(Yii::t('QuestionsModule.base', 'See all answers'))
-        ->action('loadAnswers', Url::toLoadAllAnswers($question))
-        ->cssClass('active') ?>
+    <?php if ($question->getAnswerService()->getCount() > 1) : ?>
+        <?= Button::info(Yii::t('QuestionsModule.base', 'See all answers'))
+            ->action('loadAnswers', Url::toLoadAllAnswers($question))
+            ->cssClass('active') ?>
+    <?php endif; ?>
 
     <?= Answers::widget(['question' => $question]) ?>
 

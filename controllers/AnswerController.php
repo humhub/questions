@@ -79,6 +79,8 @@ class AnswerController extends ContentContainerController
 
     public function actionVote($id, $vote)
     {
+        $this->forcePostRequest();
+
         $answer = QuestionAnswer::findOne($id);
 
         if ($answer === null) {
@@ -93,11 +95,46 @@ class AnswerController extends ContentContainerController
             return $this->asJson(['success' => false]);
         }
 
+        // Refresh voting summary after new vote
         $answer->refresh();
 
         return $this->asJson([
             'success' => true,
             'content' => AnswerVoting::widget(['answer' => $answer])
+        ]);
+    }
+
+    public function actionSelectBest($id)
+    {
+        $this->forcePostRequest();
+
+        $answer = QuestionAnswer::findOne($id);
+
+        if ($answer === null) {
+            throw new NotFoundHttpException();
+        }
+
+        $question = $answer->question;
+
+        if ($question === null) {
+            throw new NotFoundHttpException();
+        }
+
+        if (!$question->getAnswerService()->canSelectBest()) {
+            throw new ForbiddenHttpException();
+        }
+
+        if (!$question->getAnswerService()->changeBest($answer)) {
+            return $this->asJson(['success' => false]);
+        }
+
+        // Refresh best flag after new vote
+        $answer->refresh();
+
+        return $this->asJson([
+            'success' => true,
+            'content' => Answer::widget(['answer' => $answer]),
+            'action' => $answer->is_best ? 'select' : 'unselect'
         ]);
     }
 

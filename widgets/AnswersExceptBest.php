@@ -14,6 +14,8 @@ class AnswersExceptBest extends Widget
 {
     public ?Question $question;
 
+    public ?int $limit = null;
+
     /**
      * @inheritdoc
      */
@@ -27,7 +29,7 @@ class AnswersExceptBest extends Widget
      */
     public function run()
     {
-        $answers = $this->question->getAnswerService()->getExceptBest();
+        $answers = $this->question->getAnswerService()->getExceptBest($this->limit);
 
         if (count($answers) === 0) {
             return '';

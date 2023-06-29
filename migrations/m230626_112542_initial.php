@@ -36,7 +36,7 @@ class m230626_112542_initial extends Migration
         $this->safeCreateTable('question_answer_vote', [
             'answer_id' => $this->integer()->notNull(),
             'user_id' => $this->integer()->notNull(),
-            'type' => $this->tinyInteger()->notNull()
+            'type' => $this->tinyInteger(1)->notNull()
         ]);
         $this->safeAddPrimaryKey('pk_question_answer_vote', 'question_answer_vote', 'answer_id,user_id');
         $this->safeAddForeignKey('fk_questions_answer_id', 'question_answer_vote', 'answer_id', 'question_answer', 'id', 'CASCADE');

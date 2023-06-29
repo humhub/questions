@@ -9,6 +9,7 @@ namespace humhub\modules\questions\services;
 
 use humhub\modules\questions\models\Question;
 use humhub\modules\questions\models\QuestionAnswer;
+use humhub\modules\questions\permissions\SelectBestAnswer;
 use humhub\modules\user\models\User;
 use Yii;
 use yii\db\ActiveQuery;
@@ -20,6 +21,15 @@ class AnswerService
     public function __construct(Question $question)
     {
         $this->question = $question;
+    }
+
+    private function getUser(?User $user = null): ?User
+    {
+        if ($user === null && !Yii::$app->user->isGuest) {
+            $user = Yii::$app->user->getIdentity();
+        }
+
+        return $user;
     }
 
     public function getQuery(): ActiveQuery
@@ -37,11 +47,12 @@ class AnswerService
     }
 
     /**
+     * @param int|null $limit
      * @return QuestionAnswer[]
      */
-    public function getExceptBest(): array
+    public function getExceptBest(?int $limit = null): array
     {
-        return $this->getQuery()->andWhere(['is_best' => 0])->all();
+        return $this->getQuery()->andWhere(['is_best' => 0])->limit($limit)->all();
     }
 
     public function getBest(): ?QuestionAnswer
@@ -56,16 +67,38 @@ class AnswerService
 
     public function canSelectBest(?User $user = null): bool
     {
-        // TODO: Implement permission "User can select best answer (Q&A)"
-        return false;
+        $user = $this->getUser($user);
+
+        if ($user === null) {
+            return false;
+        }
+
+        // Question's author always can select the best answer
+        if ($this->question->content->createdBy->is($user)) {
+            return true;
+        }
+
+        return $this->question->content->container->getPermissionManager($user)
+            ->can(SelectBestAnswer::class);
+    }
+
+    public function changeBest(QuestionAnswer $answer): bool
+    {
+        /* @var QuestionAnswer[] $bestAnswers */
+        $bestAnswers = $this->getQuery()->andWhere(['is_best' => 1])->all();
+
+        // Reset all previous best answers, because only single Answer can be the best selected
+        foreach ($bestAnswers as $bestAnswer) {
+            $bestAnswer->updateAttributes(['is_best' => 0]);
+        }
+
+        return $answer->is_best
+            ? true // Unselect best
+            : $answer->updateAttributes(['is_best' => 1]); // Select new best answer
     }
 
     public function canVote(?User $user = null): bool
     {
-        if ($user === null && !Yii::$app->user->isGuest) {
-            $user = Yii::$app->user->getIdentity();
-        }
-
-        return $user instanceof User;
+        return $this->getUser($user) instanceof User;
     }
 }

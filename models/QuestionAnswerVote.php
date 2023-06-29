@@ -28,7 +28,7 @@ use yii\db\ActiveQuery;
 class QuestionAnswerVote extends ActiveRecord
 {
     const TYPE_UP = 1;
-    const TYPE_DOWN = 2;
+    const TYPE_DOWN = -1;
 
     /**
      * @inheritdoc
@@ -65,8 +65,27 @@ class QuestionAnswerVote extends ActiveRecord
     public function afterSave($insert, $changedAttributes)
     {
         parent::afterSave($insert, $changedAttributes);
-
         $this->answer->getVoteService()->refreshSummary();
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function afterDelete()
+    {
+        parent::afterDelete();
+        $this->answer->getVoteService()->refreshSummary();
+    }
+
+    /**
+     * Check if the current vote is the $type
+     *
+     * @param int $type
+     * @return bool
+     */
+    public function is(int $type): bool
+    {
+        return (int) $this->type === $type;
     }
 
 }

@@ -30,6 +30,7 @@ class Answers extends JsWidget
 
         if (parent::beforeRun()) {
             $this->content = $this->render('answers', [
+                'question' => $this->question,
                 'bestAnswer' => $this->question->getAnswerService()->getBest()
             ]);
             return true;

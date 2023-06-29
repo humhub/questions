@@ -76,15 +76,24 @@ class VoteService
         }
 
         $user = $this->getUser($user);
-
         $vote = $this->getVote($user);
+
+        // New vote
         if ($vote === null) {
             $vote = new QuestionAnswerVote();
             $vote->answer_id = $this->answer->id;
             $vote->user_id = $user->id;
+            $vote->type = $voteType;
+            return $vote->save();
         }
-        $vote->type = $voteType;
 
+        // Remove a vote if it is voted with same type
+        if ($vote->is($voteType)) {
+            return (bool) $vote->delete();
+        }
+
+        // Change a vote to another type
+        $vote->type = $voteType;
         return $vote->save();
     }
 
@@ -93,7 +102,7 @@ class VoteService
         $vote = $this->getVote($user);
 
         return $vote instanceof QuestionAnswerVote &&
-            $vote->type === $this->normalizeVoteType($type);
+            $vote->is($this->normalizeVoteType($type));
     }
 
     public function getQuery(): ActiveQuery
@@ -103,8 +112,7 @@ class VoteService
 
     public function getSummary(): int
     {
-        return $this->getQuery()
-            ->sum(new Expression('IF(type = ' . QuestionAnswerVote::TYPE_UP . ', 1, -1)'));
+        return (int) $this->getQuery()->sum('type');
     }
 
     public function refreshSummary()

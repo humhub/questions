@@ -24,6 +24,9 @@
     margin-top: 20px;
     border: 1px solid var(--info);
     background: var(--background-color-highlight-soft);
+    .questions-best-answer-button {
+      display: block;
+    }
   }
   &.questions-highlight-answer {
     border: 1px solid var(--warning);
@@ -57,5 +60,20 @@
   }
 }
 .questions-answer-content {
+  width: 100%;
   padding-left: 10px;
+  position: relative;
+  &:hover {
+    .questions-best-answer-button {
+      display: block;
+    }
+  }
+  .questions-best-answer-button {
+    position: absolute;
+    top: -10px;
+    right: 0;
+    display: none;
+    font-size: 13px;
+    font-weight: normal;
+  }
 }
