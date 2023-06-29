@@ -10,6 +10,7 @@ namespace humhub\modules\questions\controllers;
 use humhub\modules\content\components\ContentContainerController;
 use humhub\modules\questions\models\Question;
 use humhub\modules\questions\models\QuestionAnswer;
+use humhub\modules\questions\widgets\Answer;
 use Yii;
 use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
@@ -56,7 +57,18 @@ class AnswerController extends ContentContainerController
         }
 
         if ($answer->load(Yii::$app->request->post()) && $answer->validate() && $answer->save()) {
-            $this->asJson(['success' => true]);
+            return $this->asJson([
+                'success' => true,
+                'question' => $question->id,
+                'answer' => $answer->id,
+                'header' => Yii::t('QuestionsModule.base', '{count} Answers', [
+                    'count' => $question->getAnswerService()->getCount()
+                ]),
+                'content' => Answer::widget([
+                    'answer' => $answer,
+                    'highlight' => true
+                ])
+            ]);
         }
 
         return $this->renderAjax('form', [

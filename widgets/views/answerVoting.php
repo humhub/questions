@@ -17,7 +17,7 @@ use humhub\widgets\Button;
     <?= Button::defaultType()->icon('caret-up')
         ->action('voteUp') ?>
 
-    <div><?= $answer->votes_count ?></div>
+    <div><?= (int) $answer->votes_count ?></div>
 
     <?= Button::defaultType()->icon('caret-down')
         ->action('voteDown') ?>

@@ -23,7 +23,7 @@ class AnswerService
     public function getQuery(): ActiveQuery
     {
         return $this->question->hasMany(QuestionAnswer::class, ['question_id' => 'id'])
-            ->orderBy(['votes_count' => SORT_DESC]);
+            ->orderBy(['votes_count' => SORT_DESC, 'question_answer.id' => SORT_DESC]);
     }
 
     /**

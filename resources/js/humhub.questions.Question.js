@@ -61,10 +61,42 @@ humhub.module('questions.Question', function (module, require, $) {
         module.log.error(e, true);
     }
 
+    Question.prototype.answersList = function () {
+        return this.$.find('.except-best-answers');
+    }
+
+    Question.prototype.answersListHeader = function () {
+        return this.answersList().children('h4');
+    }
+
+    Question.prototype.getAnswer = function (id) {
+        return this.$.find('[data-answer=' + id + ']');
+    }
+
     Question.prototype.addAnswer = function (evt) {
+        const that = this;
         modal.load(evt).then(function () {
-            modal.global.$.one('submitted', function () {
-                // TODO: Append the created Answer under the Question
+            modal.global.$.one('submitted', function (e, response) {
+                if (response.success !== true) {
+                    return;
+                }
+
+                const listHeader = that.answersListHeader();
+                if (listHeader.length === 0) {
+                    that.answersList().append('<h4>' + response.header + '</h4>');
+                } else {
+                    listHeader.html(response.header);
+                }
+
+                const answerBlock = that.getAnswer(response.answer);
+                if (answerBlock.length === 0) {
+                    that.answersList().append(response.content);
+                } else {
+                    answerBlock.replaceWith(response.content);
+                }
+                setTimeout(function () {
+                    that.getAnswer(response.answer).removeClass('questions-highlight-answer')
+                }, 1000);
             });
         }).catch(function (e) {
             module.log.error(e, true);
@@ -75,7 +107,7 @@ humhub.module('questions.Question', function (module, require, $) {
         const that = this;
 
         client.post(evt).then(function (response) {
-            that.$.find('.except-best-answers').html(response.html);
+            that.answersList().html(response.html);
             evt.$trigger.remove();
         }).catch(function (e) {
             module.log.error(e, true);

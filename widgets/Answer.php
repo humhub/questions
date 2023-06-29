@@ -14,6 +14,8 @@ class Answer extends Widget
 {
     public ?QuestionAnswer $answer;
 
+    public bool $highlight = false;
+
     /**
      * @inheritdoc
      */
@@ -36,7 +38,23 @@ class Answer extends Widget
     protected function getOptions(): array
     {
         return [
-            'class' => 'questions-answer' . ($this->answer->is_best ? ' questions-best-answer' : '')
+            'class' => $this->getStyleClass(),
+            'data-answer' => $this->answer->id
         ];
+    }
+
+    protected function getStyleClass(): string
+    {
+        $class = 'questions-answer';
+
+        if ($this->answer->is_best) {
+            $class .= ' questions-best-answer';
+        }
+
+        if ($this->highlight) {
+            $class .= ' questions-highlight-answer';
+        }
+
+        return $class;
     }
 }
