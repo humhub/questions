@@ -8,14 +8,22 @@ humhub.module('questions.Answer', function (module, require, $) {
     Answer.prototype.vote = function (evt) {
         const voting = evt.$trigger.parent();
         const summary = voting.find('div');
+        const buttons = voting.find('button');
 
         loader.set(summary, {size: '8px', css: {padding: 0}});
+        buttons.prop('disabled', true);
 
         client.post(evt).then(function (response) {
-            voting.replaceWith(response.content);
+            if (response.success === true) {
+                voting.replaceWith(response.content);
+            } else {
+                loader.reset(summary);
+                buttons.prop('disabled', false);
+            }
         }).catch(function (e) {
             module.log.error(e, true);
             loader.reset(summary);
+            buttons.prop('disabled', false);
         });
     }
 

@@ -23,7 +23,9 @@ class VoteButton extends Widget
      */
     public function beforeRun()
     {
-        return $this->answer instanceof QuestionAnswer && parent::beforeRun();
+        return $this->answer instanceof QuestionAnswer &&
+            $this->answer->question->getAnswerService()->canVote() &&
+            parent::beforeRun();
     }
 
     /**
