@@ -9,6 +9,7 @@
 /* @var array $options */
 
 use humhub\libs\Html;
+use humhub\modules\content\widgets\richtext\RichText;
 use humhub\modules\questions\models\QuestionAnswer;
 use humhub\modules\questions\widgets\AnswerVoting;
 use humhub\modules\questions\widgets\BestAnswerButton;
@@ -32,7 +33,7 @@ use humhub\widgets\TimeAgo;
                 'date' => TimeAgo::widget(['timestamp' => $answer->content->created_at])
             ]) ?></small>
         </div>
-        <?= $answer->answer ?>
+        <?= RichText::output($answer->answer) ?>
         <?= BestAnswerButton::widget(['answer' => $answer]) ?>
     </div>
 
