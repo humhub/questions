@@ -82,6 +82,14 @@ class AnswerService
             ->can(SelectBestAnswer::class);
     }
 
+    /**
+     * Change the "best" flag of the Answer,
+     * On set the Answer as the best, previous best answer is unselected automatically,
+     * if the Answer was the best before run this action then it will be unselected.
+     *
+     * @param QuestionAnswer $answer
+     * @return bool
+     */
     public function changeBest(QuestionAnswer $answer): bool
     {
         /* @var QuestionAnswer[] $bestAnswers */
@@ -93,8 +101,8 @@ class AnswerService
         }
 
         return $answer->is_best
-            ? true // Unselect best
-            : $answer->updateAttributes(['is_best' => 1]); // Select new best answer
+            ? true // The Answer has been unselected above, no need to update it twice
+            : $answer->updateAttributes(['is_best' => 1]); // Select the Answer as the best
     }
 
     public function canVote(?User $user = null): bool

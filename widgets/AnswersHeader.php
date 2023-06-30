@@ -8,13 +8,13 @@
 namespace humhub\modules\questions\widgets;
 
 use humhub\components\Widget;
+use humhub\libs\Html;
 use humhub\modules\questions\models\Question;
+use Yii;
 
-class AnswersExceptBest extends Widget
+class AnswersHeader extends Widget
 {
     public ?Question $question;
-
-    public ?int $limit = null;
 
     /**
      * @inheritdoc
@@ -29,15 +29,10 @@ class AnswersExceptBest extends Widget
      */
     public function run()
     {
-        $answers = $this->question->getAnswerService()->getExceptBest($this->limit);
-
-        if (count($answers) === 0) {
-            return '';
-        }
-
-        return $this->render('answersExceptBest', [
-            'question' => $this->question,
-            'answers' => $answers,
+        return Html::tag('h4', Yii::t('QuestionsModule.base', '{count} Answers', [
+            'count' => $this->question->getAnswerService()->getCount()
+        ]), [
+            'class' => 'except-best-answers-header'
         ]);
     }
 }

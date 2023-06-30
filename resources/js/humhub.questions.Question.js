@@ -66,7 +66,7 @@ humhub.module('questions.Question', function (module, require, $) {
     }
 
     Question.prototype.answersListHeader = function () {
-        return this.answersList().children('h4');
+        return this.answersList().children('.except-best-answers-header');
     }
 
     Question.prototype.getAnswer = function (id) {
@@ -83,9 +83,9 @@ humhub.module('questions.Question', function (module, require, $) {
 
                 const listHeader = that.answersListHeader();
                 if (listHeader.length === 0) {
-                    that.answersList().append('<h4>' + response.header + '</h4>');
+                    that.answersList().append(response.header);
                 } else {
-                    listHeader.html(response.header);
+                    listHeader.replaceWith(response.header);
                 }
 
                 const answerBlock = that.getAnswer(response.answer);

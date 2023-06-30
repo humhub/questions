@@ -5,13 +5,15 @@
  * @license https://www.humhub.com/licences
  */
 
+use humhub\modules\questions\models\Question;
 use humhub\modules\questions\models\QuestionAnswer;
 use humhub\modules\questions\widgets\Answer;
+use humhub\modules\questions\widgets\AnswersHeader;
 
+/* @var Question $question */
 /* @var QuestionAnswer[] $answers */
-/* @var int $count */
 ?>
-<h4><?= Yii::t('QuestionsModule.base', '{count} Answers', ['count' => $count]) ?></h4>
+<?= AnswersHeader::widget(['question' => $question]) ?>
 
 <?php foreach ($answers as $answer) : ?>
     <?= Answer::widget(['answer' => $answer]) ?>

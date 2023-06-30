@@ -20,15 +20,63 @@ humhub.module('questions.Answer', function (module, require, $) {
     }
 
     Answer.prototype.best = function (evt) {
-        loader.set(evt.$trigger, {size: '8px', css: {padding: 0}});
+        const that = this;
+        const button = evt.$trigger;
+        const answer = button.closest('.questions-answer');
+
+        loader.set(button, {size: '8px', css: {padding: 0}});
 
         client.post(evt).then(function (response) {
-            // TODO: Move answer to proper place after set/reset the best flag
-            console.log('BEST');
+            if (response.success !== true) {
+                loader.reset(button);
+                return;
+            }
+
+            if (response.action === 'selected') {
+                that.moveAnswerToNormalList(that.$.find('.questions-best-answer'));
+                that.moveAnswerToBestPlace(answer);
+            } else if (response.action === 'unselected') {
+                that.moveAnswerToNormalList(answer);
+            }
+            that.refreshHeader(response.header);
         }).catch(function (e) {
             module.log.error(e, true);
-            loader.reset(evt.$trigger);
+            loader.reset(button);
         });
+    }
+
+    Answer.prototype.refreshHeader = function (headerHtml) {
+        const answersList = this.$.find('.except-best-answers')
+        const answersHeader = this.$.find('.except-best-answers-header');
+        const answersExist = answersList.find('.questions-answer').length > 0;
+
+        if (!answersExist && answersHeader.length) {
+            answersHeader.remove();
+        } else if (answersHeader.length) {
+            answersHeader.replaceWith(headerHtml);
+        } else {
+            answersList.prepend(headerHtml);
+        }
+    }
+
+    Answer.prototype.moveAnswerToBestPlace = function (answer) {
+        answer.addClass('questions-best-answer');
+        this.$.prepend(answer);
+    }
+
+    Answer.prototype.moveAnswerToNormalList = function (answer) {
+        if (answer.length === 0) {
+            return;
+        }
+
+        const exceptBestAnswersHeader = this.$.find('.except-best-answers-header');
+
+        answer.removeClass('questions-best-answer');
+        if (exceptBestAnswersHeader.length) {
+            exceptBestAnswersHeader.after(answer);
+        } else {
+            this.$.find('.except-best-answers').prepend(answer);
+        }
     }
 
     module.export = Answer;

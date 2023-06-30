@@ -11,6 +11,7 @@ use humhub\modules\content\components\ContentContainerController;
 use humhub\modules\questions\models\Question;
 use humhub\modules\questions\models\QuestionAnswer;
 use humhub\modules\questions\widgets\Answer;
+use humhub\modules\questions\widgets\AnswersHeader;
 use humhub\modules\questions\widgets\AnswerVoting;
 use Yii;
 use yii\web\ForbiddenHttpException;
@@ -62,9 +63,7 @@ class AnswerController extends ContentContainerController
                 'success' => true,
                 'question' => $question->id,
                 'answer' => $answer->id,
-                'header' => Yii::t('QuestionsModule.base', '{count} Answers', [
-                    'count' => $question->getAnswerService()->getCount()
-                ]),
+                'header' => AnswersHeader::widget(['question' => $question]),
                 'content' => Answer::widget([
                     'answer' => $answer,
                     'highlight' => true
@@ -128,13 +127,13 @@ class AnswerController extends ContentContainerController
             return $this->asJson(['success' => false]);
         }
 
-        // Refresh best flag after new vote
+        // Refresh the "best" flag after updating
         $answer->refresh();
 
         return $this->asJson([
             'success' => true,
-            'content' => Answer::widget(['answer' => $answer]),
-            'action' => $answer->is_best ? 'select' : 'unselect'
+            'header' => AnswersHeader::widget(['question' => $question]),
+            'action' => $answer->is_best ? 'selected' : 'unselected'
         ]);
     }
 

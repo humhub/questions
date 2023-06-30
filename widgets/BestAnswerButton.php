@@ -8,11 +8,16 @@
 namespace humhub\modules\questions\widgets;
 
 use humhub\components\Widget;
+use humhub\libs\Html;
 use humhub\modules\questions\helpers\Url;
 use humhub\modules\questions\models\QuestionAnswer;
 use humhub\widgets\Label;
 use Yii;
 
+/**
+ * Widget BestAnswerButton displays a button to select/unselect the Best Answer
+ *        if user has a permission, otherwise it is displayed as label only for the Best Answer
+ */
 class BestAnswerButton extends Widget
 {
     public ?QuestionAnswer $answer;
@@ -22,7 +27,7 @@ class BestAnswerButton extends Widget
      */
     public function beforeRun()
     {
-        return $this->answer instanceof QuestionAnswer && parent::beforeRun();
+        return parent::beforeRun() && $this->isVisible();
     }
 
     /**
@@ -30,8 +35,7 @@ class BestAnswerButton extends Widget
      */
     public function run()
     {
-        $button = Label::info(Yii::t('QuestionsModule.base', 'BEST ANSWER'))
-            ->cssClass('questions-best-answer-button');
+        $button = Label::info(Yii::t('QuestionsModule.base', 'BEST ANSWER'));
 
         if ($this->answer->question->getAnswerService()->canSelectBest()) {
             $button->action('best', Url::toSelectBestAnswer($this->answer))
@@ -40,6 +44,16 @@ class BestAnswerButton extends Widget
                     : Yii::t('QuestionsModule.base', 'Select best answer'));
         }
 
-        return $button;
+        return Html::tag('div', $button, ['class' => 'questions-best-answer-button']);
+    }
+
+    private function isVisible(): bool
+    {
+        if (!($this->answer instanceof QuestionAnswer)) {
+            return false;
+        }
+
+        return $this->answer->is_best ||
+            $this->answer->question->getAnswerService()->canSelectBest();
     }
 }

@@ -30,6 +30,4 @@ class QuestionsAssets extends AssetBundle
     public $css = [
         'css/questions.min.css',
     ];
-
-    public $forceCopy = true;
 }
