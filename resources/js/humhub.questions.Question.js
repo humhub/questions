@@ -4,6 +4,7 @@ humhub.module('questions.Question', function (module, require, $) {
     const Content = require('content').Content;
     const loader = require('ui.loader');
     const modal = require('ui.modal');
+    const Widget = require('ui.widget').Widget;
 
     const Question = function (id) {
         Content.call(this, id);
@@ -73,6 +74,12 @@ humhub.module('questions.Question', function (module, require, $) {
         return this.$.find('[data-answer=' + id + ']');
     }
 
+    Question.prototype.initAnswersListWidgets = function () {
+        this.answersList().find('[data-ui-widget]').each(function () {
+            Widget.instance($(this));
+        });
+    }
+
     Question.prototype.addAnswer = function (evt) {
         const that = this;
         modal.load(evt).then(function () {
@@ -94,6 +101,7 @@ humhub.module('questions.Question', function (module, require, $) {
                 } else {
                     answerBlock.replaceWith(response.content);
                 }
+                that.initAnswersListWidgets();
                 setTimeout(function () {
                     that.getAnswer(response.answer).removeClass('questions-highlight-answer')
                 }, 1000);
@@ -108,6 +116,7 @@ humhub.module('questions.Question', function (module, require, $) {
 
         client.post(evt).then(function (response) {
             that.answersList().html(response.html);
+            that.initAnswersListWidgets();
             evt.$trigger.remove();
         }).catch(function (e) {
             module.log.error(e, true);
