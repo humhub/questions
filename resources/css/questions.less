@@ -46,9 +46,17 @@
       background: var(--background-color-highlight);
       box-shadow: none;
     }
+    &.active:hover {
+      background: #fff;
+      box-shadow: 1px 1px 3px #ccc;
+    }
     .fa {
       font-size: 28px;
       color: #333;
+      margin: -2px 0 0 -1px;
+      &.fa-caret-down {
+        margin-top: 2px;
+      }
     }
   }
   div {
