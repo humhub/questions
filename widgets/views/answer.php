@@ -24,13 +24,13 @@ use humhub\widgets\TimeAgo;
     <div class="questions-answer-content">
         <div class="questions-answer-header">
             <?= Image::widget([
-                'user' => $answer->content->createdBy,
+                'user' => $answer->createdBy,
                 'width' => 29
             ]) ?>
-            <strong><?= $answer->content->createdBy->displayName ?></strong>
+            <strong><?= $answer->createdBy->displayName ?></strong>
             &middot;
             <small><?= Yii::t('QuestionsModule.base', 'answered {date}', [
-                'date' => TimeAgo::widget(['timestamp' => $answer->content->created_at])
+                'date' => TimeAgo::widget(['timestamp' => $answer->created_at])
             ]) ?></small>
         </div>
         <?= RichText::output($answer->answer) ?>

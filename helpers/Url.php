@@ -50,21 +50,21 @@ class Url extends BaseUrl
 
     public static function toEditAnswer(QuestionAnswer $answer): string
     {
-        return static::create(static::ROUTE_ANSWER_EDIT, ['qid' => $answer->question->id, 'id' => $answer->id], $answer->content->container);
+        return static::create(static::ROUTE_ANSWER_EDIT, ['qid' => $answer->question->id, 'id' => $answer->id], $answer->question->content->container);
     }
 
     public static function toVoteUpAnswer(QuestionAnswer $answer): string
     {
-        return static::create(static::ROUTE_ANSWER_VOTE, ['id' => $answer->id, 'vote' => 'up'], $answer->content->container);
+        return static::create(static::ROUTE_ANSWER_VOTE, ['id' => $answer->id, 'vote' => 'up'], $answer->question->content->container);
     }
 
     public static function toVoteDownAnswer(QuestionAnswer $answer): string
     {
-        return static::create(static::ROUTE_ANSWER_VOTE, ['id' => $answer->id, 'vote' => 'down'], $answer->content->container);
+        return static::create(static::ROUTE_ANSWER_VOTE, ['id' => $answer->id, 'vote' => 'down'], $answer->question->content->container);
     }
 
     public static function toSelectBestAnswer(QuestionAnswer $answer): string
     {
-        return static::create(static::ROUTE_ANSWER_SELECT_BEST, ['id' => $answer->id], $answer->content->container);
+        return static::create(static::ROUTE_ANSWER_SELECT_BEST, ['id' => $answer->id], $answer->question->content->container);
     }
 }

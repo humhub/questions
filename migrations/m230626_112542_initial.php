@@ -28,10 +28,16 @@ class m230626_112542_initial extends Migration
             'question_id' => $this->integer()->notNull(),
             'answer' => $this->text(),
             'votes_summary' => $this->integer()->defaultValue(0)->notNull(),
-            'is_best' => $this->boolean()->defaultValue(0)->notNull()
+            'is_best' => $this->boolean()->defaultValue(0)->notNull(),
+            'created_at' => $this->dateTime()->notNull(),
+            'created_by' => $this->integer()->notNull(),
+            'updated_at' => $this->dateTime()->notNull(),
+            'updated_by' => $this->integer()->notNull()
         ]);
         $this->safeAddForeignKey('fk_questions_question_id', 'question_answer', 'question_id', 'question', 'id', 'CASCADE');
         $this->safeCreateIndex('idx_is_best', 'question_answer', 'is_best');
+        $this->safeAddForeignKey('fk_questions_created_by', 'question_answer', 'created_by', 'user', 'id', 'CASCADE');
+        $this->safeAddForeignKey('fk_questions_updated_by', 'question_answer', 'updated_by', 'user', 'id', 'CASCADE');
 
         $this->safeCreateTable('question_answer_vote', [
             'answer_id' => $this->integer()->notNull(),

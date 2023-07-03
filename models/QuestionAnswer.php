@@ -7,7 +7,7 @@
 
 namespace humhub\modules\questions\models;
 
-use humhub\modules\content\components\ContentActiveRecord;
+use humhub\components\ActiveRecord;
 use humhub\modules\content\widgets\richtext\RichText;
 use humhub\modules\questions\permissions\CreateQuestion;
 use humhub\modules\questions\services\VoteService;
@@ -23,19 +23,18 @@ use yii\db\ActiveQuery;
  * @property string $answer
  * @property int $votes_summary
  * @property bool $is_best
+ * @property string $created_at
+ * @property integer $created_by
+ * @property string $updated_at
+ * @property integer $updated_by
  *
  * @property-read Question $question
  *
  * @package humhub.modules.questions.models
  * @author Luke
  */
-class QuestionAnswer extends ContentActiveRecord
+class QuestionAnswer extends ActiveRecord
 {
-    /**
-     * @inheritdoc
-     */
-    protected $createPermission = CreateQuestion::class;
-
     /**
      * @inheritdoc
      */
@@ -83,6 +82,28 @@ class QuestionAnswer extends ContentActiveRecord
     public function getVoteService(): VoteService
     {
         return new VoteService($this);
+    }
+
+    public function canEdit($user = null): bool
+    {
+        if ($user === null) {
+            if (Yii::$app->user->isGuest) {
+                return false;
+            }
+            $user = Yii::$app->user->getIdentity();
+        }
+
+        // Author can always edit own Answer
+        if ($this->created_by == $user->id) {
+            return true;
+        }
+
+        // Global Admin can edit arbitrarily content
+        if (Yii::$app->getModule('content')->adminCanEditAllContent && $user->isSystemAdmin()) {
+            return true;
+        }
+
+        return $this->question->content->container->getPermissionManager($user)->can(CreateQuestion::class);
     }
 
 }

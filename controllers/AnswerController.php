@@ -42,7 +42,7 @@ class AnswerController extends ContentContainerController
         }
 
         if ($id === null) {
-            $answer = new QuestionAnswer($this->contentContainer);
+            $answer = new QuestionAnswer();
             $answer->question_id = $question->id;
         } else {
             $answer = QuestionAnswer::find()
@@ -54,7 +54,7 @@ class AnswerController extends ContentContainerController
             throw new NotFoundHttpException();
         }
 
-        if (!$answer->content->canEdit()) {
+        if (!$answer->canEdit()) {
             throw new ForbiddenHttpException('Access denied!');
         }
 
