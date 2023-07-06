@@ -19,7 +19,7 @@ use yii\web\View;
 
 QuestionsAssets::register($this);
 ?>
-<?php ModalDialog::begin(['header' => Yii::t('AdminModule.modules', '<strong>General</strong> Settings')]) ?>
+<?php ModalDialog::begin(['header' => Yii::t('QuestionsModule.base', '<strong>Create</strong> Answer')]) ?>
     <?php $form = ActiveForm::begin() ?>
 
     <div class="modal-body">
