@@ -3,7 +3,6 @@ humhub.module('questions.Question', function (module, require, $) {
     const client = require('client');
     const Content = require('content').Content;
     const loader = require('ui.loader');
-    const modal = require('ui.modal');
     const Widget = require('ui.widget').Widget;
 
     const Question = function (id) {
@@ -74,53 +73,59 @@ humhub.module('questions.Question', function (module, require, $) {
         return this.$.find('[data-answer=' + id + ']');
     }
 
-    Question.prototype.initAnswersListWidgets = function () {
-        this.answersList().find('[data-ui-widget]').each(function () {
+    Question.prototype.initWidgets = function (elements) {
+        elements.find('[data-ui-widget]').each(function () {
             Widget.instance($(this));
         });
     }
 
-    Question.prototype.addAnswer = function (evt) {
-        const that = this;
-        modal.load(evt).then(function () {
-            modal.global.$.one('submitted', function (e, response) {
-                if (response.success !== true) {
-                    return;
-                }
-
-                const listHeader = that.answersListHeader();
-                if (listHeader.length === 0) {
-                    that.answersList().append(response.header);
-                } else {
-                    listHeader.replaceWith(response.header);
-                }
-
-                const answerBlock = that.getAnswer(response.answer);
-                if (answerBlock.length === 0) {
-                    that.answersList().append(response.content);
-                } else {
-                    answerBlock.replaceWith(response.content);
-                }
-                that.initAnswersListWidgets();
-                setTimeout(function () {
-                    that.getAnswer(response.answer).removeClass('questions-highlight-answer')
-                }, 1000);
-            });
-        }).catch(function (e) {
-            module.log.error(e, true);
-        });
+    Question.prototype.initAnswersListWidgets = function () {
+        this.initWidgets(this.answersList());
     }
 
-    Question.prototype.loadAnswers = function (evt) {
+    Question.prototype.saveAnswer = function (evt) {
         const that = this;
+        const saveButton = evt.$trigger;
+        evt.$form = saveButton.closest('form');
 
-        client.post(evt).then(function (response) {
-            that.answersList().html(response.html);
+        client.submit(evt).then(function (response) {
+            if (typeof response.form === 'string') {
+                const answerFormSelector = '.questions-answer-form[data-answer-form=' + response.answerFormId + ']';
+                const answerForm = that.$.find(answerFormSelector);
+                if (answerForm.length) {
+                    answerForm.replaceWith(response.form);
+                    that.initWidgets(that.$.find(answerFormSelector));
+                }
+            }
+
+            if (response.success !== true) {
+                return;
+            }
+
+            const listHeader = that.answersListHeader();
+            if (listHeader.length === 0) {
+                that.answersList().append(response.header);
+            } else {
+                listHeader.replaceWith(response.header);
+            }
+
+            const answerBlock = that.getAnswer(response.answer);
+            if (answerBlock.length === 0) {
+                const collapseButton = that.answersList().find('button[data-action-click=collapse]');
+                const expandButton = that.answersList().find('button[data-action-click=expand]');
+                if (collapseButton.is(':hidden') && expandButton.is(':hidden')) {
+                    collapseButton.show();
+                }
+                collapseButton.before(response.content);
+            } else {
+                answerBlock.replaceWith(response.content);
+            }
             that.initAnswersListWidgets();
-            evt.$trigger.remove();
-        }).catch(function (e) {
-            module.log.error(e, true);
-            loader.reset(evt.$trigger);
+            setTimeout(function () {
+                that.getAnswer(response.answer).removeClass('questions-highlight-answer')
+            }, 1000);
+        }).catch(function (error) {
+            module.log.error(error, true);
         });
     }
 

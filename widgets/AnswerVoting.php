@@ -27,7 +27,7 @@ class AnswerVoting extends Widget
      */
     public function run()
     {
-        return $this->render('answerVoting', [
+        return $this->render('answer-voting', [
             'answer' => $this->answer,
             'options' => $this->getOptions()
         ]);

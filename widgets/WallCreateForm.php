@@ -35,7 +35,7 @@ class WallCreateForm extends WallCreateContentForm
      */
     public function renderActiveForm(ActiveForm $form): string
     {
-        return $this->render('form', [
+        return $this->render('wall-create-form', [
             'model' => new Question($this->contentContainer),
             'form' => $form,
             'submitUrl' => $this->submitUrl,

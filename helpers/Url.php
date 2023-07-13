@@ -17,7 +17,6 @@ class Url extends BaseUrl
     const ROUTE_QUESTION_CREATE = '/questions/question/create';
     const ROUTE_QUESTION_CREATE_FORM = '/questions/question/create-form';
     const ROUTE_QUESTION_EDIT = '/questions/question/edit';
-    const ROUTE_QUESTION_LOAD_ANSWERS = '/questions/question/load-except-best';
 
     const ROUTE_ANSWER_EDIT = '/questions/answer/edit';
     const ROUTE_ANSWER_VOTE = '/questions/answer/vote';
@@ -33,19 +32,24 @@ class Url extends BaseUrl
         }
     }
 
+    public static function toViewQuestion(Question $question): string
+    {
+        return $question->content->container->createUrl(null, ['contentId' => $question->content->id]);
+    }
+
     public static function toEditQuestion(Question $question): string
     {
         return static::create(static::ROUTE_QUESTION_EDIT, ['id' => $question->id], $question->content->container);
     }
 
-    public static function toLoadAllAnswers(Question $question): string
-    {
-        return static::create(static::ROUTE_QUESTION_LOAD_ANSWERS, ['id' => $question->id], $question->content->container);
-    }
-
     public static function toCreateAnswer(Question $question): string
     {
-        return static::create(static::ROUTE_ANSWER_EDIT, ['qid' => $question->id], $question->content->container);
+        return self::toViewQuestion($question) . '#create-answer-form';
+    }
+
+    public static function toViewAnswers(Question $question): string
+    {
+        return self::toViewQuestion($question) . '#answers';
     }
 
     public static function toEditAnswer(QuestionAnswer $answer): string

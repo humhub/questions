@@ -7,6 +7,7 @@
 
 namespace humhub\modules\questions\widgets;
 
+use humhub\modules\content\widgets\stream\WallStreamEntryOptions;
 use humhub\modules\content\widgets\stream\WallStreamModuleEntryWidget;
 use humhub\modules\questions\helpers\Url;
 
@@ -44,8 +45,9 @@ class WallEntry extends WallStreamModuleEntryWidget
      */
     public function renderContent()
     {
-        return $this->render('entry', [
+        return $this->render('wall-entry', [
             'question' => $this->model,
+            'isDetailView' => $this->renderOptions->isViewContext(WallStreamEntryOptions::VIEW_CONTEXT_DETAIL),
             'options' => [
                 'data' => [
                     'poll' => $this->model->id,

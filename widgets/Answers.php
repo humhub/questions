@@ -19,6 +19,8 @@ class Answers extends JsWidget
 
     public ?Question $question;
 
+    public bool $displayAll = false;
+
     /**
      * @inheritdoc
      */
@@ -31,7 +33,8 @@ class Answers extends JsWidget
         if (parent::beforeRun()) {
             $this->content = $this->render('answers', [
                 'question' => $this->question,
-                'bestAnswer' => $this->question->getAnswerService()->getBest()
+                'bestAnswer' => $this->question->getAnswerService()->getBest(),
+                'displayAll' => $this->displayAll
             ]);
             return true;
         }

@@ -87,5 +87,22 @@ humhub.module('questions.Answer', function (module, require, $) {
         }
     }
 
+    Answer.prototype.collapse = function (evt) {
+        this.toggleList(evt, true);
+    }
+
+    Answer.prototype.expand = function (evt) {
+        this.toggleList(evt, false);
+    }
+
+    Answer.prototype.toggleList = function (evt, collapse) {
+        const btn = evt.$target;
+        const answersList = btn.parent();
+
+        btn.hide();
+        answersList.find('.questions-answer').toggle(!collapse);
+        answersList.find('button[data-action-click=' + (collapse ? 'expand' : 'collapse') + ']').show();
+    }
+
     module.export = Answer;
 });

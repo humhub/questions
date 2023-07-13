@@ -29,15 +29,15 @@ class AnswersExceptBest extends Widget
      */
     public function run()
     {
-        $answers = $this->question->getAnswerService()->getExceptBest($this->limit);
-
-        if (count($answers) === 0) {
-            return '';
-        }
-
-        return $this->render('answersExceptBest', [
+        return $this->render('answers-except-best', [
             'question' => $this->question,
-            'answers' => $answers,
+            'answers' => $this->question->getAnswerService()->getExceptBest($this->limit),
+            'options' => $this->getOptions()
         ]);
+    }
+
+    public function getOptions(): array
+    {
+        return ['class' => 'except-best-answers'];
     }
 }

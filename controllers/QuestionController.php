@@ -9,7 +9,6 @@ namespace humhub\modules\questions\controllers;
 
 use humhub\modules\content\components\ContentContainerController;
 use humhub\modules\questions\models\Question;
-use humhub\modules\questions\widgets\Answers;
 use humhub\modules\questions\widgets\AnswersExceptBest;
 use humhub\modules\questions\widgets\WallCreateForm;
 use humhub\modules\stream\actions\StreamEntryResponse;

@@ -11,6 +11,7 @@ use humhub\modules\content\components\ContentContainerController;
 use humhub\modules\questions\models\Question;
 use humhub\modules\questions\models\QuestionAnswer;
 use humhub\modules\questions\widgets\Answer;
+use humhub\modules\questions\widgets\AnswerForm;
 use humhub\modules\questions\widgets\AnswersHeader;
 use humhub\modules\questions\widgets\AnswerVoting;
 use Yii;
@@ -58,21 +59,29 @@ class AnswerController extends ContentContainerController
             throw new ForbiddenHttpException('Access denied!');
         }
 
+        $answerFormId = $answer->isNewRecord ? 0 : $answer->id;
+
         if ($answer->load(Yii::$app->request->post()) && $answer->validate() && $answer->save()) {
             return $this->asJson([
                 'success' => true,
                 'question' => $question->id,
                 'answer' => $answer->id,
+                'answerFormId' => $answerFormId,
                 'header' => AnswersHeader::widget(['question' => $question]),
                 'content' => Answer::widget([
                     'answer' => $answer,
                     'highlight' => true
-                ])
+                ]),
+                'form' => AnswerForm::widget(['question' => $question])
             ]);
         }
 
-        return $this->renderAjax('form', [
-            'answer' => $answer
+        return $this->asJson([
+            'answerFormId' => $answerFormId,
+            'form' => AnswerForm::widget([
+                'question' => $question,
+                'answer' => $answer
+            ])
         ]);
     }
 

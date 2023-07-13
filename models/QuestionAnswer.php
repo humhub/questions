@@ -61,7 +61,7 @@ class QuestionAnswer extends ActiveRecord
     public function attributeLabels()
     {
         return [
-            'answer' => Yii::t('QuestionsModule.base', 'Answer')
+            'answer' => Yii::t('QuestionsModule.base', 'Your Answer')
         ];
     }
 
