@@ -8,19 +8,21 @@
 
 .questions-answer {
   display: flex;
-  margin: 0;
-  padding: 20px 0;
+  margin: 0 -5px;
+  padding: 20px 5px;
   border-top: 1px solid var(--background3);
   transition: border, background 2s ease;
   .questions-answer-header {
     padding-bottom: 10px;
+    .nav.preferences {
+      top: -15px;
+      right: 0;
+    }
   }
-  &.questions-best-answer, &.questions-highlight-answer {
+  &.questions-best-answer {
     border-radius: 4px;
     margin: 0 -10px;
     padding: 20px 10px;
-  }
-  &.questions-best-answer {
     margin-top: 20px;
     border: 1px solid var(--info);
     background: var(--background-color-highlight-soft);
@@ -29,8 +31,7 @@
     }
   }
   &.questions-highlight-answer {
-    border: 1px solid var(--warning);
-    background: var(--background-color-warning);
+    background: #FFF8E0;
   }
 }
 
@@ -82,7 +83,7 @@
   .questions-best-answer-button {
     position: absolute;
     top: -14px;
-    right: 0;
+    right: 25px;
     display: none;
     span {
       font-size: 13px;

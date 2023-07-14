@@ -47,6 +47,8 @@ class WallEntry extends WallStreamModuleEntryWidget
      */
     public $model;
 
+    public ?int $currentAnswerId = null;
+
     /**
      * @inheritDoc
      */
@@ -54,6 +56,7 @@ class WallEntry extends WallStreamModuleEntryWidget
     {
         return $this->render('wall-entry', [
             'question' => $this->model,
+            'currentAnswerId' => $this->currentAnswerId,
             'isDetailView' => $this->renderOptions->isViewContext(WallStreamEntryOptions::VIEW_CONTEXT_DETAIL),
             'options' => [
                 'data' => [
@@ -66,7 +69,7 @@ class WallEntry extends WallStreamModuleEntryWidget
     }
 
     /**
-     * @return string a non encoded plain text title (no html allowed) used in the header of the widget
+     * @inheritdoc
      */
     protected function getTitle()
     {

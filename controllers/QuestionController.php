@@ -98,9 +98,10 @@ class QuestionController extends ContentContainerController
     }
 
     /**
-     * @param int $id
+     * @param int $id Question ID
+     * @param int|null $aid Answer ID
      */
-    public function actionView($id)
+    public function actionView($id, $aid = null)
     {
         $question = Question::findOne($id);
 
@@ -117,6 +118,7 @@ class QuestionController extends ContentContainerController
 
         return $this->render('view', [
             'question' => $question,
+            'currentAnswerId' => $aid,
             'renderOptions' => $renderOptions
         ]);
     }

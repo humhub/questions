@@ -21,6 +21,8 @@ class Answers extends JsWidget
 
     public bool $displayAll = false;
 
+    public ?int $currentAnswerId = null;
+
     /**
      * @inheritdoc
      */
@@ -33,6 +35,7 @@ class Answers extends JsWidget
         if (parent::beforeRun()) {
             $this->content = $this->render('answers', [
                 'question' => $this->question,
+                'currentAnswerId' => $this->currentAnswerId,
                 'bestAnswer' => $this->question->getAnswerService()->getBest(),
                 'displayAll' => $this->displayAll
             ]);

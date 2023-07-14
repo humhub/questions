@@ -35,9 +35,18 @@ class Url extends BaseUrl
         }
     }
 
-    public static function toViewQuestion(Question $question): string
+    public static function toViewQuestion(Question $question, array $params = []): string
     {
-        return static::create(static::ROUTE_QUESTION_VIEW, ['id' => $question->id], $question->content->container);
+        if (isset($params['#'])) {
+            $anchor = '#' . $params['#'];
+            unset($params['#']);
+        } else {
+            $anchor = '';
+        }
+
+        return static::create(static::ROUTE_QUESTION_VIEW,
+            array_merge(['id' => $question->id], $params),
+            $question->content->container) . $anchor;
     }
 
     public static function toEditQuestion(Question $question): string
@@ -47,17 +56,22 @@ class Url extends BaseUrl
 
     public static function toCreateAnswer(Question $question): string
     {
-        return self::toViewQuestion($question) . '#create-answer-form';
+        return self::toViewQuestion($question, ['#' => 'create-answer-form']);
     }
 
     public static function toViewAnswers(Question $question): string
     {
-        return self::toViewQuestion($question) . '#answers';
+        return self::toViewQuestion($question, ['#' => 'answers']);
     }
 
     public static function toEditAnswer(QuestionAnswer $answer): string
     {
         return static::create(static::ROUTE_ANSWER_EDIT, ['qid' => $answer->question->id, 'id' => $answer->id], $answer->question->content->container);
+    }
+
+    public static function toViewAnswer(QuestionAnswer $answer): string
+    {
+        return self::toViewQuestion($answer->question, ['aid' => $answer->id, '#' => 'answer' . $answer->id]);
     }
 
     public static function toVoteUpAnswer(QuestionAnswer $answer): string

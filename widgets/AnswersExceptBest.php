@@ -16,6 +16,8 @@ class AnswersExceptBest extends Widget
 
     public ?int $limit = null;
 
+    public ?int $currentAnswerId = null;
+
     /**
      * @inheritdoc
      */
@@ -31,6 +33,7 @@ class AnswersExceptBest extends Widget
     {
         return $this->render('answers-except-best', [
             'question' => $this->question,
+            'currentAnswerId' => $this->currentAnswerId,
             'answers' => $this->question->getAnswerService()->getExceptBest($this->limit),
             'options' => $this->getOptions()
         ]);

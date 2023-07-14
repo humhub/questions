@@ -11,6 +11,7 @@
 use humhub\libs\Html;
 use humhub\modules\content\widgets\richtext\RichText;
 use humhub\modules\questions\models\QuestionAnswer;
+use humhub\modules\questions\widgets\AnswerControls;
 use humhub\modules\questions\widgets\AnswerVoting;
 use humhub\modules\questions\widgets\BestAnswerButton;
 use humhub\modules\user\widgets\Image;
@@ -32,6 +33,7 @@ use humhub\widgets\TimeAgo;
             <small><?= Yii::t('QuestionsModule.base', 'answered {date}', [
                 'date' => TimeAgo::widget(['timestamp' => $answer->created_at])
             ]) ?></small>
+            <?= AnswerControls::widget(['answer' => $answer]) ?>
         </div>
         <?= RichText::output($answer->answer) ?>
         <?= BestAnswerButton::widget(['answer' => $answer]) ?>

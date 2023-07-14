@@ -10,9 +10,11 @@ use humhub\modules\questions\models\Question;
 use humhub\modules\questions\widgets\WallEntry;
 
 /* @var Question $question */
+/* @var int $currentAnswerId */
 /* @var WallStreamEntryOptions $renderOptions */
 ?>
 <?= WallEntry::widget([
     'model' => $question,
+    'currentAnswerId' => $currentAnswerId,
     'renderOptions' => $renderOptions,
 ]) ?>

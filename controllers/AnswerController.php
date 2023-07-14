@@ -29,8 +29,8 @@ class AnswerController extends ContentContainerController
 {
 
     /**
-     * @param int $qid
-     * @param int|null $id
+     * @param int $qid Question ID
+     * @param int|null $id Answer ID
      * @return array|string|Response
      * @throws ForbiddenHttpException
      */

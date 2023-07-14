@@ -17,6 +17,7 @@ use yii\web\View;
 
 /* @var View $this */
 /* @var Question $question */
+/* @var int|null $currentAnswerId */
 /* @var bool $isDetailView */
 /* @var array $options */
 
@@ -43,6 +44,7 @@ QuestionsAssets::register($this);
 
     <?= Answers::widget([
         'question' => $question,
+        'currentAnswerId' => $currentAnswerId,
         'displayAll' => $isDetailView
     ]) ?>
 
