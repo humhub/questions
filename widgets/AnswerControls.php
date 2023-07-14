@@ -49,6 +49,19 @@ class AnswerControls extends Menu
             'url' => Url::toViewAnswer($this->answer),
             'sortOrder' => 100,
         ]));
+
+        if ($this->answer->canEdit()) {
+            $this->addEntry(new MenuLink([
+                'label' => Yii::t('QuestionsModule.base', 'Edit'),
+                'icon' => 'edit',
+                'url' => '#',
+                'htmlOptions' => [
+                    'data-action-click' => 'edit',
+                    'data-action-url' => Url::toEditAnswer($this->answer)
+                ],
+                'sortOrder' => 200,
+            ]));
+        }
     }
 
     /**

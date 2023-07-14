@@ -73,14 +73,16 @@ humhub.module('questions.Question', function (module, require, $) {
         return this.$.find('[data-answer=' + id + ']');
     }
 
+    Question.prototype.refreshUpdatedAnswer = function (id) {
+        const answerBlock = this.getAnswer(id);
+        this.initWidgets(answerBlock);
+        setTimeout(() => answerBlock.removeClass('questions-highlight-answer'), 1000);
+    }
+
     Question.prototype.initWidgets = function (elements) {
         elements.find('[data-ui-widget]').each(function () {
             Widget.instance($(this));
         });
-    }
-
-    Question.prototype.initAnswersListWidgets = function () {
-        this.initWidgets(this.answersList());
     }
 
     Question.prototype.saveAnswer = function (evt) {
@@ -109,7 +111,7 @@ humhub.module('questions.Question', function (module, require, $) {
                 listHeader.replaceWith(response.header);
             }
 
-            const answerBlock = that.getAnswer(response.answer);
+            let answerBlock = that.getAnswer(response.answer);
             if (answerBlock.length === 0) {
                 const collapseButton = that.answersList().find('button[data-action-click=collapse]');
                 const expandButton = that.answersList().find('button[data-action-click=expand]');
@@ -120,10 +122,8 @@ humhub.module('questions.Question', function (module, require, $) {
             } else {
                 answerBlock.replaceWith(response.content);
             }
-            that.initAnswersListWidgets();
-            setTimeout(function () {
-                that.getAnswer(response.answer).removeClass('questions-highlight-answer')
-            }, 1000);
+
+            that.refreshUpdatedAnswer(response.answer)
         }).catch(function (error) {
             module.log.error(error, true);
         });

@@ -5,6 +5,11 @@ humhub.module('questions.Answer', function (module, require, $) {
 
     const Answer = Widget.extend();
 
+    Answer.prototype.init = function () {
+        const question = this.$.closest('[data-content-component="questions.Question"]');
+        this.Question = question.length ? Widget.instance(question) : null;
+    }
+
     Answer.prototype.vote = function (evt) {
         const voting = evt.$trigger.parent();
         const summary = voting.find('div');
@@ -102,6 +107,38 @@ humhub.module('questions.Answer', function (module, require, $) {
         btn.hide();
         answersList.find('.questions-answer').toggle(!collapse);
         answersList.find('button[data-action-click=' + (collapse ? 'expand' : 'collapse') + ']').show();
+    }
+
+    Answer.prototype.edit = function (evt) {
+        const that = this;
+        const answerContent = evt.$target.closest('.questions-answer-content');
+        const answerText = answerContent.find('[data-ui-richtext]');
+
+        loader.set(answerText);
+
+        client.get(evt).then(function(response) {
+            answerText.replaceWith(response.form);
+            that.Question.initWidgets(answerContent);
+        }).catch(function(e) {
+            module.log.error(e, true);
+        });
+    }
+
+    Answer.prototype.saveAnswer = function (evt) {
+        this.Question.saveAnswer(evt);
+    }
+
+    Answer.prototype.cancelEditAnswer = function (evt) {
+        const that = this;
+
+        client.submit(evt).then(function (response) {
+            if (typeof(response.answer) !== 'undefined' && typeof(response.content) !== 'undefined') {
+                that.Question.getAnswer(response.answer).replaceWith(response.content);
+                that.Question.refreshUpdatedAnswer(response.answer);
+            }
+        }).catch(function (error) {
+            module.log.error(error, true);
+        });
     }
 
     module.export = Answer;

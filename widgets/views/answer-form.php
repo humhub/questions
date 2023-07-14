@@ -23,11 +23,13 @@ use humhub\widgets\Button;
     <?= $form->field($answer, 'id')->hiddenInput()->label(false) ?>
 
     <?= $form->field($answer, 'answer')->widget(RichTextField::class, [
+        'id' => 'answerRichTextField' . ($answer->isNewRecord ? 0 : $answer->id),
         'placeholder' => Yii::t('QuestionsModule.base', 'Enter your answer...')
     ])->label($answer->isNewRecord) ?>
 
     <?php if (!$answer->isNewRecord) : ?>
-        <?= Button::danger()->action('cancelEditAnswer') ?>
+        <?= Button::danger(Yii::t('QuestionsModule.base', 'Cancel'))
+            ->action('cancelEditAnswer', Url::toContentAnswer($answer)) ?>
     <?php endif; ?>
 
     <?= Button::save()->action('saveAnswer') ?>

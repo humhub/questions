@@ -29,6 +29,32 @@ class AnswerController extends ContentContainerController
 {
 
     /**
+     * @param int $id
+     * @throws ForbiddenHttpException
+     * @throws NotFoundHttpException
+     */
+    public function actionContent($id)
+    {
+        $answer = QuestionAnswer::findOne($id);
+
+        if ($answer === null) {
+            throw new NotFoundHttpException();
+        }
+
+        if (!$answer->question->content->canView()) {
+            throw new ForbiddenHttpException('Access denied!');
+        }
+
+        return $this->asJson([
+            'answer' => $answer->id,
+            'content' => Answer::widget([
+                'answer' => $answer,
+                'highlight' => true
+            ])
+        ]);
+    }
+
+    /**
      * @param int $qid Question ID
      * @param int|null $id Answer ID
      * @return array|string|Response
@@ -72,7 +98,7 @@ class AnswerController extends ContentContainerController
                     'answer' => $answer,
                     'highlight' => true
                 ]),
-                'form' => AnswerForm::widget(['question' => $question])
+                'form' => $answerFormId === 0 ? AnswerForm::widget(['question' => $question]) : null
             ]);
         }
 

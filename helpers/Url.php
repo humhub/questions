@@ -22,6 +22,7 @@ class Url extends BaseUrl
 
     const ROUTE_ANSWER = '/questions/answer';
     const ROUTE_ANSWER_EDIT = self::ROUTE_ANSWER . '/edit';
+    const ROUTE_ANSWER_CONTENT = self::ROUTE_ANSWER . '/content';
     const ROUTE_ANSWER_VOTE = self::ROUTE_ANSWER . '/vote';
     const ROUTE_ANSWER_SELECT_BEST = self::ROUTE_ANSWER . '/select-best';
 
@@ -67,6 +68,11 @@ class Url extends BaseUrl
     public static function toEditAnswer(QuestionAnswer $answer): string
     {
         return static::create(static::ROUTE_ANSWER_EDIT, ['qid' => $answer->question->id, 'id' => $answer->id], $answer->question->content->container);
+    }
+
+    public static function toContentAnswer(QuestionAnswer $answer): string
+    {
+        return static::create(static::ROUTE_ANSWER_CONTENT, ['id' => $answer->id], $answer->question->content->container);
     }
 
     public static function toViewAnswer(QuestionAnswer $answer): string

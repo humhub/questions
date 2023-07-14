@@ -17,6 +17,11 @@ class Answers extends JsWidget
      */
     public $jsWidget = 'questions.Answer';
 
+    /**
+     * @inheritdoc
+     */
+    public $init = true;
+
     public ?Question $question;
 
     public bool $displayAll = false;
