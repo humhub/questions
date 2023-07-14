@@ -8,6 +8,7 @@
 namespace humhub\modules\questions\controllers;
 
 use humhub\modules\content\components\ContentContainerController;
+use humhub\modules\content\widgets\stream\WallStreamEntryOptions;
 use humhub\modules\questions\models\Question;
 use humhub\modules\questions\widgets\AnswersExceptBest;
 use humhub\modules\questions\widgets\WallCreateForm;
@@ -93,6 +94,30 @@ class QuestionController extends ContentContainerController
                 ],
                 'class' => 'content_edit'
             ]
+        ]);
+    }
+
+    /**
+     * @param int $id
+     */
+    public function actionView($id)
+    {
+        $question = Question::findOne($id);
+
+        if ($question === null) {
+            throw new NotFoundHttpException();
+        }
+
+        if (!$question->content->canView()) {
+            throw new ForbiddenHttpException('Access denied!');
+        }
+
+        $renderOptions = new WallStreamEntryOptions();
+        $renderOptions->viewContext(WallStreamEntryOptions::VIEW_CONTEXT_DETAIL);
+
+        return $this->render('view', [
+            'question' => $question,
+            'renderOptions' => $renderOptions
         ]);
     }
 

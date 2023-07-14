@@ -14,13 +14,16 @@ use yii\helpers\Url as BaseUrl;
 
 class Url extends BaseUrl
 {
-    const ROUTE_QUESTION_CREATE = '/questions/question/create';
-    const ROUTE_QUESTION_CREATE_FORM = '/questions/question/create-form';
-    const ROUTE_QUESTION_EDIT = '/questions/question/edit';
+    const ROUTE_QUESTION = '/questions/question';
+    const ROUTE_QUESTION_CREATE = self::ROUTE_QUESTION . '/create';
+    const ROUTE_QUESTION_CREATE_FORM = self::ROUTE_QUESTION . '/create-form';
+    const ROUTE_QUESTION_EDIT = self::ROUTE_QUESTION . '/edit';
+    const ROUTE_QUESTION_VIEW = self::ROUTE_QUESTION . '/view';
 
-    const ROUTE_ANSWER_EDIT = '/questions/answer/edit';
-    const ROUTE_ANSWER_VOTE = '/questions/answer/vote';
-    const ROUTE_ANSWER_SELECT_BEST = '/questions/answer/select-best';
+    const ROUTE_ANSWER = '/questions/answer';
+    const ROUTE_ANSWER_EDIT = self::ROUTE_ANSWER . '/edit';
+    const ROUTE_ANSWER_VOTE = self::ROUTE_ANSWER . '/vote';
+    const ROUTE_ANSWER_SELECT_BEST = self::ROUTE_ANSWER . '/select-best';
 
     private static function create($route, $params = [], ContentContainerActiveRecord $container = null)
     {
@@ -34,7 +37,7 @@ class Url extends BaseUrl
 
     public static function toViewQuestion(Question $question): string
     {
-        return $question->content->container->createUrl(null, ['contentId' => $question->content->id]);
+        return static::create(static::ROUTE_QUESTION_VIEW, ['id' => $question->id], $question->content->container);
     }
 
     public static function toEditQuestion(Question $question): string

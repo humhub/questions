@@ -10,6 +10,7 @@ namespace humhub\modules\questions\widgets;
 use humhub\modules\content\widgets\stream\WallStreamEntryOptions;
 use humhub\modules\content\widgets\stream\WallStreamModuleEntryWidget;
 use humhub\modules\questions\helpers\Url;
+use humhub\modules\questions\models\Question;
 
 /**
  * Question WallEntry Widget is used to display a question inside the stream.
@@ -41,6 +42,12 @@ class WallEntry extends WallStreamModuleEntryWidget
     public $createFormClass = WallCreateForm::class;
 
     /**
+     * @inheritdoc
+     * @var Question $model
+     */
+    public $model;
+
+    /**
      * @inheritDoc
      */
     public function renderContent()
@@ -50,7 +57,7 @@ class WallEntry extends WallStreamModuleEntryWidget
             'isDetailView' => $this->renderOptions->isViewContext(WallStreamEntryOptions::VIEW_CONTEXT_DETAIL),
             'options' => [
                 'data' => [
-                    'poll' => $this->model->id,
+                    'question' => $this->model->id,
                     'content-component' => 'questions.Question',
                     'content-key' => $this->model->content->id
                 ]
