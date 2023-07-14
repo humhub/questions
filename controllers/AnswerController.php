@@ -168,7 +168,9 @@ class AnswerController extends ContentContainerController
         return $this->asJson([
             'success' => true,
             'header' => AnswersHeader::widget(['question' => $question]),
-            'action' => $answer->is_best ? 'selected' : 'unselected'
+            'action' => $answer->is_best ? 'selected' : 'unselected',
+            'titleSelect' => Yii::t('QuestionsModule.base', 'Select best answer'),
+            'titleUnselect' => Yii::t('QuestionsModule.base', 'Unselect best answer')
         ]);
     }
 

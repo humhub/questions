@@ -8,6 +8,7 @@
 namespace humhub\modules\questions\models;
 
 use humhub\components\ActiveRecord;
+use humhub\modules\content\permissions\ManageContent;
 use humhub\modules\content\widgets\richtext\RichText;
 use humhub\modules\questions\permissions\CreateQuestion;
 use humhub\modules\questions\services\VoteService;
@@ -103,7 +104,8 @@ class QuestionAnswer extends ActiveRecord
             return true;
         }
 
-        return $this->question->content->container->getPermissionManager($user)->can(CreateQuestion::class);
+        return $this->question->content->container->getPermissionManager($user)
+            ->can($this->isNewRecord ? CreateQuestion::class : ManageContent::class);
     }
 
 }

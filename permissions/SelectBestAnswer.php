@@ -23,8 +23,7 @@ class SelectBestAnswer extends BasePermission
     public $defaultAllowedGroups = [
         Space::USERGROUP_OWNER,
         Space::USERGROUP_ADMIN,
-        Space::USERGROUP_MODERATOR,
-        Space::USERGROUP_MEMBER
+        Space::USERGROUP_MODERATOR
     ];
     
     /**
@@ -47,7 +46,7 @@ class SelectBestAnswer extends BasePermission
      */
     public function getTitle()
     {
-        return Yii::t('QuestionsModule.base', 'User can select the best answer (Q&A)');
+        return Yii::t('QuestionsModule.base', 'Can mark answer as best answer');
     }
 
     /**
@@ -55,6 +54,6 @@ class SelectBestAnswer extends BasePermission
      */
     public function getDescription()
     {
-        return Yii::t('QuestionsModule.base', 'User can select the best answer (Q&A)');
+        return Yii::t('QuestionsModule.base', 'Can mark answer as best answer');
     }
 }

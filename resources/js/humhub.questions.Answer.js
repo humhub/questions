@@ -3,6 +3,7 @@ humhub.module('questions.Answer', function (module, require, $) {
     const client = require('client');
     const loader = require('ui.loader');
     const status = require('ui.status');
+    const additions = require('ui.additions');
 
     const Answer = Widget.extend();
 
@@ -12,7 +13,9 @@ humhub.module('questions.Answer', function (module, require, $) {
     }
 
     Answer.prototype.vote = function (evt) {
+        const that = this;
         const voting = evt.$trigger.parent();
+        const answer = voting.parent();
         const summary = voting.find('div');
         const buttons = voting.find('button');
 
@@ -22,6 +25,7 @@ humhub.module('questions.Answer', function (module, require, $) {
         client.post(evt).then(function (response) {
             if (response.success === true) {
                 voting.replaceWith(response.content);
+                that.refreshTooltips(answer);
             } else {
                 loader.reset(summary);
                 buttons.prop('disabled', false);
@@ -47,16 +51,21 @@ humhub.module('questions.Answer', function (module, require, $) {
             }
 
             if (response.action === 'selected') {
-                that.moveToNormalList(that.$.find('.questions-best-answer'));
-                that.moveToBestPlace(answer);
+                that.moveToNormalList(that.$.find('.questions-best-answer'), response.titleSelect);
+                that.moveToBestPlace(answer, response.titleUnselect);
             } else if (response.action === 'unselected') {
-                that.moveToNormalList(answer);
+                that.moveToNormalList(answer, response.titleSelect);
             }
             that.refreshHeader(response.header);
+            that.refreshTooltips(answer);
         }).catch(function (e) {
             module.log.error(e, true);
             loader.reset(button);
         });
+    }
+
+    Answer.prototype.refreshTooltips = function (container) {
+        additions.apply(container.find('.tt'), 'tooltip');
     }
 
     Answer.prototype.refreshHeader = function (headerHtml) {
@@ -73,19 +82,23 @@ humhub.module('questions.Answer', function (module, require, $) {
         }
     }
 
-    Answer.prototype.moveToBestPlace = function (answer) {
-        answer.addClass('questions-best-answer');
+    Answer.prototype.moveToBestPlace = function (answer, title) {
+        answer.addClass('questions-best-answer')
+            .find('.questions-best-answer-button [data-original-title]')
+            .attr('data-original-title', title);
         this.$.prepend(answer);
     }
 
-    Answer.prototype.moveToNormalList = function (answer) {
+    Answer.prototype.moveToNormalList = function (answer, title) {
         if (answer.length === 0) {
             return;
         }
 
         const exceptBestAnswersHeader = this.$.find('.except-best-answers-header');
 
-        answer.removeClass('questions-best-answer');
+        answer.removeClass('questions-best-answer')
+            .find('.questions-best-answer-button [data-original-title]')
+            .attr('data-original-title', title);
         if (exceptBestAnswersHeader.length) {
             exceptBestAnswersHeader.after(answer);
         } else {

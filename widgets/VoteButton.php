@@ -11,6 +11,7 @@ use humhub\components\Widget;
 use humhub\modules\questions\helpers\Url;
 use humhub\modules\questions\models\QuestionAnswer;
 use humhub\widgets\Button;
+use Yii;
 
 class VoteButton extends Widget
 {
@@ -37,6 +38,7 @@ class VoteButton extends Widget
             ->icon($this->getIcon())
             ->action('vote', $this->getUrl())
             ->cssClass($this->getStyleClass())
+            ->tooltip($this->getTooltip())
             ->loader(false);
     }
 
@@ -57,5 +59,12 @@ class VoteButton extends Widget
         return $this->answer->getVoteService()->isVotedWithType($this->type)
             ? 'active'
             : '';
+    }
+
+    private function getTooltip(): string
+    {
+        return $this->type === 'up'
+            ? Yii::t('QuestionsModule.base', 'Upvote')
+            : Yii::t('QuestionsModule.base', 'Downvote');
     }
 }
