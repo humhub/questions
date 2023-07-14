@@ -172,4 +172,39 @@ class AnswerController extends ContentContainerController
         ]);
     }
 
+    /**
+     * @param int $id
+     * @throws ForbiddenHttpException
+     * @throws NotFoundHttpException
+     */
+    public function actionDelete($id)
+    {
+        $answer = QuestionAnswer::findOne($id);
+
+        if ($answer === null) {
+            throw new NotFoundHttpException();
+        }
+
+        if (!$answer->canEdit()) {
+            throw new ForbiddenHttpException('Access denied!');
+        }
+
+        $question = $answer->question;
+        $deletedAnswerId = $answer->id;
+
+        if (!$answer->delete()) {
+            return $this->asJson([
+                'success' => false,
+                'message' => Yii::t('QuestionsModule.base', 'Cannot delete the Answer!')
+            ]);
+        }
+
+        return $this->asJson([
+            'success' => true,
+            'answer' => $deletedAnswerId,
+            'header' => AnswersHeader::widget(['question' => $question]),
+            'message' => Yii::t('QuestionsModule.base', 'Deleted')
+        ]);
+    }
+
 }

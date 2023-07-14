@@ -29,10 +29,10 @@ use humhub\widgets\Button;
 
     <?php if (!$answer->isNewRecord) : ?>
         <?= Button::danger(Yii::t('QuestionsModule.base', 'Cancel'))
-            ->action('cancelEditAnswer', Url::toContentAnswer($answer)) ?>
+            ->action('cancelEdit', Url::toContentAnswer($answer)) ?>
     <?php endif; ?>
 
-    <?= Button::save()->action('saveAnswer') ?>
+    <?= Button::save()->action($answer->isNewRecord ? 'saveAnswer' : 'save') ?>
 
     <?php ActiveForm::end() ?>
 

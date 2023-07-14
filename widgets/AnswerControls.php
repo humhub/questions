@@ -61,6 +61,19 @@ class AnswerControls extends Menu
                 ],
                 'sortOrder' => 200,
             ]));
+
+            $this->addEntry(new MenuLink([
+                'label' => Yii::t('QuestionsModule.base', 'Delete'),
+                'icon' => 'delete',
+                'url' => '#',
+                'htmlOptions' => [
+                    'data-action-click' => 'delete',
+                    'data-action-url' => Url::toDeleteAnswer($this->answer),
+                    'data-action-confirm-header' => Yii::t('QuestionsModule.base', '<strong>Delete</strong> Answer'),
+                    'data-action-confirm' => Yii::t('QuestionsModule.base', 'Are you sure to delete this Answer?'),
+                ],
+                'sortOrder' => 300,
+            ]));
         }
     }
 

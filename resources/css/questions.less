@@ -29,9 +29,16 @@
     .questions-best-answer-button {
       display: block;
     }
+    &.questions-deleted-answer {
+      border-color: var(--danger);
+    }
   }
   &.questions-highlight-answer {
     background: #FFF8E0;
+  }
+  &.questions-deleted-answer {
+    transition: none;
+    background: var(--background-color-danger);
   }
 }
 

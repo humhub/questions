@@ -69,6 +69,15 @@ humhub.module('questions.Question', function (module, require, $) {
         return this.answersList().children('.except-best-answers-header');
     }
 
+    Question.prototype.refreshAnswersListHeader = function (headerHtml) {
+        const listHeader = this.answersListHeader();
+        if (listHeader.length === 0) {
+            this.answersList().append(headerHtml);
+        } else {
+            listHeader.replaceWith(headerHtml);
+        }
+    }
+
     Question.prototype.getAnswer = function (id) {
         return this.$.find('[data-answer=' + id + ']');
     }
@@ -104,12 +113,7 @@ humhub.module('questions.Question', function (module, require, $) {
                 return;
             }
 
-            const listHeader = that.answersListHeader();
-            if (listHeader.length === 0) {
-                that.answersList().append(response.header);
-            } else {
-                listHeader.replaceWith(response.header);
-            }
+            that.refreshAnswersListHeader(response.header);
 
             let answerBlock = that.getAnswer(response.answer);
             if (answerBlock.length === 0) {

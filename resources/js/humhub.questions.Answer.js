@@ -2,6 +2,7 @@ humhub.module('questions.Answer', function (module, require, $) {
     const Widget = require('ui.widget').Widget;
     const client = require('client');
     const loader = require('ui.loader');
+    const status = require('ui.status');
 
     const Answer = Widget.extend();
 
@@ -46,10 +47,10 @@ humhub.module('questions.Answer', function (module, require, $) {
             }
 
             if (response.action === 'selected') {
-                that.moveAnswerToNormalList(that.$.find('.questions-best-answer'));
-                that.moveAnswerToBestPlace(answer);
+                that.moveToNormalList(that.$.find('.questions-best-answer'));
+                that.moveToBestPlace(answer);
             } else if (response.action === 'unselected') {
-                that.moveAnswerToNormalList(answer);
+                that.moveToNormalList(answer);
             }
             that.refreshHeader(response.header);
         }).catch(function (e) {
@@ -72,12 +73,12 @@ humhub.module('questions.Answer', function (module, require, $) {
         }
     }
 
-    Answer.prototype.moveAnswerToBestPlace = function (answer) {
+    Answer.prototype.moveToBestPlace = function (answer) {
         answer.addClass('questions-best-answer');
         this.$.prepend(answer);
     }
 
-    Answer.prototype.moveAnswerToNormalList = function (answer) {
+    Answer.prototype.moveToNormalList = function (answer) {
         if (answer.length === 0) {
             return;
         }
@@ -124,11 +125,11 @@ humhub.module('questions.Answer', function (module, require, $) {
         });
     }
 
-    Answer.prototype.saveAnswer = function (evt) {
+    Answer.prototype.save = function (evt) {
         this.Question.saveAnswer(evt);
     }
 
-    Answer.prototype.cancelEditAnswer = function (evt) {
+    Answer.prototype.cancelEdit = function (evt) {
         const that = this;
 
         client.submit(evt).then(function (response) {
@@ -138,6 +139,32 @@ humhub.module('questions.Answer', function (module, require, $) {
             }
         }).catch(function (error) {
             module.log.error(error, true);
+        });
+    }
+
+    Answer.prototype.delete = function (evt) {
+        const that = this;
+        const answerControls = evt.$target.closest('.nav.preferences');
+
+        loader.set(answerControls, {size: '4px', css: {padding: 0, width: '45px'}});
+
+        client.post(evt).then(function (response) {
+            if (response.success === true) {
+                that.Question.refreshAnswersListHeader(response.header);
+
+                that.Question.getAnswer(response.answer)
+                    .addClass('questions-deleted-answer')
+                    .fadeOut('slow', function() {
+                        $(this).remove();
+                        status.success(response.message);
+                    });
+            } else {
+                loader.reset(answerControls);
+                status.error(response.message);
+            }
+        }).catch(function (error) {
+            module.log.error(error, true);
+            loader.reset(answerControls);
         });
     }
 
