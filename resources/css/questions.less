@@ -43,25 +43,26 @@
 }
 
 .questions-answer-voting {
-  width: 46px;
+  width: 32px;
   button {
-    width: 46px;
-    height: 46px;
-    background: #fff;
-    border-radius: 50%;
-    box-shadow: 1px 1px 3px #ccc;
+    width: 32px;
+    height: 32px;
+    background: #f3f3f3;
+    border-radius: 8px;
+    box-shadow: none;
     &.active, &:active, &:hover {
-      background: var(--background-color-highlight);
+      background: #bce3e8;
       box-shadow: none;
     }
     &.active:hover {
-      background: #fff;
-      box-shadow: 1px 1px 3px #ccc;
+      background: #f3f3f3;
     }
     .fa {
-      font-size: 28px;
+      font-size: 24px;
       color: #333;
-      margin: -2px 0 0 -1px;
+      position: relative;
+      top: -5px;
+      left: -7px;
       &.fa-caret-down {
         margin-top: 2px;
       }

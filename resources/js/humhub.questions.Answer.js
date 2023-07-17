@@ -19,7 +19,7 @@ humhub.module('questions.Answer', function (module, require, $) {
         const summary = voting.find('div');
         const buttons = voting.find('button');
 
-        loader.set(summary, {size: '8px', css: {padding: 0}});
+        loader.set(summary, {size: '4px', css: {padding: 0}});
         buttons.prop('disabled', true);
 
         client.post(evt).then(function (response) {
