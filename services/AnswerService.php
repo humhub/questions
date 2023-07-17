@@ -38,6 +38,16 @@ class AnswerService
             ->orderBy(['votes_summary' => SORT_DESC, 'question_answer.id' => SORT_DESC]);
     }
 
+    public function getExceptBestQuery(): ActiveQuery
+    {
+        return $this->getQuery()->andWhere(['is_best' => 0]);
+    }
+
+    public function getBestQuery(): ActiveQuery
+    {
+        return $this->getQuery()->andWhere(['is_best' => 1]);
+    }
+
     /**
      * @return QuestionAnswer[]
      */
@@ -52,12 +62,12 @@ class AnswerService
      */
     public function getExceptBest(?int $limit = null): array
     {
-        return $this->getQuery()->andWhere(['is_best' => 0])->limit($limit)->all();
+        return $this->getExceptBestQuery()->limit($limit)->all();
     }
 
     public function getBest(): ?QuestionAnswer
     {
-        return $this->getQuery()->andWhere(['is_best' => 1])->one();
+        return $this->getBestQuery()->one();
     }
 
     public function getCount(): int
@@ -93,7 +103,7 @@ class AnswerService
     public function changeBest(QuestionAnswer $answer): bool
     {
         /* @var QuestionAnswer[] $bestAnswers */
-        $bestAnswers = $this->getQuery()->andWhere(['is_best' => 1])->all();
+        $bestAnswers = $this->getBestQuery()->all();
 
         // Reset all previous best answers, because only single Answer can be the best selected
         foreach ($bestAnswers as $bestAnswer) {

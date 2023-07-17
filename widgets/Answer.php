@@ -15,6 +15,7 @@ class Answer extends Widget
     public ?QuestionAnswer $answer;
 
     public bool $highlight = false;
+    public bool $allowSelectBest = true;
 
     /**
      * @inheritdoc
@@ -31,6 +32,7 @@ class Answer extends Widget
     {
         return $this->render('answer', [
             'answer' => $this->answer,
+            'allowSelectBest' => $this->allowSelectBest,
             'options' => $this->getOptions()
         ]);
     }

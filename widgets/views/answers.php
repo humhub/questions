@@ -18,7 +18,10 @@ use humhub\modules\questions\widgets\AnswersExceptBest;
 
 QuestionsAssets::register($this);
 ?>
-<?= Answer::widget(['answer' => $bestAnswer]) ?>
+<?= Answer::widget([
+    'answer' => $bestAnswer,
+    'allowSelectBest' => $displayAll
+]) ?>
 
 <?php if ($displayAll) : ?>
     <?= AnswersExceptBest::widget([

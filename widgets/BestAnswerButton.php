@@ -22,6 +22,8 @@ class BestAnswerButton extends Widget
 {
     public ?QuestionAnswer $answer;
 
+    public bool $allowSelect = true;
+
     /**
      * @inheritdoc
      */
@@ -37,7 +39,7 @@ class BestAnswerButton extends Widget
     {
         $button = Label::info(Yii::t('QuestionsModule.base', 'BEST ANSWER'));
 
-        if ($this->answer->question->getAnswerService()->canSelectBest()) {
+        if ($this->allowSelect()) {
             $button->action('best', Url::toSelectBestAnswer($this->answer))
                 ->tooltip($this->answer->is_best
                     ? Yii::t('QuestionsModule.base', 'Unselect best answer')
@@ -53,7 +55,11 @@ class BestAnswerButton extends Widget
             return false;
         }
 
-        return $this->answer->is_best ||
-            $this->answer->question->getAnswerService()->canSelectBest();
+        return $this->answer->is_best || $this->allowSelect();
+    }
+
+    private function allowSelect(): bool
+    {
+        return $this->allowSelect && $this->answer->question->getAnswerService()->canSelectBest();
     }
 }

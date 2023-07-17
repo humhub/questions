@@ -5,9 +5,6 @@
  * @license https://www.humhub.com/licences
  */
 
-/* @var QuestionAnswer $answer */
-/* @var array $options */
-
 use humhub\libs\Html;
 use humhub\modules\content\widgets\richtext\RichText;
 use humhub\modules\questions\models\QuestionAnswer;
@@ -17,6 +14,9 @@ use humhub\modules\questions\widgets\BestAnswerButton;
 use humhub\modules\user\widgets\Image;
 use humhub\widgets\TimeAgo;
 
+/* @var QuestionAnswer $answer */
+/* @var array $options */
+/* @var bool $allowSelectBest */
 ?>
 <?= Html::beginTag('div', $options) ?>
 
@@ -36,7 +36,7 @@ use humhub\widgets\TimeAgo;
             <?= AnswerControls::widget(['answer' => $answer]) ?>
         </div>
         <?= RichText::output($answer->answer) ?>
-        <?= BestAnswerButton::widget(['answer' => $answer]) ?>
+        <?= BestAnswerButton::widget(['answer' => $answer, 'allowSelect' => $allowSelectBest]) ?>
     </div>
 
 <?= Html::endTag('div') ?>

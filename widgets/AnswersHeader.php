@@ -29,8 +29,10 @@ class AnswersHeader extends Widget
      */
     public function run()
     {
-        return Html::tag('h4', Yii::t('QuestionsModule.base', '{count} Answers', [
-            'count' => $this->question->getAnswerService()->getCount()
+        $count = $this->question->getAnswerService()->getExceptBestQuery()->count();
+
+        return Html::tag('h4', Yii::t('QuestionsModule.base', '{countAnswers} more {n,plural,=1{Answer} other{Answers}}', [
+            'countAnswers' => $count, 'n' => $count
         ]), [
             'class' => 'except-best-answers-header'
         ]);
