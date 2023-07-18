@@ -29,12 +29,19 @@ class AnswersHeader extends Widget
      */
     public function run()
     {
-        $count = $this->question->getAnswerService()->getExceptBestQuery()->count();
-
-        return Html::tag('h4', Yii::t('QuestionsModule.base', '{countAnswers} more {n,plural,=1{Answer} other{Answers}}', [
-            'countAnswers' => $count, 'n' => $count
-        ]), [
+        return Html::tag('h4', $this->getText(), [
             'class' => 'except-best-answers-header'
         ]);
+    }
+
+    private function getText(): string
+    {
+        $answerService = $this->question->getAnswerService();
+        $count = $answerService->getExceptBestQuery()->count();
+        $params = ['countAnswers' => $count, 'n' => $count];
+
+        return $answerService->getBestQuery()->exists()
+            ? Yii::t('QuestionsModule.base', '{countAnswers} more {n,plural,=1{answer} other{answers}}', $params)
+            : Yii::t('QuestionsModule.base', '{countAnswers} {n,plural,=1{answer} other{answers}}', $params);
     }
 }
