@@ -7,10 +7,13 @@
 
 namespace humhub\modules\questions\widgets;
 
+use humhub\modules\content\widgets\stream\StreamEntryOptions;
 use humhub\modules\content\widgets\stream\WallStreamEntryOptions;
 use humhub\modules\content\widgets\stream\WallStreamModuleEntryWidget;
+use humhub\modules\questions\controllers\QuestionController;
 use humhub\modules\questions\helpers\Url;
 use humhub\modules\questions\models\Question;
+use Yii;
 
 /**
  * Question WallEntry Widget is used to display a question inside the stream.
@@ -50,11 +53,19 @@ class WallEntry extends WallStreamModuleEntryWidget
     public ?int $currentAnswerId = null;
 
     /**
-     * @inheritDoc
+     * @inheritdoc
      */
     public function renderContent()
     {
-        return $this->render('wall-entry', [
+        return $this->render('wall-entry', ['question' => $this->model]);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    protected function renderFooter()
+    {
+        return $this->render('wall-entry-footer', [
             'question' => $this->model,
             'currentAnswerId' => $this->currentAnswerId,
             'isDetailView' => $this->renderOptions->isViewContext(WallStreamEntryOptions::VIEW_CONTEXT_DETAIL),
@@ -65,7 +76,7 @@ class WallEntry extends WallStreamModuleEntryWidget
                     'content-key' => $this->model->content->id
                 ]
             ]
-        ]);
+        ]) . parent::renderFooter();
     }
 
     /**
@@ -74,5 +85,19 @@ class WallEntry extends WallStreamModuleEntryWidget
     protected function getTitle()
     {
         return trim($this->model->question) === '' ? $this->model->getContentName() : $this->model->question;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getEditUrl()
+    {
+        $params = ['id' => $this->model->id];
+
+        if (Yii::$app->controller instanceof QuestionController) {
+            $params['context'] = StreamEntryOptions::VIEW_CONTEXT_DETAIL;
+        }
+
+        return $this->model->content->container->createUrl($this->editRoute, $params);
     }
 }

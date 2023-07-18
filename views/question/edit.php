@@ -16,6 +16,7 @@ use yii\web\View;
 
 /* @var View $this */
 /* @var Question $question */
+/* @var string $context */
 /* @var array $options */
 
 QuestionsAssets::register($this);
@@ -23,6 +24,8 @@ QuestionsAssets::register($this);
 <?= Html::beginTag('div', $options) ?>
 
     <?php $form = ActiveForm::begin() ?>
+
+    <?= Html::hiddenInput('context', $context) ?>
 
     <?= $form->field($question, 'question')->textInput([
             'placeholder' => Yii::t('QuestionsModule.base', 'Question')

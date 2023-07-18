@@ -76,9 +76,18 @@ class QuestionController extends ContentContainerController
             throw new ForbiddenHttpException('Access denied!');
         }
 
+        $context = Yii::$app->request->get('context', Yii::$app->request->post('context'));
+
         if ($question->load(Yii::$app->request->post())) {
             if ($question->validate() && $question->save()) {
-                return StreamEntryResponse::getAsJson($question->content);
+                if ($context === WallStreamEntryOptions::VIEW_CONTEXT_DETAIL) {
+                    $renderOptions = new WallStreamEntryOptions();
+                    $renderOptions->viewContext($context);
+                } else {
+                    $renderOptions = null;
+                }
+
+                return StreamEntryResponse::getAsJson($question->content, $renderOptions);
             }
 
             return $this->asJson(['error' => $question->getErrors()]);
@@ -86,6 +95,7 @@ class QuestionController extends ContentContainerController
 
         return $this->renderAjax('edit', [
             'question' => $question,
+            'context' => $context,
             'options' => [
                 'data' => [
                     'question' => $question->id,
