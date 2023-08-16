@@ -30,12 +30,15 @@ QuestionsAssets::register($this);
 
     <?php if (!$isDetailView) : ?>
         <br>
-        <?= Button::info(Yii::t('QuestionsModule.base', 'Answer the question'))
-            ->link(Url::toCreateAnswer($question))
-            ->loader(false) ?>
+        <?php if ($question->canAnswer()) : ?>
+            <?= Button::info(Yii::t('QuestionsModule.base', 'Answer the question'))
+                ->link(Url::toCreateAnswer($question))
+                ->loader(false) ?>
+        <?php endif; ?>
 
         <?= Button::info(Yii::t('QuestionsModule.base', 'View all answers ({count})', [
-                'count' => $question->getAnswerService()->getCount()]))
+                'count' => '<span class="questions-answers-count">' . $question->getAnswerService()->getCount() . '</span>'
+            ]))
             ->link(Url::toViewAnswers($question))
             ->cssClass('active')
             ->loader(false) ?>
@@ -44,7 +47,7 @@ QuestionsAssets::register($this);
     <?= Answers::widget([
         'question' => $question,
         'currentAnswerId' => $currentAnswerId,
-        'displayAll' => $isDetailView
+        'isDetailView' => $isDetailView
     ]) ?>
 
 <?= Html::endTag('div') ?>

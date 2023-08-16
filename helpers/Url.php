@@ -14,13 +14,16 @@ use yii\helpers\Url as BaseUrl;
 
 class Url extends BaseUrl
 {
-    const ROUTE_QUESTION = '/questions/question';
+    const ROUTE_MODULE = '/questions';
+    const ROUTE_SETTINGS = self::ROUTE_MODULE . '/settings';
+
+    const ROUTE_QUESTION = self::ROUTE_MODULE . '/question';
     const ROUTE_QUESTION_CREATE = self::ROUTE_QUESTION . '/create';
     const ROUTE_QUESTION_CREATE_FORM = self::ROUTE_QUESTION . '/create-form';
     const ROUTE_QUESTION_EDIT = self::ROUTE_QUESTION . '/edit';
     const ROUTE_QUESTION_VIEW = self::ROUTE_QUESTION . '/view';
 
-    const ROUTE_ANSWER = '/questions/answer';
+    const ROUTE_ANSWER = self::ROUTE_MODULE . '/answer';
     const ROUTE_ANSWER_EDIT = self::ROUTE_ANSWER . '/edit';
     const ROUTE_ANSWER_CONTENT = self::ROUTE_ANSWER . '/content';
     const ROUTE_ANSWER_VOTE = self::ROUTE_ANSWER . '/vote';
@@ -35,6 +38,11 @@ class Url extends BaseUrl
             $params[0] = $route;
             return static::to($params);
         }
+    }
+
+    public static function toContainerSettings(ContentContainerActiveRecord $container): string
+    {
+        return $container->createUrl(static::ROUTE_SETTINGS);
     }
 
     public static function toViewQuestion(Question $question, array $params = []): string

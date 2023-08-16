@@ -13,19 +13,22 @@ use humhub\modules\questions\widgets\AnswersExceptBest;
 
 /* @var Question $question */
 /* @var QuestionAnswer $bestAnswer */
-/* @var bool $displayAll */
+/* @var int $limit */
+/* @var bool $enableControls */
 /* @var int|null $currentAnswerId */
 
 QuestionsAssets::register($this);
 ?>
 <?= Answer::widget([
     'answer' => $bestAnswer,
-    'allowSelectBest' => $displayAll
+    'enableControls' => $enableControls
 ]) ?>
 
-<?php if ($displayAll) : ?>
+<?php if ($limit !== 0) : ?>
     <?= AnswersExceptBest::widget([
         'question' => $question,
-        'currentAnswerId' => $currentAnswerId
+        'currentAnswerId' => $currentAnswerId,
+        'enableControls' => $enableControls,
+        'limit' => $limit
     ]) ?>
 <?php endif; ?>

@@ -7,7 +7,9 @@
 
 namespace humhub\modules\questions\widgets;
 
+use humhub\modules\questions\models\forms\ContainerSettings;
 use humhub\modules\questions\models\Question;
+use humhub\modules\questions\models\QuestionAnswer;
 use humhub\widgets\JsWidget;
 
 class Answers extends JsWidget
@@ -24,9 +26,20 @@ class Answers extends JsWidget
 
     public ?Question $question;
 
-    public bool $displayAll = false;
+    public bool $isDetailView = false;
 
     public ?int $currentAnswerId = null;
+
+    private ?ContainerSettings $settings = null;
+
+    /**
+     * @inheritdoc
+     */
+    public function init()
+    {
+        parent::init();
+        $this->settings = new ContainerSettings(['contentContainer' => $this->question->content->container]);
+    }
 
     /**
      * @inheritdoc
@@ -37,12 +50,13 @@ class Answers extends JsWidget
             return false;
         }
 
-        if (parent::beforeRun()) {
+        if (parent::beforeRun() && $this->isVisible()) {
             $this->content = $this->render('answers', [
                 'question' => $this->question,
                 'currentAnswerId' => $this->currentAnswerId,
-                'bestAnswer' => $this->question->getAnswerService()->getBest(),
-                'displayAll' => $this->displayAll
+                'bestAnswer' => $bestAnswer = $this->question->getAnswerService()->getBest(),
+                'limit' => $this->getLimit($bestAnswer),
+                'enableControls' => $this->isDetailView,
             ]);
             return true;
         }
@@ -64,5 +78,26 @@ class Answers extends JsWidget
     protected function getData()
     {
         return ['question' => $this->question->id];
+    }
+
+    protected function isVisible(): bool
+    {
+        // Always visible on single question view OR when it is enabled in the Container Settings
+        return $this->isDetailView || $this->settings->showAnswersInStream;
+    }
+
+    protected function getLimit(?QuestionAnswer $bestAnswer): ?int
+    {
+        if ($this->isDetailView) {
+            // Don't limit on single question view
+            return null;
+        }
+
+        if ($bestAnswer instanceof QuestionAnswer) {
+            // Don't display other answers if the best answers exists
+            return 0;
+        }
+
+        return $this->settings->showAnswersInStream ? 2 : 0;
     }
 }

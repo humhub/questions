@@ -143,4 +143,9 @@ class Question extends ContentActiveRecord implements Searchable
         return new AnswerService($this);
     }
 
+    public function canAnswer($user = null): bool
+    {
+        return (new QuestionAnswer())->canEdit($user);
+    }
+
 }

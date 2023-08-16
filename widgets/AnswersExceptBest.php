@@ -18,6 +18,8 @@ class AnswersExceptBest extends Widget
 
     public ?int $currentAnswerId = null;
 
+    public bool $enableControls = true;
+
     /**
      * @inheritdoc
      */
@@ -35,6 +37,7 @@ class AnswersExceptBest extends Widget
             'question' => $this->question,
             'currentAnswerId' => $this->currentAnswerId,
             'answers' => $this->question->getAnswerService()->getExceptBest($this->limit),
+            'enableControls' => $this->enableControls,
             'options' => $this->getOptions()
         ]);
     }

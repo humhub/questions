@@ -9,6 +9,7 @@ namespace humhub\modules\questions;
 
 use humhub\modules\content\components\ActiveQueryContent;
 use humhub\modules\content\components\ContentContainerActiveRecord;
+use humhub\modules\questions\helpers\Url;
 use humhub\modules\questions\models\Question;
 use humhub\modules\space\models\Space;
 use humhub\modules\content\components\ContentContainerModule;
@@ -36,6 +37,14 @@ class Module extends ContentContainerModule
         }
 
         return [];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getContentContainerConfigUrl(ContentContainerActiveRecord $container)
+    {
+        return Url::toContainerSettings($container);
     }
 
     /**
