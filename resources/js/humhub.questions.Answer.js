@@ -56,7 +56,7 @@ humhub.module('questions.Answer', function (module, require, $) {
             } else if (response.action === 'unselected') {
                 that.moveToNormalList(answer, response.titleSelect);
             }
-            that.refreshHeader(response.header);
+            that.Question.refreshAnswersCount(response.count);
             that.refreshTooltips(answer);
         }).catch(function (e) {
             module.log.error(e, true);
@@ -66,20 +66,6 @@ humhub.module('questions.Answer', function (module, require, $) {
 
     Answer.prototype.refreshTooltips = function (container) {
         additions.apply(container.find('.tt'), 'tooltip');
-    }
-
-    Answer.prototype.refreshHeader = function (headerHtml) {
-        const answersList = this.$.find('.except-best-answers')
-        const answersHeader = this.$.find('.except-best-answers-header');
-        const answersExist = answersList.find('.questions-answer').length > 0;
-
-        if (!answersExist && answersHeader.length) {
-            answersHeader.remove();
-        } else if (answersHeader.length) {
-            answersHeader.replaceWith(headerHtml);
-        } else {
-            answersList.prepend(headerHtml);
-        }
     }
 
     Answer.prototype.moveToBestPlace = function (answer, title) {
@@ -94,16 +80,10 @@ humhub.module('questions.Answer', function (module, require, $) {
             return;
         }
 
-        const exceptBestAnswersHeader = this.$.find('.except-best-answers-header');
-
         answer.removeClass('questions-best-answer')
             .find('.questions-best-answer-button [data-original-title]')
             .attr('data-original-title', title);
-        if (exceptBestAnswersHeader.length) {
-            exceptBestAnswersHeader.after(answer);
-        } else {
-            this.$.find('.except-best-answers').prepend(answer);
-        }
+        this.$.find('.except-best-answers').prepend(answer);
     }
 
     Answer.prototype.collapse = function (evt) {
@@ -115,12 +95,9 @@ humhub.module('questions.Answer', function (module, require, $) {
     }
 
     Answer.prototype.toggleList = function (evt, collapse) {
-        const btn = evt.$target;
-        const answersList = btn.parent();
-
-        btn.hide();
-        answersList.find('.questions-answer').toggle(!collapse);
-        answersList.find('button[data-action-click=' + (collapse ? 'expand' : 'collapse') + ']').show();
+        this.Question.answersList().toggle(!collapse);
+        this.$.find('.questions-toggle-btn').show();
+        evt.$target.hide();
     }
 
     Answer.prototype.edit = function (evt) {
@@ -163,7 +140,7 @@ humhub.module('questions.Answer', function (module, require, $) {
 
         client.post(evt).then(function (response) {
             if (response.success === true) {
-                that.Question.refreshAnswersListHeader(response.header);
+                that.Question.refreshAnswersCount(response.count);
 
                 that.Question.getAnswer(response.answer)
                     .addClass('questions-deleted-answer')

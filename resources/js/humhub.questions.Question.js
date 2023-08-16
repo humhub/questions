@@ -65,17 +65,8 @@ humhub.module('questions.Question', function (module, require, $) {
         return this.$.find('.except-best-answers');
     }
 
-    Question.prototype.answersListHeader = function () {
-        return this.answersList().children('.except-best-answers-header');
-    }
-
-    Question.prototype.refreshAnswersListHeader = function (headerHtml) {
-        const listHeader = this.answersListHeader();
-        if (listHeader.length === 0) {
-            this.answersList().append(headerHtml);
-        } else {
-            listHeader.replaceWith(headerHtml);
-        }
+    Question.prototype.refreshAnswersCount = function (count) {
+        this.$.find('.questions-answers-count').html(count);
     }
 
     Question.prototype.getAnswer = function (id) {
@@ -113,16 +104,16 @@ humhub.module('questions.Question', function (module, require, $) {
                 return;
             }
 
-            that.refreshAnswersListHeader(response.header);
+            that.refreshAnswersCount(response.count);
 
             let answerBlock = that.getAnswer(response.answer);
             if (answerBlock.length === 0) {
-                const collapseButton = that.answersList().find('button[data-action-click=collapse]');
-                const expandButton = that.answersList().find('button[data-action-click=expand]');
+                const collapseButton = that.$.find('.questions-toggle-btn[data-action-click=collapse]');
+                const expandButton = that.$.find('.questions-toggle-btn[data-action-click=expand]');
                 if (collapseButton.is(':hidden') && expandButton.is(':hidden')) {
                     collapseButton.show();
                 }
-                collapseButton.before(response.content);
+                that.answersList().append(response.content);
             } else {
                 answerBlock.replaceWith(response.content);
             }

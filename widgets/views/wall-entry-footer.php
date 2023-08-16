@@ -24,6 +24,10 @@ QuestionsAssets::register($this);
 ?>
 <?= Html::beginTag('div', $options) ?>
 
+    <?php if ($isDetailView) : ?>
+        <?= AnswerForm::widget(['question' => $question]) ?>
+    <?php endif; ?>
+
     <?php if (!$isDetailView) : ?>
         <br>
         <?= Button::info(Yii::t('QuestionsModule.base', 'Answer the question'))
@@ -42,9 +46,5 @@ QuestionsAssets::register($this);
         'currentAnswerId' => $currentAnswerId,
         'displayAll' => $isDetailView
     ]) ?>
-
-    <?php if ($isDetailView) : ?>
-        <?= AnswerForm::widget(['question' => $question]) ?>
-    <?php endif; ?>
 
 <?= Html::endTag('div') ?>

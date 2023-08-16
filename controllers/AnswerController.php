@@ -12,7 +12,6 @@ use humhub\modules\questions\models\Question;
 use humhub\modules\questions\models\QuestionAnswer;
 use humhub\modules\questions\widgets\Answer;
 use humhub\modules\questions\widgets\AnswerForm;
-use humhub\modules\questions\widgets\AnswersHeader;
 use humhub\modules\questions\widgets\AnswerVoting;
 use Yii;
 use yii\web\ForbiddenHttpException;
@@ -93,7 +92,7 @@ class AnswerController extends ContentContainerController
                 'question' => $question->id,
                 'answer' => $answer->id,
                 'answerFormId' => $answerFormId,
-                'header' => AnswersHeader::widget(['question' => $question]),
+                'count' => $question->getAnswerService()->getExceptBestQuery()->count(),
                 'content' => Answer::widget([
                     'answer' => $answer,
                     'highlight' => true
@@ -167,7 +166,7 @@ class AnswerController extends ContentContainerController
 
         return $this->asJson([
             'success' => true,
-            'header' => AnswersHeader::widget(['question' => $question]),
+            'count' => $question->getAnswerService()->getExceptBestQuery()->count(),
             'action' => $answer->is_best ? 'selected' : 'unselected',
             'titleSelect' => Yii::t('QuestionsModule.base', 'Select best answer'),
             'titleUnselect' => Yii::t('QuestionsModule.base', 'Unselect best answer')
@@ -204,7 +203,7 @@ class AnswerController extends ContentContainerController
         return $this->asJson([
             'success' => true,
             'answer' => $deletedAnswerId,
-            'header' => AnswersHeader::widget(['question' => $question]),
+            'count' => $question->getAnswerService()->getExceptBestQuery()->count(),
             'message' => Yii::t('QuestionsModule.base', 'Deleted')
         ]);
     }

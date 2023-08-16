@@ -9,7 +9,6 @@ use humhub\libs\Html;
 use humhub\modules\questions\models\Question;
 use humhub\modules\questions\models\QuestionAnswer;
 use humhub\modules\questions\widgets\Answer;
-use humhub\modules\questions\widgets\AnswersHeader;
 use humhub\modules\questions\widgets\AnswersToggleButton;
 
 /* @var Question $question */
@@ -17,9 +16,9 @@ use humhub\modules\questions\widgets\AnswersToggleButton;
 /* @var QuestionAnswer[] $answers */
 /* @var array $options */
 ?>
-<?= Html::beginTag('div', $options) ?>
+<?= AnswersToggleButton::widget(['count' => count($answers)]) ?>
 
-    <?= AnswersHeader::widget(['question' => $question]) ?>
+<?= Html::beginTag('div', $options) ?>
 
     <?php foreach ($answers as $answer) : ?>
         <?= Answer::widget([
@@ -27,7 +26,5 @@ use humhub\modules\questions\widgets\AnswersToggleButton;
             'highlight' => $answer->id === $currentAnswerId
         ]) ?>
     <?php endforeach; ?>
-
-    <?= AnswersToggleButton::widget(['hideButton' => count($answers) ? 'expand' : 'all']) ?>
 
 <?= Html::endTag('div') ?>

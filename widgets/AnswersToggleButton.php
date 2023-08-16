@@ -19,6 +19,11 @@ class AnswersToggleButton extends Widget
     public string $hideButton = 'expand';
 
     /**
+     * @var int Count of answers
+     */
+    public int $count = 0;
+
+    /**
      * @inheritdoc
      */
     public function run()
@@ -28,13 +33,15 @@ class AnswersToggleButton extends Widget
 
     private function renderCollapseButton(): string
     {
-        $button = Button::info(Yii::t('QuestionsModule.base', 'Collapse all answers'))
+        $button = Button::info(Yii::t('QuestionsModule.base', 'Collapse all answers ({count})', [
+                'count' => '<span class="questions-answers-count">' . $this->count . '</span>'
+            ]))
             ->icon('arrow-up')
             ->action('collapse')
-            ->sm()->cssClass('active')
+            ->sm()->cssClass('active questions-toggle-btn')
             ->loader(false);
 
-        if ($this->hideButton === 'collapse' || $this->hideButton === 'all') {
+        if (!$this->isVisibleButton('collapse')) {
             $button->style('display:none');
         }
 
@@ -43,16 +50,24 @@ class AnswersToggleButton extends Widget
 
     private function renderExpandButton(): string
     {
-        $button = Button::info(Yii::t('QuestionsModule.base', 'Expand all answers'))
+        $button = Button::info(Yii::t('QuestionsModule.base', 'Expand all answers ({count})', [
+                'count' => '<span class="questions-answers-count">' . $this->count . '</span>'
+            ]))
             ->icon('arrow-down')
             ->action('expand')
-            ->sm()->cssClass('active')
+            ->sm()->cssClass('active questions-toggle-btn')
             ->loader(false);
 
-        if ($this->hideButton === 'expand' || $this->hideButton === 'all') {
+        if (!$this->isVisibleButton('expand')) {
             $button->style('display:none');
         }
 
         return $button;
+    }
+
+    private function isVisibleButton(string $type): bool
+    {
+        $hideButton = $this->hideButton ?? ($this->count ? 'expand' : 'all');
+        return $hideButton !== $type && $hideButton !== 'all';
     }
 }
