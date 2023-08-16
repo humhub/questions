@@ -16,6 +16,7 @@ use humhub\widgets\TimeAgo;
 
 /* @var QuestionAnswer $answer */
 /* @var array $options */
+/* @var array $contentAttributes */
 /* @var bool $enableControls */
 ?>
 <?= Html::beginTag('div', $options) ?>
@@ -37,7 +38,7 @@ use humhub\widgets\TimeAgo;
             ]) ?></small>
             <?= AnswerControls::widget(['answer' => $answer]) ?>
         </div>
-        <?= RichText::output($answer->answer) ?>
+        <?= Html::tag('div', RichText::output($answer->answer), $contentAttributes) ?>
         <?= BestAnswerButton::widget(['answer' => $answer, 'allowSelect' => $enableControls]) ?>
     </div>
 

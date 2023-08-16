@@ -5,11 +5,13 @@
  * @license https://www.humhub.com/licences
  */
 
+use humhub\libs\Html;
 use humhub\modules\content\widgets\richtext\RichText;
 use humhub\modules\questions\models\Question;
 
 /* @var Question $question */
+/* @var array $attributes */
 ?>
-<div data-ui-markdown>
+<?= Html::beginTag('div', $attributes) ?>
     <?= RichText::output($question->description) ?>
-</div>
+<?= Html::endTag('div') ?>

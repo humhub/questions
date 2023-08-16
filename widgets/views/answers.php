@@ -14,21 +14,21 @@ use humhub\modules\questions\widgets\AnswersExceptBest;
 /* @var Question $question */
 /* @var QuestionAnswer $bestAnswer */
 /* @var int $limit */
-/* @var bool $enableControls */
+/* @var bool $isDetailView */
 /* @var int|null $currentAnswerId */
 
 QuestionsAssets::register($this);
 ?>
 <?= Answer::widget([
     'answer' => $bestAnswer,
-    'enableControls' => $enableControls
+    'isDetailView' => $isDetailView
 ]) ?>
 
 <?php if ($limit !== 0) : ?>
     <?= AnswersExceptBest::widget([
         'question' => $question,
         'currentAnswerId' => $currentAnswerId,
-        'enableControls' => $enableControls,
+        'isDetailView' => $isDetailView,
         'limit' => $limit
     ]) ?>
 <?php endif; ?>

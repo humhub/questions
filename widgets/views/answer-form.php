@@ -24,7 +24,7 @@ use humhub\widgets\Button;
 
     <?= $form->field($answer, 'answer')->widget(RichTextField::class, [
         'id' => 'answerRichTextField' . ($answer->isNewRecord ? 0 : $answer->id),
-        'placeholder' => Yii::t('QuestionsModule.base', 'Enter your answer...'),
+        'placeholder' => Yii::t('QuestionsModule.base', 'Provide an answer...'),
         'backupInterval' => 0
     ])->label($answer->isNewRecord) ?>
 

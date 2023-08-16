@@ -57,7 +57,10 @@ class WallEntry extends WallStreamModuleEntryWidget
      */
     public function renderContent()
     {
-        return $this->render('wall-entry', ['question' => $this->model]);
+        return $this->render('wall-entry', [
+            'question' => $this->model,
+            'attributes' => $this->getContentAttributes()
+        ]);
     }
 
     /**
@@ -99,5 +102,16 @@ class WallEntry extends WallStreamModuleEntryWidget
         }
 
         return $this->model->content->container->createUrl($this->editRoute, $params);
+    }
+
+    private function getContentAttributes(): array
+    {
+        $attrs = ['data-ui-markdown' => true];
+
+        if (!$this->renderOptions->isViewContext(StreamEntryOptions::VIEW_CONTEXT_DETAIL)) {
+            $attrs['data-ui-show-more'] = true;
+        }
+
+        return $attrs;
     }
 }

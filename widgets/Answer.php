@@ -15,7 +15,7 @@ class Answer extends Widget
     public ?QuestionAnswer $answer;
 
     public bool $highlight = false;
-    public bool $enableControls = true;
+    public bool $isDetailView = true;
 
     /**
      * @inheritdoc
@@ -32,8 +32,9 @@ class Answer extends Widget
     {
         return $this->render('answer', [
             'answer' => $this->answer,
-            'enableControls' => $this->enableControls,
-            'options' => $this->getOptions()
+            'enableControls' => $this->isDetailView,
+            'options' => $this->getOptions(),
+            'contentAttributes' => $this->getContentAttributes()
         ]);
     }
 
@@ -59,5 +60,16 @@ class Answer extends Widget
         }
 
         return $class;
+    }
+
+    protected function getContentAttributes(): array
+    {
+        $attrs = ['data-ui-markdown' => true];
+
+        if (!$this->isDetailView) {
+            $attrs['data-ui-show-more'] = true;
+        }
+
+        return $attrs;
     }
 }

@@ -56,7 +56,7 @@ class Answers extends JsWidget
                 'currentAnswerId' => $this->currentAnswerId,
                 'bestAnswer' => $bestAnswer = $this->question->getAnswerService()->getBest(),
                 'limit' => $this->getLimit($bestAnswer),
-                'enableControls' => $this->isDetailView,
+                'isDetailView' => $this->isDetailView,
             ]);
             return true;
         }

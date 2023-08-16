@@ -28,11 +28,11 @@ QuestionsAssets::register($this);
     <?= Html::hiddenInput('context', $context) ?>
 
     <?= $form->field($question, 'question')->textInput([
-            'placeholder' => Yii::t('QuestionsModule.base', 'Question')
+            'placeholder' => Yii::t('QuestionsModule.base', 'Question headline...')
         ]) ?>
 
     <?= $form->field($question, 'description')->widget(RichTextField::class, [
-            'placeholder' => Yii::t('QuestionsModule.base', 'Edit your question...')
+            'placeholder' => Yii::t('QuestionsModule.base', 'Question details...')
         ]) ?>
 
     <?= Button::primary(Yii::t('QuestionsModule.base', 'Save'))

@@ -31,7 +31,7 @@ QuestionsAssets::register($this);
     <?php if (!$isDetailView) : ?>
         <br>
         <?php if ($question->canAnswer()) : ?>
-            <?= Button::info(Yii::t('QuestionsModule.base', 'Answer the question'))
+            <?= Button::info(Yii::t('QuestionsModule.base', 'Provide an answer'))
                 ->link(Url::toCreateAnswer($question))
                 ->loader(false) ?>
         <?php endif; ?>

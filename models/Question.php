@@ -64,7 +64,7 @@ class Question extends ContentActiveRecord implements Searchable
      */
     public function getContentName()
     {
-        return Yii::t('QuestionsModule.base', 'Question');
+        return Yii::t('QuestionsModule.base', 'Q&A');
     }
 
     /**

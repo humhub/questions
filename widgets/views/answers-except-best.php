@@ -14,10 +14,10 @@ use humhub\modules\questions\widgets\AnswersToggleButton;
 /* @var Question $question */
 /* @var int|null $currentAnswerId */
 /* @var QuestionAnswer[] $answers */
-/* @var bool $enableControls */
+/* @var bool $isDetailView */
 /* @var array $options */
 ?>
-<?php if ($enableControls) : ?>
+<?php if ($isDetailView) : ?>
     <?= AnswersToggleButton::widget(['count' => count($answers)]) ?>
 <?php endif; ?>
 
@@ -27,7 +27,7 @@ use humhub\modules\questions\widgets\AnswersToggleButton;
         <?= Answer::widget([
             'answer' => $answer,
             'highlight' => $answer->id === $currentAnswerId,
-            'enableControls' => $enableControls
+            'isDetailView' => $isDetailView
         ]) ?>
     <?php endforeach; ?>
 
