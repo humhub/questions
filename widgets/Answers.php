@@ -30,17 +30,6 @@ class Answers extends JsWidget
 
     public ?int $currentAnswerId = null;
 
-    private ?ContainerSettings $settings = null;
-
-    /**
-     * @inheritdoc
-     */
-    public function init()
-    {
-        parent::init();
-        $this->settings = new ContainerSettings(['contentContainer' => $this->question->content->container]);
-    }
-
     /**
      * @inheritdoc
      */
@@ -50,12 +39,12 @@ class Answers extends JsWidget
             return false;
         }
 
-        if (parent::beforeRun() && $this->isVisible()) {
+        if (parent::beforeRun()) {
             $this->content = $this->render('answers', [
                 'question' => $this->question,
                 'currentAnswerId' => $this->currentAnswerId,
                 'bestAnswer' => $bestAnswer = $this->question->getAnswerService()->getBest(),
-                'limit' => $this->getLimit($bestAnswer),
+                'otherAnswersLimit' => $this->getOtherAnswersLimit($bestAnswer),
                 'isDetailView' => $this->isDetailView,
             ]);
             return true;
@@ -80,13 +69,7 @@ class Answers extends JsWidget
         return ['question' => $this->question->id];
     }
 
-    protected function isVisible(): bool
-    {
-        // Always visible on single question view OR when it is enabled in the Container Settings
-        return $this->isDetailView || $this->settings->showAnswersInStream;
-    }
-
-    protected function getLimit(?QuestionAnswer $bestAnswer): ?int
+    protected function getOtherAnswersLimit(?QuestionAnswer $bestAnswer): ?int
     {
         if ($this->isDetailView) {
             // Don't limit on single question view
@@ -98,6 +81,7 @@ class Answers extends JsWidget
             return 0;
         }
 
-        return $this->settings->showAnswersInStream ? 2 : 0;
+        $settings = new ContainerSettings(['contentContainer' => $this->question->content->container]);
+        return $settings->showAnswersInStream ? 2 : 0;
     }
 }

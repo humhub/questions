@@ -13,7 +13,7 @@ use humhub\modules\questions\widgets\AnswersExceptBest;
 
 /* @var Question $question */
 /* @var QuestionAnswer $bestAnswer */
-/* @var int $limit */
+/* @var int|null $otherAnswersLimit */
 /* @var bool $isDetailView */
 /* @var int|null $currentAnswerId */
 
@@ -24,11 +24,11 @@ QuestionsAssets::register($this);
     'isDetailView' => $isDetailView
 ]) ?>
 
-<?php if ($limit !== 0) : ?>
+<?php if ($otherAnswersLimit !== 0) : ?>
     <?= AnswersExceptBest::widget([
         'question' => $question,
         'currentAnswerId' => $currentAnswerId,
         'isDetailView' => $isDetailView,
-        'limit' => $limit
+        'limit' => $otherAnswersLimit
     ]) ?>
 <?php endif; ?>
