@@ -1,7 +1,7 @@
 {
     "id": "questions",
-    "name": "Q&A",
-    "description": "Questions & Answers",
+    "name": "Questions and Answers",
+    "description": "Questions and Answers",
     "keywords": ["Q&A", "questions answers"],
     "version": "1.0.0",
     "humhub": {

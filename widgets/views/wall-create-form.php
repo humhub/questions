@@ -16,12 +16,12 @@ use humhub\modules\ui\form\widgets\ActiveForm;
 ?>
 
 <?= $form->field($model, 'question')
-    ->textInput(['placeholder' => Yii::t('QuestionsModule.base', 'Question')])
+    ->textInput(['placeholder' => Yii::t('QuestionsModule.base', 'Question headline...')])
     ->label(false) ?>
 
 <div class="contentForm_options">
     <?= $form->field($model, 'description')->widget(RichTextField::class, [
-        'placeholder' => Yii::t('QuestionsModule.base', 'Description')
+        'placeholder' => Yii::t('QuestionsModule.base', 'Questions details...')
     ])->label(false) ?>
 </div>
 

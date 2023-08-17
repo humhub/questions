@@ -23,6 +23,10 @@ use Yii;
  */
 class Module extends ContentContainerModule
 {
+    /**
+     * @inheritdoc
+     */
+    public $resourcesPath = 'resources';
 
     /**
      * @inheritdoc
@@ -68,7 +72,7 @@ class Module extends ContentContainerModule
      */
     public function getContentContainerName(ContentContainerActiveRecord $container)
     {
-        return Yii::t('QuestionsModule.base', 'Questions');
+        return Yii::t('QuestionsModule.base', 'Questions and Answers');
     }
 
     /**
