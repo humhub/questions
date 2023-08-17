@@ -10,10 +10,8 @@ namespace humhub\modules\questions\widgets;
 use humhub\modules\content\widgets\stream\StreamEntryOptions;
 use humhub\modules\content\widgets\stream\WallStreamEntryOptions;
 use humhub\modules\content\widgets\stream\WallStreamModuleEntryWidget;
-use humhub\modules\questions\controllers\QuestionController;
 use humhub\modules\questions\helpers\Url;
 use humhub\modules\questions\models\Question;
-use Yii;
 
 /**
  * Question WallEntry Widget is used to display a question inside the stream.
@@ -97,7 +95,7 @@ class WallEntry extends WallStreamModuleEntryWidget
     {
         $params = ['id' => $this->model->id];
 
-        if (Yii::$app->controller instanceof QuestionController) {
+        if ($this->renderOptions->viewContext === StreamEntryOptions::VIEW_CONTEXT_DETAIL) {
             $params['context'] = StreamEntryOptions::VIEW_CONTEXT_DETAIL;
         }
 
