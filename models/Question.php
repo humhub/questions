@@ -145,7 +145,7 @@ class Question extends ContentActiveRecord implements Searchable
 
     public function canAnswer($user = null): bool
     {
-        return (new QuestionAnswer())->canEdit($user);
+        return (new QuestionAnswer(['question_id' => $this->id]))->canEdit($user);
     }
 
 }
