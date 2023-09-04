@@ -127,7 +127,7 @@ class Question extends ContentActiveRecord implements Searchable
     {
         $itemAnswers = '';
 
-        foreach ($this->answers as $answer) {
+        foreach ($this->getAnswerService()->getAll() as $answer) {
             $itemAnswers .= $answer->answer . ' ';
         }
 
