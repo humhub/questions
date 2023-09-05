@@ -41,7 +41,6 @@ class Answer extends Widget
     protected function getOptions(): array
     {
         return [
-            'id' => 'answer' . $this->answer->id,
             'class' => $this->getStyleClass(),
             'data-answer' => $this->answer->id
         ];

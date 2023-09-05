@@ -20,6 +20,7 @@ use humhub\widgets\TimeAgo;
 /* @var bool $enableControls */
 ?>
 <?= Html::beginTag('div', $options) ?>
+    <?= Html::a('', null, ['id' => 'answer' . $answer->id, 'class' => 'questions-anchor']) ?>
 
     <?php if ($enableControls) : ?>
         <?= AnswerVoting::widget(['answer' => $answer]) ?>

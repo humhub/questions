@@ -16,6 +16,9 @@ use humhub\widgets\Button;
 /* @var array $options */
 ?>
 <?= Html::beginTag('div', $options) ?>
+    <?php if ($answer->isNewRecord) : ?>
+        <?= Html::a('', null, ['id' => 'create-answer-form', 'class' => 'questions-anchor']) ?>
+    <?php endif; ?>
 
     <?php $form = ActiveForm::begin(['action' => Url::toEditAnswer($answer)]) ?>
 

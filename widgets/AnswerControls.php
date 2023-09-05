@@ -46,7 +46,12 @@ class AnswerControls extends Menu
         $this->addEntry(new MenuLink([
             'label' => Yii::t('QuestionsModule.base', 'Permalink'),
             'icon' => 'link',
-            'url' => Url::toViewAnswer($this->answer),
+            'url' => '#',
+            'htmlOptions' => [
+                'data-action-click' => 'content.permalink',
+                'data-content-permalink' => Url::toViewAnswer($this->answer),
+                'data-content-permalink-title' => Yii::t('QuestionsModule.base', '<strong>Permalink</strong> to this answer'),
+            ],
             'sortOrder' => 100,
         ]));
 

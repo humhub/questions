@@ -55,10 +55,6 @@ class AnswerForm extends Widget
             'data-answer-form' => $this->answer->isNewRecord ? 0 : $this->answer->id
         ];
 
-        if ($this->answer->isNewRecord) {
-            $options['id'] = 'create-answer-form';
-        }
-
         return $options;
     }
 }

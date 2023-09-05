@@ -45,7 +45,6 @@ class AnswersExceptBest extends Widget
     public function getOptions(): array
     {
         return [
-            'id' => 'answers',
             'class' => 'except-best-answers'
         ];
     }

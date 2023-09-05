@@ -17,6 +17,8 @@ use humhub\modules\questions\widgets\AnswersToggleButton;
 /* @var bool $isDetailView */
 /* @var array $options */
 ?>
+<?= Html::a('', null, ['id' => 'answers', 'class' => 'questions-anchor']) ?>
+
 <?php if ($isDetailView) : ?>
     <?= AnswersToggleButton::widget(['count' => count($answers)]) ?>
 <?php endif; ?>
