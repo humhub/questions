@@ -39,6 +39,7 @@ class VoteButton extends Widget
             ->action('vote', $this->getUrl())
             ->cssClass($this->getStyleClass())
             ->tooltip($this->getTooltip())
+            ->options(['disabled' => !$this->answer->getVoteService()->canVote()])
             ->loader(false);
     }
 

@@ -7,6 +7,14 @@ humhub.module('questions.Question', function (module, require, $) {
 
     const Question = function (id) {
         Content.call(this, id);
+
+        // Save new Answer form by Ctrl+S
+        $(document).bind('keydown', function (evt) {
+            const saveAnswerButton = $('[data-action-click=saveAnswer]');
+            if (evt.ctrlKey && evt.which === 83 && saveAnswerButton.length && !loader.is(saveAnswerButton)) {
+                saveAnswerButton.trigger('focus').trigger('click');
+            }
+        });
     }
 
     object.inherits(Question, Content);
@@ -87,8 +95,6 @@ humhub.module('questions.Question', function (module, require, $) {
 
     Question.prototype.saveAnswer = function (evt) {
         const that = this;
-        const saveButton = evt.$trigger;
-        evt.$form = saveButton.closest('form');
 
         client.submit(evt).then(function (response) {
             if (typeof response.form === 'string') {
@@ -118,7 +124,9 @@ humhub.module('questions.Question', function (module, require, $) {
                 answerBlock.replaceWith(response.content);
             }
 
-            that.refreshUpdatedAnswer(response.answer)
+            that.refreshUpdatedAnswer(response.answer);
+
+            loader.init();
         }).catch(function (error) {
             module.log.error(error, true);
         });

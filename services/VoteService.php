@@ -12,7 +12,6 @@ use humhub\modules\questions\models\QuestionAnswerVote;
 use humhub\modules\user\models\User;
 use Yii;
 use yii\db\ActiveQuery;
-use yii\db\Expression;
 
 class VoteService
 {
@@ -34,7 +33,9 @@ class VoteService
 
     public function canVote(?User $user = null): bool
     {
-        return $this->getUser($user) instanceof User;
+        $user = $this->getUser($user);
+
+        return $user instanceof User && $user->id !== $this->answer->created_by;
     }
 
     public function getVote(?User $user = null): ?QuestionAnswerVote

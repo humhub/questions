@@ -8,6 +8,7 @@
 namespace humhub\modules\questions\models;
 
 use humhub\modules\content\widgets\richtext\RichText;
+use humhub\modules\questions\helpers\Url;
 use humhub\modules\questions\permissions\CreateQuestion;
 use humhub\modules\questions\services\AnswerService;
 use humhub\modules\questions\widgets\WallEntry;
@@ -146,6 +147,11 @@ class Question extends ContentActiveRecord implements Searchable
     public function canAnswer($user = null): bool
     {
         return (new QuestionAnswer(['question_id' => $this->id]))->canEdit($user);
+    }
+
+    public function getUrl(): string
+    {
+        return Url::toViewQuestion($this);
     }
 
 }
