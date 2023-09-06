@@ -1,7 +1,7 @@
 {
     "id": "questions",
-    "name": "Questions and Answers",
-    "description": "Questions and Answers",
+    "name": "Q&A",
+    "description": "Elevate your knowledge sharing experience by enabling users to ask questions and upvote the most helpful answers.",
     "keywords": ["Q&A", "questions answers"],
     "version": "1.0.0",
     "humhub": {
