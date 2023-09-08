@@ -16,5 +16,6 @@ class QuestionFixture extends ActiveFixture
     public $dataFile = '@questions/tests/codeception/fixtures/data/question.php';
     public $depends = [
         QuestionAnswerFixture::class,
+        QuestionAnswerVoteFixture::class,
     ];
 }

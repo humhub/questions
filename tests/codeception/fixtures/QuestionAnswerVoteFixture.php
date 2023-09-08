@@ -7,14 +7,11 @@
 
 namespace humhub\modules\questions\tests\codeception\fixtures;
 
-use humhub\modules\questions\models\Question;
+use humhub\modules\questions\models\QuestionAnswerVote;
 use yii\test\ActiveFixture;
 
 class QuestionAnswerVoteFixture extends ActiveFixture
 {
-    public $modelClass = Question::class;
-    public $dataFile = '@questions/tests/codeception/fixtures/data/question.php';
-    public $depends = [
-        QuestionAnswerFixture::class,
-    ];
+    public $modelClass = QuestionAnswerVote::class;
+    public $dataFile = '@questions/tests/codeception/fixtures/data/question_answer_vote.php';
 }

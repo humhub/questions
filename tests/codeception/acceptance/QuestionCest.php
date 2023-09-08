@@ -12,7 +12,7 @@ use questions\AcceptanceTester;
 class QuestionCest
 {
 
-    public function testCreateQuestion(AcceptanceTester $I)
+    public function testCreateQuestionWithAnswersAndTestVoting(AcceptanceTester $I)
     {
         $I->wantTo('create a Question from stream');
         $I->amAdmin();
@@ -21,25 +21,49 @@ class QuestionCest
         $I->enableModule(1, 'questions');
         $I->amOnSpace1();
 
-        $I->amGoingTo('create a Question');
-        $I->waitForText('Q&A');
-        $I->click( 'Q&A', '#contentFormMenu');
-        $I->waitForElementVisible('input[name="Question[question]"]');
-        $I->fillField('Question[question]', 'Question headline text?');
-        $I->fillField('#question-description .humhub-ui-richtext', 'Question description text.');
-        $I->jsClick('#post_submit_button');
+        $I->createQuestion('Question headline text?', 'Question description text.');
 
-        $I->waitForText('Question headline text?', null, '.wall-entry-header');
-        $I->see('Provide an answer', '[data-content-component="questions.Question"]');
-        $I->see('View all answers (0)', '[data-content-component="questions.Question"]');
-
-        $I->amGoingTo('provide an Answer');
+        $I->amGoingTo('provide first Answer from Admin');
         $I->click('Provide an answer');
         $I->switchToNextTab();
-        $I->waitForText('Collapse all answers (0)');
-        $I->fillField('#answerRichTextField0 .humhub-ui-richtext', 'Answer text.');
-        $I->click('Save', '.questions-answer-form');
-        $I->waitForText('Answer text.', null, '.except-best-answers');
+        $I->provideAnswer('First answer text from Admin.');
+        $I->cannotVote(1);
+
+        $I->amUser2(true);
+        $I->amOnSpace1();
+
+        $I->amGoingTo('provide first Answer from Sara');
+        $I->waitForText('Provide an answer', null, '.wall-entry');
+        $I->click('Provide an answer');
+        $I->switchToNextTab();
+        $I->provideAnswer('Second answer text from Sara.');
+        $I->cannotVote(2);
+
+        $I->amGoingTo('vote on the first Answer of Admin');
+        $I->upVote(1);
+        $I->checkVotingSummary(1, 1);
+        $I->downVote(1);
+        $I->checkVotingSummary(1, -1);
+
+        $I->amAdmin(true);
+        $I->amOnSpace1();
+
+        $I->waitForText('View all answers (2)', null, '.wall-entry');
+        $I->click('View all answers (2)');
+        $I->switchToNextTab();
+
+        $I->amGoingTo('vote on the second Answer by Admin');
+        $I->upVote(2);
+        $I->checkVotingSummary(2, 1);
+        $I->wait(1);
+        $I->upVote(2);
+        $I->checkVotingSummary(2, 0);
+
+        $I->amGoingTo('select the best Answer');
+        $I->selectBestAnswer(2);
+        $I->unselectBestAnswer();
+        $I->selectBestAnswer(1);
+        $I->selectBestAnswer(2);
     }
 
 }
