@@ -59,12 +59,12 @@ class AcceptanceTester extends \AcceptanceTester
 
     public function canVote(int $answerId)
     {
-        $this->seeElement($this->getVoteButtonSelector($answerId, ':not([disabled])'));
+        $this->waitForElementVisible($this->getVoteButtonSelector($answerId, ':not([disabled])'));
     }
 
     public function cannotVote(int $answerId)
     {
-        $this->seeElement($this->getVoteButtonSelector($answerId, '[disabled]'));
+        $this->waitForElementVisible($this->getVoteButtonSelector($answerId, '[disabled]'));
     }
 
     public function vote(int $answerId, string $buttonTitle)

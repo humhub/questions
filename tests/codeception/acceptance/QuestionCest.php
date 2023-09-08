@@ -55,7 +55,6 @@ class QuestionCest
         $I->amGoingTo('vote on the second Answer by Admin');
         $I->upVote(2);
         $I->checkVotingSummary(2, 1);
-        $I->wait(1);
         $I->upVote(2);
         $I->checkVotingSummary(2, 0);
 
