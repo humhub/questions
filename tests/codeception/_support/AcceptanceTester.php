@@ -71,6 +71,7 @@ class AcceptanceTester extends \AcceptanceTester
     {
         $this->canVote($answerId);
         $buttonSelector = $this->getVoteButtonSelector($answerId, '[data-original-title="' . $buttonTitle . '"]');
+        $this->waitForElementVisible($buttonSelector);
         $this->jsClick($buttonSelector);
         $this->waitForElementVisible($buttonSelector . '.active');
     }
@@ -87,7 +88,7 @@ class AcceptanceTester extends \AcceptanceTester
 
     public function checkVotingSummary(int $answerId, int $summary)
     {
-        $this->see($summary, '[data-answer="' . $answerId . '"] .questions-answer-voting div');
+        $this->waitForText((string)$summary, null, '[data-answer="' . $answerId . '"] .questions-answer-voting div');
     }
 
     public function selectBestAnswer(int $answerId)
@@ -95,7 +96,7 @@ class AcceptanceTester extends \AcceptanceTester
         $answerSelector = '[data-answer="' . $answerId . '"]';
         $this->moveMouseOver(['css' => $answerSelector]);
         $bestButtonSelector = '[data-action-click="best"]';
-        $this->waitForElementVisible($bestButtonSelector);
+        $this->waitForElementVisible($answerSelector . ' ' . $bestButtonSelector);
         $this->jsClick($answerSelector . ' ' . $bestButtonSelector);
         $this->waitForElementVisible($answerSelector . '.questions-best-answer');
     }
@@ -106,7 +107,5 @@ class AcceptanceTester extends \AcceptanceTester
         $bestButtonSelector = '[data-action-click="best"]';
         $this->waitForElementVisible($bestButtonSelector);
         $this->jsClick('.questions-best-answer ' . $bestButtonSelector);
-        $this->wait(1);
-        $this->dontSeeElement('.questions-best-answer');
     }
 }

@@ -62,6 +62,8 @@ class QuestionCest
         $I->amGoingTo('select the best Answer');
         $I->selectBestAnswer(2);
         $I->unselectBestAnswer();
+        $I->waitForText('Collapse all answers (2)');
+        $I->dontSeeElement('.questions-best-answer');
         $I->selectBestAnswer(1);
         $I->selectBestAnswer(2);
     }
