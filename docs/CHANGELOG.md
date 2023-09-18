@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.0.2 (Unreleased)
+1.0.2 (September 18, 2023)
 --------------------------
 - Fix #10: Use absolute URL for answer permalink
 
