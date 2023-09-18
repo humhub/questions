@@ -30,13 +30,13 @@ class Url extends BaseUrl
     const ROUTE_ANSWER_SELECT_BEST = self::ROUTE_ANSWER . '/select-best';
     const ROUTE_ANSWER_DELETE = self::ROUTE_ANSWER . '/delete';
 
-    private static function create($route, $params = [], ContentContainerActiveRecord $container = null)
+    private static function create($route, $params = [], ContentContainerActiveRecord $container = null, bool $scheme = false)
     {
         if ($container) {
-            return $container->createUrl($route, $params);
+            return $container->createUrl($route, $params, $scheme);
         } else {
             $params[0] = $route;
-            return static::to($params);
+            return static::to($params, $scheme);
         }
     }
 
@@ -45,7 +45,7 @@ class Url extends BaseUrl
         return $container->createUrl(static::ROUTE_SETTINGS);
     }
 
-    public static function toViewQuestion(Question $question, array $params = []): string
+    public static function toViewQuestion(Question $question, array $params = [], bool $scheme = false): string
     {
         if (isset($params['#'])) {
             $anchor = '#' . $params['#'];
@@ -56,7 +56,7 @@ class Url extends BaseUrl
 
         return static::create(static::ROUTE_QUESTION_VIEW,
             array_merge(['id' => $question->id], $params),
-            $question->content->container) . $anchor;
+            $question->content->container, $scheme) . $anchor;
     }
 
     public static function toEditQuestion(Question $question): string
@@ -84,9 +84,9 @@ class Url extends BaseUrl
         return static::create(static::ROUTE_ANSWER_CONTENT, ['id' => $answer->id], $answer->question->content->container);
     }
 
-    public static function toViewAnswer(QuestionAnswer $answer): string
+    public static function toViewAnswer(QuestionAnswer $answer, bool $scheme = false): string
     {
-        return self::toViewQuestion($answer->question, ['aid' => $answer->id, '#' => 'answer' . $answer->id]);
+        return self::toViewQuestion($answer->question, ['aid' => $answer->id, '#' => 'answer' . $answer->id], $scheme);
     }
 
     public static function toVoteUpAnswer(QuestionAnswer $answer): string
