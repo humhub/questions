@@ -118,7 +118,7 @@ class Question extends ContentActiveRecord implements Searchable
         }
 
         foreach ($this->getAnswerService()->getAll() as $answer) {
-            $answer->hardDelete();
+            $answer->delete();
         }
 
         return true;

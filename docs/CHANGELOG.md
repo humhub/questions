@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.0.1 (Unreleased)
+------------------
+- Fix #6: Fix error on delete a question
+
 1.0.0 (September 7, 2023)
 -------------------------
 
