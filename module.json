@@ -3,7 +3,7 @@
     "name": "Q&A",
     "description": "Elevate your knowledge sharing experience by enabling users to ask questions and upvote the most helpful answers.",
     "keywords": ["Q&A", "questions answers"],
-    "version": "1.0.1",
+    "version": "1.0.2",
     "humhub": {
         "minVersion": "1.14"
     },

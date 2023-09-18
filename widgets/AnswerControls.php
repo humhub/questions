@@ -49,7 +49,7 @@ class AnswerControls extends Menu
             'url' => '#',
             'htmlOptions' => [
                 'data-action-click' => 'content.permalink',
-                'data-content-permalink' => Url::toViewAnswer($this->answer),
+                'data-content-permalink' => Url::toViewAnswer($this->answer, true),
                 'data-content-permalink-title' => Yii::t('QuestionsModule.base', '<strong>Permalink</strong> to this answer'),
             ],
             'sortOrder' => 100,
