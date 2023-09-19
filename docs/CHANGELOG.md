@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.0.3 (September 19, 2023)
+--------------------------
+- Fix #11: Changed Form Sort Order
+
 1.0.2 (September 18, 2023)
 --------------------------
 - Fix #10: Use absolute URL for answer permalink
