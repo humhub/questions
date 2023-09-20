@@ -10,6 +10,7 @@ namespace humhub\modules\questions\models;
 use humhub\components\ActiveRecord;
 use humhub\modules\content\permissions\ManageContent;
 use humhub\modules\content\widgets\richtext\RichText;
+use humhub\modules\questions\notifications\AnsweredNotification;
 use humhub\modules\questions\permissions\CreateQuestion;
 use humhub\modules\questions\services\VoteService;
 use Yii;
@@ -78,6 +79,7 @@ class QuestionAnswer extends ActiveRecord
     {
         parent::afterSave($insert, $changedAttributes);
         RichText::postProcess($this->answer, $this);
+        $this->sendNotification($insert);
     }
 
     public function getVoteService(): VoteService
@@ -106,6 +108,16 @@ class QuestionAnswer extends ActiveRecord
 
         return $this->question->content->container->getPermissionManager($user)
             ->can($this->isNewRecord ? CreateQuestion::class : ManageContent::class);
+    }
+
+    public function sendNotification(bool $isNewRecord = false)
+    {
+        if ($isNewRecord) {
+            Yii::createObject(['class' => AnsweredNotification::class])
+                ->from(Yii::$app->user->getIdentity())
+                ->about($this)
+                ->sendBulk($this->question->content->getCreatedBy());
+        }
     }
 
 }
