@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.0.4 (Unreleased)
+----------------------
+- Enh #17: Tests for `next` version
+
 1.0.3 (September 19, 2023)
 --------------------------
 - Fix #11: Changed Form Sort Order
