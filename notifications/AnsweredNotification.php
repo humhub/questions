@@ -45,14 +45,14 @@ class AnsweredNotification extends BaseNotification
     public function html()
     {
         if ($this->source->question->content->container instanceof Space) {
-            return Yii::t('QuestionsModule.base', '{displayName} has answered to your Question "{contentTitle}" in Space {spaceName}.', [
+            return Yii::t('QuestionsModule.base', '{displayName} has answered your Question "{contentTitle}" in Space {spaceName}.', [
                 'displayName' => Html::tag('strong', Html::encode($this->originator->displayName)),
                 'contentTitle' => $this->getContentInfo($this->source->question, false),
                 'spaceName' => Html::encode($this->source->question->content->container->displayName)
             ]);
         }
 
-        return Yii::t('QuestionsModule.base', '{displayName} has answered to your Question "{contentTitle}".', [
+        return Yii::t('QuestionsModule.base', '{displayName} has answered your Question "{contentTitle}".', [
             'displayName' => Html::tag('strong', Html::encode($this->originator->displayName)),
             'contentTitle' => $this->getContentInfo($this->source->question, false)
         ]);
@@ -63,7 +63,7 @@ class AnsweredNotification extends BaseNotification
      */
     public function getMailSubject()
     {
-        return Yii::t('QuestionsModule.base', 'Answered to your question "{questionTitle}"', [
+        return Yii::t('QuestionsModule.base', 'New answer to your Question "{questionTitle}"', [
             'questionTitle' => $this->source->question->question
         ]);
     }

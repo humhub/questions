@@ -33,6 +33,6 @@ class QuestionNotificationCategory extends NotificationCategory
      */
     public function getDescription()
     {
-        return Yii::t('QuestionsModule.base', 'Receive Notifications when a question is created or answered to own questions.');
+        return Yii::t('QuestionsModule.base', 'Receive notifications when a Question is created or your questions are answered.');
     }
 }

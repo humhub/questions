@@ -62,7 +62,7 @@ class NewQuestionNotification extends BaseNotification
      */
     public function getMailSubject()
     {
-        return Yii::t('QuestionsModule.base', 'New question "{questionTitle}"', [
+        return Yii::t('QuestionsModule.base', 'New Question "{questionTitle}"', [
             'questionTitle' => $this->source->question
         ]);
     }
