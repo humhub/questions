@@ -1,7 +1,8 @@
 Changelog
 =========
 
-1.0.4 (Unreleased)
+1.0.4 (September 22, 2023)
+--------------------------
 - Enh #17: Tests for `next` version
 - Enh #8: Add notifications about new question and answered to own questions
 
