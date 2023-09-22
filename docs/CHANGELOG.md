@@ -2,8 +2,8 @@ Changelog
 =========
 
 1.0.4 (Unreleased)
-----------------------
 - Enh #17: Tests for `next` version
+- Enh #8: Add notifications about new question and answered to own questions
 
 1.0.3 (September 19, 2023)
 --------------------------

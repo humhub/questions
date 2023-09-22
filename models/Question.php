@@ -9,11 +9,16 @@ namespace humhub\modules\questions\models;
 
 use humhub\modules\content\widgets\richtext\RichText;
 use humhub\modules\questions\helpers\Url;
+use humhub\modules\questions\notifications\NewQuestionNotification;
 use humhub\modules\questions\permissions\CreateQuestion;
 use humhub\modules\questions\services\AnswerService;
 use humhub\modules\questions\widgets\WallEntry;
 use humhub\modules\search\interfaces\Searchable;
 use humhub\modules\content\components\ContentActiveRecord;
+use humhub\modules\space\models\Membership;
+use humhub\modules\space\models\Space;
+use humhub\modules\user\components\ActiveQueryUser;
+use humhub\modules\user\models\User;
 use Yii;
 
 /**
@@ -106,6 +111,7 @@ class Question extends ContentActiveRecord implements Searchable
     {
         parent::afterSave($insert, $changedAttributes);
         RichText::postProcess($this->description, $this);
+        $this->sendNotification($insert);
     }
 
     /**
@@ -152,6 +158,26 @@ class Question extends ContentActiveRecord implements Searchable
     public function getUrl(): string
     {
         return Url::toViewQuestion($this);
+    }
+
+    public function sendNotification(bool $isNewRecord = false)
+    {
+        if ($isNewRecord) {
+            Yii::createObject(['class' => NewQuestionNotification::class])
+                ->from(Yii::$app->user->getIdentity())
+                ->about($this)
+                ->sendBulk($this->getNotificationUserQuery());
+        }
+    }
+
+    public function getNotificationUserQuery(): ActiveQueryUser
+    {
+        if ($this->content->container instanceof Space) {
+            return Membership::getSpaceMembersQuery($this->content->container);
+        }
+
+        // Fallback should only happen for global events, which are not supported
+        return User::find()->where(['id' => $this->content->created_by]);
     }
 
 }
