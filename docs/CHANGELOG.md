@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.0.5 (Unreleased)
+--------------------------
+- Fix #18: Add migrations uninstall
+
 1.0.4 (September 22, 2023)
 --------------------------
 - Enh #17: Tests for `next` version
