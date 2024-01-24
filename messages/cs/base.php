@@ -13,7 +13,7 @@ return array (
   'Cannot delete the Answer!' => '',
   'Collapse all answers ({count})' => '',
   'Delete' => 'Smazat',
-  'Deleted' => '',
+  'Deleted' => 'Smazáno',
   'Description' => 'Popis',
   'Downvote' => '',
   'Edit' => 'Upravit',
