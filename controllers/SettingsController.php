@@ -8,7 +8,9 @@
 namespace humhub\modules\questions\controllers;
 
 use humhub\modules\content\components\ContentContainerController;
+use humhub\modules\content\components\ContentContainerControllerAccess;
 use humhub\modules\questions\models\forms\ContainerSettings;
+use humhub\modules\space\models\Space;
 use Yii;
 
 /**
@@ -19,6 +21,13 @@ use Yii;
  */
 class SettingsController extends ContentContainerController
 {
+    /**
+     * @inheritdoc
+     */
+    public function getAccessRules()
+    {
+        return [[ContentContainerControllerAccess::RULE_USER_GROUP_ONLY => [Space::USERGROUP_ADMIN]]];
+    }
 
     public function actionIndex()
     {
