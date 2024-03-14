@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.0.6 (March 3, 2023)
+------------------------
+- Fix #21: Space configuration checks permissions insufficiently
+
 1.0.5 (October 20, 2023)
 ------------------------
 - Fix #18: Add migrations uninstall
