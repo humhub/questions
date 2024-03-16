@@ -50,7 +50,7 @@ class Url extends BaseUrl
         $anchor = '';
         
         if ($target === '_self') {
-            if (isset($params['#']) && ($params['#'] === 'create-answer-form' || $params['#'] === 'answers')) {
+            if (isset($params['#']) && (strpos($params['#'], 'create-answer-form') !== false || strpos($params['#'], 'answers') !== false || strpos($params['#'], 'answer') !== false)) {
                 unset($params['#']);
             }
         } else {
