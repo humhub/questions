@@ -13,7 +13,7 @@ return array (
   'Cannot delete the Answer!' => '',
   'Collapse all answers ({count})' => '',
   'Delete' => 'Ištrinti',
-  'Deleted' => '',
+  'Deleted' => 'Ištrinta',
   'Description' => 'Aprašymas',
   'Downvote' => '',
   'Edit' => 'Taisyti',

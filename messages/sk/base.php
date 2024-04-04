@@ -14,7 +14,7 @@ return array (
   'Collapse all answers ({count})' => '',
   'Delete' => 'Zmazať',
   'Deleted' => 'Zmazané',
-  'Description' => '',
+  'Description' => 'Popis',
   'Downvote' => '',
   'Edit' => 'Zmeniť',
   'Expand all answers ({count})' => '',
