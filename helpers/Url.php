@@ -45,13 +45,19 @@ class Url extends BaseUrl
         return $container->createUrl(static::ROUTE_SETTINGS);
     }
 
-    public static function toViewQuestion(Question $question, array $params = [], bool $scheme = false): string
+    public static function toViewQuestion(Question $question, array $params = [], bool $scheme = false, string $target = '_self'): string
     {
-        if (isset($params['#'])) {
-            $anchor = '#' . $params['#'];
-            unset($params['#']);
+        $anchor = '';
+        
+        if ($target === '_self') {
+            if (isset($params['#']) && (strpos($params['#'], 'create-answer-form') !== false || strpos($params['#'], 'answers') !== false || strpos($params['#'], 'answer') !== false)) {
+                unset($params['#']);
+            }
         } else {
-            $anchor = '';
+            if (isset($params['#'])) {
+                $anchor = '#' . $params['#'];
+                unset($params['#']);
+            }
         }
 
         return static::create(static::ROUTE_QUESTION_VIEW,

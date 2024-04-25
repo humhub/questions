@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.0.7 (TBA)
+-----------------------
+- Chg: `_blank` to `_self`
+
 1.0.6 (March 3, 2023)
 ------------------------
 - Fix #21: Space configuration checks permissions insufficiently
