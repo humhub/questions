@@ -33,7 +33,6 @@ QuestionsAssets::register($this);
         <?php if ($question->canAnswer()) : ?>
             <?= Button::info(Yii::t('QuestionsModule.base', 'Provide an answer'))
                 ->link(Url::toCreateAnswer($question))
-                ->options(['target' => '_blank'])
                 ->loader(false) ?>
         <?php endif; ?>
 
@@ -41,7 +40,6 @@ QuestionsAssets::register($this);
                 'count' => '<span class="questions-answers-count">' . $question->getAnswerService()->getCount() . '</span>'
             ]))
             ->link(Url::toViewAnswers($question))
-            ->options(['target' => '_blank'])
             ->cssClass('active')
             ->loader(false) ?>
     <?php endif; ?>

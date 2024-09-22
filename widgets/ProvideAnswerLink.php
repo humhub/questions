@@ -30,8 +30,6 @@ class ProvideAnswerLink extends Widget
      */
     public function run()
     {
-        return Html::a(Yii::t('QuestionsModule.base', 'Provide an answer'), Url::toCreateAnswer($this->question), [
-            'target' => '_blank'
-        ]);
+        return Html::a(Yii::t('QuestionsModule.base', 'Provide an answer'), Url::toCreateAnswer($this->question), []);
     }
 }
