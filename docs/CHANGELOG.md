@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.1.0 (Unreleased)
+------------------------
+- Fix #25: Update module resources path
+
 1.0.6 (March 3, 2023)
 ------------------------
 - Fix #21: Space configuration checks permissions insufficiently

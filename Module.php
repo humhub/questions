@@ -26,17 +26,12 @@ class Module extends ContentContainerModule
     /**
      * @inheritdoc
      */
-    public $resourcesPath = 'resources';
-
-    /**
-     * @inheritdoc
-     */
     public function getPermissions($contentContainer = null)
     {
         if ($contentContainer instanceof Space) {
             return [
                 new permissions\CreateQuestion(),
-                new permissions\SelectBestAnswer()
+                new permissions\SelectBestAnswer(),
             ];
         }
 
