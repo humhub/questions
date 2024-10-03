@@ -21,7 +21,6 @@ use yii\base\Model;
  */
 class ContainerSettings extends Model
 {
-
     public ContentContainerActiveRecord $contentContainer;
     protected ?ContentContainerSettingsManager $settings = null;
     public bool $showAnswersInStream = false;

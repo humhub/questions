@@ -26,7 +26,6 @@ use yii\web\Response;
  */
 class AnswerController extends ContentContainerController
 {
-
     /**
      * @param int $id
      * @throws ForbiddenHttpException
@@ -48,8 +47,8 @@ class AnswerController extends ContentContainerController
             'answer' => $answer->id,
             'content' => Answer::widget([
                 'answer' => $answer,
-                'highlight' => true
-            ])
+                'highlight' => true,
+            ]),
         ]);
     }
 
@@ -95,9 +94,9 @@ class AnswerController extends ContentContainerController
                 'count' => $question->getAnswerService()->getExceptBestQuery()->count(),
                 'content' => Answer::widget([
                     'answer' => $answer,
-                    'highlight' => true
+                    'highlight' => true,
                 ]),
-                'form' => $answerFormId === 0 ? AnswerForm::widget(['question' => $question]) : null
+                'form' => $answerFormId === 0 ? AnswerForm::widget(['question' => $question]) : null,
             ]);
         }
 
@@ -105,8 +104,8 @@ class AnswerController extends ContentContainerController
             'answerFormId' => $answerFormId,
             'form' => AnswerForm::widget([
                 'question' => $question,
-                'answer' => $answer
-            ])
+                'answer' => $answer,
+            ]),
         ]);
     }
 
@@ -133,7 +132,7 @@ class AnswerController extends ContentContainerController
 
         return $this->asJson([
             'success' => true,
-            'content' => AnswerVoting::widget(['answer' => $answer])
+            'content' => AnswerVoting::widget(['answer' => $answer]),
         ]);
     }
 
@@ -169,7 +168,7 @@ class AnswerController extends ContentContainerController
             'count' => $question->getAnswerService()->getExceptBestQuery()->count(),
             'action' => $answer->is_best ? 'selected' : 'unselected',
             'titleSelect' => Yii::t('QuestionsModule.base', 'Select best answer'),
-            'titleUnselect' => Yii::t('QuestionsModule.base', 'Unselect best answer')
+            'titleUnselect' => Yii::t('QuestionsModule.base', 'Unselect best answer'),
         ]);
     }
 
@@ -196,7 +195,7 @@ class AnswerController extends ContentContainerController
         if (!$answer->delete()) {
             return $this->asJson([
                 'success' => false,
-                'message' => Yii::t('QuestionsModule.base', 'Cannot delete the Answer!')
+                'message' => Yii::t('QuestionsModule.base', 'Cannot delete the Answer!'),
             ]);
         }
 
@@ -204,7 +203,7 @@ class AnswerController extends ContentContainerController
             'success' => true,
             'answer' => $deletedAnswerId,
             'count' => $question->getAnswerService()->getExceptBestQuery()->count(),
-            'message' => Yii::t('QuestionsModule.base', 'Deleted')
+            'message' => Yii::t('QuestionsModule.base', 'Deleted'),
         ]);
     }
 

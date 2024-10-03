@@ -62,7 +62,7 @@ class AnswerControls extends Menu
                 'url' => '#',
                 'htmlOptions' => [
                     'data-action-click' => 'edit',
-                    'data-action-url' => Url::toEditAnswer($this->answer)
+                    'data-action-url' => Url::toEditAnswer($this->answer),
                 ],
                 'sortOrder' => 200,
             ]));
@@ -88,7 +88,7 @@ class AnswerControls extends Menu
     public function getAttributes()
     {
         return [
-            'class' => 'nav nav-pills preferences'
+            'class' => 'nav nav-pills preferences',
         ];
     }
 }

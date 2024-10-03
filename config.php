@@ -14,5 +14,5 @@ return [
     'namespace' => 'humhub\modules\questions',
     'events' => [
         [WallEntryLinks::class, WallEntryLinks::EVENT_INIT, [Events::class, 'onWallEntryLinksInit']],
-    ]
+    ],
 ];

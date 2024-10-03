@@ -33,7 +33,7 @@ class AcceptanceTester extends \AcceptanceTester
     {
         $this->amGoingTo('create a Question');
         $this->waitForText('Q&A');
-        $this->click( 'Q&A', '#contentFormMenu');
+        $this->click('Q&A', '#contentFormMenu');
         $this->waitForElementVisible('input[name="Question[question]"]');
         $this->fillField('Question[question]', $headline);
         $this->fillField('#question-description .humhub-ui-richtext', $description);
