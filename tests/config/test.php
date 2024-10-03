@@ -12,5 +12,5 @@ return [
     'fixtures' => [
         'default',
         'question' => QuestionFixture::class,
-    ]
+    ],
 ];

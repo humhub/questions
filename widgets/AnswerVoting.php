@@ -29,7 +29,7 @@ class AnswerVoting extends Widget
     {
         return $this->render('answer-voting', [
             'answer' => $this->answer,
-            'options' => $this->getOptions()
+            'options' => $this->getOptions(),
         ]);
     }
 

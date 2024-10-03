@@ -26,7 +26,6 @@ use yii\web\Response;
  */
 class QuestionController extends ContentContainerController
 {
-
     /**
      * @return string
      * @throws ForbiddenHttpException
@@ -102,8 +101,8 @@ class QuestionController extends ContentContainerController
                     'content-component' => 'questions.Question',
                     'content-key' => $question->content->id,
                 ],
-                'class' => 'content_edit'
-            ]
+                'class' => 'content_edit',
+            ],
         ]);
     }
 
@@ -129,7 +128,7 @@ class QuestionController extends ContentContainerController
         return $this->render('view', [
             'question' => $question,
             'currentAnswerId' => $aid,
-            'renderOptions' => $renderOptions
+            'renderOptions' => $renderOptions,
         ]);
     }
 

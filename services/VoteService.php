@@ -47,7 +47,7 @@ class VoteService
 
         return QuestionAnswerVote::findOne([
             'answer_id' => $this->answer->id,
-            'user_id' => $user->id
+            'user_id' => $user->id,
         ]);
     }
 
@@ -119,7 +119,7 @@ class VoteService
     public function refreshSummary()
     {
         $this->answer->updateAttributes([
-            'votes_summary' => $this->getSummary()
+            'votes_summary' => $this->getSummary(),
         ]);
     }
 }

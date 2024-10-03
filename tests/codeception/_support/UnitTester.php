@@ -14,7 +14,6 @@ use tests\codeception\_support\HumHubDbTestCase;
 
 class UnitTester extends HumHubDbTestCase
 {
-
     public function createQuestion(string $headline, string $description = '', int $spaceId = 1): ?Question
     {
         $space = Space::findOne(['id' => $spaceId]);

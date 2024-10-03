@@ -11,7 +11,6 @@ use questions\AcceptanceTester;
 
 class QuestionCest
 {
-
     public function testCreateQuestionWithAnswersAndTestVoting(AcceptanceTester $I)
     {
         $I->wantTo('create a Question from stream');

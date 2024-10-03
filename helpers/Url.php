@@ -14,21 +14,21 @@ use yii\helpers\Url as BaseUrl;
 
 class Url extends BaseUrl
 {
-    const ROUTE_MODULE = '/questions';
-    const ROUTE_SETTINGS = self::ROUTE_MODULE . '/settings';
+    public const ROUTE_MODULE = '/questions';
+    public const ROUTE_SETTINGS = self::ROUTE_MODULE . '/settings';
 
-    const ROUTE_QUESTION = self::ROUTE_MODULE . '/question';
-    const ROUTE_QUESTION_CREATE = self::ROUTE_QUESTION . '/create';
-    const ROUTE_QUESTION_CREATE_FORM = self::ROUTE_QUESTION . '/create-form';
-    const ROUTE_QUESTION_EDIT = self::ROUTE_QUESTION . '/edit';
-    const ROUTE_QUESTION_VIEW = self::ROUTE_QUESTION . '/view';
+    public const ROUTE_QUESTION = self::ROUTE_MODULE . '/question';
+    public const ROUTE_QUESTION_CREATE = self::ROUTE_QUESTION . '/create';
+    public const ROUTE_QUESTION_CREATE_FORM = self::ROUTE_QUESTION . '/create-form';
+    public const ROUTE_QUESTION_EDIT = self::ROUTE_QUESTION . '/edit';
+    public const ROUTE_QUESTION_VIEW = self::ROUTE_QUESTION . '/view';
 
-    const ROUTE_ANSWER = self::ROUTE_MODULE . '/answer';
-    const ROUTE_ANSWER_EDIT = self::ROUTE_ANSWER . '/edit';
-    const ROUTE_ANSWER_CONTENT = self::ROUTE_ANSWER . '/content';
-    const ROUTE_ANSWER_VOTE = self::ROUTE_ANSWER . '/vote';
-    const ROUTE_ANSWER_SELECT_BEST = self::ROUTE_ANSWER . '/select-best';
-    const ROUTE_ANSWER_DELETE = self::ROUTE_ANSWER . '/delete';
+    public const ROUTE_ANSWER = self::ROUTE_MODULE . '/answer';
+    public const ROUTE_ANSWER_EDIT = self::ROUTE_ANSWER . '/edit';
+    public const ROUTE_ANSWER_CONTENT = self::ROUTE_ANSWER . '/content';
+    public const ROUTE_ANSWER_VOTE = self::ROUTE_ANSWER . '/vote';
+    public const ROUTE_ANSWER_SELECT_BEST = self::ROUTE_ANSWER . '/select-best';
+    public const ROUTE_ANSWER_DELETE = self::ROUTE_ANSWER . '/delete';
 
     private static function create($route, $params = [], ContentContainerActiveRecord $container = null, bool $scheme = false)
     {
@@ -54,9 +54,12 @@ class Url extends BaseUrl
             $anchor = '';
         }
 
-        return static::create(static::ROUTE_QUESTION_VIEW,
+        return static::create(
+            static::ROUTE_QUESTION_VIEW,
             array_merge(['id' => $question->id], $params),
-            $question->content->container, $scheme) . $anchor;
+            $question->content->container,
+            $scheme,
+        ) . $anchor;
     }
 
     public static function toEditQuestion(Question $question): string

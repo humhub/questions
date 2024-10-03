@@ -44,7 +44,7 @@ class AnswerForm extends Widget
     {
         return $this->render('answer-form', [
             'answer' => $this->answer,
-            'options' => $this->getOptions()
+            'options' => $this->getOptions(),
         ]);
     }
 
@@ -52,7 +52,7 @@ class AnswerForm extends Widget
     {
         $options = [
             'class' => 'questions-answer-form',
-            'data-answer-form' => $this->answer->isNewRecord ? 0 : $this->answer->id
+            'data-answer-form' => $this->answer->isNewRecord ? 0 : $this->answer->id,
         ];
 
         return $options;

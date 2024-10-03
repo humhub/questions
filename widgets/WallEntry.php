@@ -57,7 +57,7 @@ class WallEntry extends WallStreamModuleEntryWidget
     {
         return $this->render('wall-entry', [
             'question' => $this->model,
-            'attributes' => $this->getContentAttributes()
+            'attributes' => $this->getContentAttributes(),
         ]);
     }
 
@@ -74,9 +74,9 @@ class WallEntry extends WallStreamModuleEntryWidget
                 'data' => [
                     'question' => $this->model->id,
                     'content-component' => 'questions.Question',
-                    'content-key' => $this->model->content->id
-                ]
-            ]
+                    'content-key' => $this->model->content->id,
+                ],
+            ],
         ]) . parent::renderFooter();
     }
 

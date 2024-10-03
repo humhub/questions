@@ -36,7 +36,7 @@ class Module extends ContentContainerModule
         if ($contentContainer instanceof Space) {
             return [
                 new permissions\CreateQuestion(),
-                new permissions\SelectBestAnswer()
+                new permissions\SelectBestAnswer(),
             ];
         }
 

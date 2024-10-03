@@ -38,14 +38,14 @@ class AnswersExceptBest extends Widget
             'currentAnswerId' => $this->currentAnswerId,
             'answers' => $this->question->getAnswerService()->getExceptBest($this->limit),
             'isDetailView' => $this->isDetailView,
-            'options' => $this->getOptions()
+            'options' => $this->getOptions(),
         ]);
     }
 
     public function getOptions(): array
     {
         return [
-            'class' => 'except-best-answers'
+            'class' => 'except-best-answers',
         ];
     }
 }

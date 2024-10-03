@@ -26,9 +26,9 @@ use yii\db\ActiveQuery;
  * @property int $votes_summary
  * @property bool $is_best
  * @property string $created_at
- * @property integer $created_by
+ * @property int $created_by
  * @property string $updated_at
- * @property integer $updated_by
+ * @property int $updated_by
  *
  * @property-read Question $question
  *
@@ -63,7 +63,7 @@ class QuestionAnswer extends ActiveRecord
     public function attributeLabels()
     {
         return [
-            'answer' => Yii::t('QuestionsModule.base', 'Provide an answer')
+            'answer' => Yii::t('QuestionsModule.base', 'Provide an answer'),
         ];
     }
 
