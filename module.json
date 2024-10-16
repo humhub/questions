@@ -1,8 +1,8 @@
 {
     "id": "questions",
     "name": "Q&A",
-    "description": "Elevate your knowledge sharing experience by enabling users to ask questions and upvote the most helpful answers.",
-    "keywords": ["Q&A", "questions answers"],
+    "description": "Users can ask questions, receive helpful answers, and engage in community discussions.",
+    "keywords": ["Q&A", "questions", "answers"],
     "version": "1.0.7",
     "humhub": {
         "minVersion": "1.14"
@@ -14,10 +14,12 @@
         }
     ],
     "screenshots": [
-        "resources/screen1.PNG",
-        "resources/screen2.PNG",
-        "resources/screen3.PNG",
-        "resources/screen4.PNG",
-        "resources/screen5.PNG"
+        "resources/screenshot1.png",
+        "resources/screenshot2.png",
+        "resources/screenshot3.png",
+        "resources/screenshot4.png",
+        "resources/screenshot5.png",
+        "resources/screenshot6.png",
+        "resources/screenshot7.png"
     ]
 }
