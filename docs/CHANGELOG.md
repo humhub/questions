@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.0.7 (Unreleased)
+1.0.7 (October 16, 2024)
 ------------------------
 - Enh #26: Use PHP CS Fixer
 
