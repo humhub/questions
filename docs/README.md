@@ -1,3 +1,8 @@
 # Questions & Answers
 
-Engage and Learn: Our 'Q&A' module empowers users to seek and share knowledge. Ask burning questions, receive insightful answers from the community, and enhance discussions by upvoting the best responses. Join the collaborative journey of discovering valuable information and solutions.
+Make knowledge sharing easy within your network with the Questions & Answers Module. Encourage users to ask questions, receive helpful answers, and engage in community discussions to solve problems together.
+
+## Key Features:
+- **Questions:** Empower users to seek help by posting questions.
+- **Upvote and Downvote:** Users can upvote or downvote answers, ensuring the most helpful responses are easily found.
+- **Best Answer:** Question author or admin can mark the best answer, pinning it at the top for quick reference.
