@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.0.8 (Unreleased)
+------------------------
+- Enh #29: Enable the feature to move a content to another space
+
 1.0.7 (October 16, 2024)
 ------------------------
 - Enh #26: Use PHP CS Fixer

@@ -52,6 +52,11 @@ class Question extends ContentActiveRecord implements Searchable
     /**
      * @inheritdoc
      */
+    protected $canMove = true;
+
+    /**
+     * @inheritdoc
+     */
     public static function tableName()
     {
         return 'question';
