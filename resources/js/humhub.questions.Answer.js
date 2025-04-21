@@ -95,9 +95,10 @@ humhub.module('questions.Answer', function (module, require, $) {
     }
 
     Answer.prototype.toggleList = function (evt, collapse) {
-        this.Question.answersList().toggle(!collapse);
-        this.$.find('.questions-toggle-btn').show();
-        evt.$target.hide();
+        this.Question.answersList().toggleClass('d-none', !collapse);
+        
+        this.$.find('.questions-toggle-btn').removeClass('d-none');
+        evt.$target.addClass('d-none');
     }
 
     Answer.prototype.edit = function (evt) {
@@ -144,7 +145,7 @@ humhub.module('questions.Answer', function (module, require, $) {
 
                 that.Question.getAnswer(response.answer)
                     .addClass('questions-deleted-answer')
-                    .fadeOut('slow', function() {
+                    .fadeOut('slow', function() {//TODO BS5
                         $(this).remove();
                         status.success(response.message);
                     });
