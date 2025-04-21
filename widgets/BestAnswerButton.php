@@ -12,12 +12,12 @@ use humhub\components\Widget;
 use humhub\helpers\Html;
 use humhub\modules\questions\helpers\Url;
 use humhub\modules\questions\models\QuestionAnswer;
-use humhub\widgets\bootstrap\Label;
+use humhub\widgets\bootstrap\Badge;
 use Yii;
 
 /**
  * Widget BestAnswerButton displays a button to select/unselect the Best Answer
- *        if user has a permission, otherwise it is displayed as label only for the Best Answer
+ *        if user has a permission, otherwise it is displayed as badge only for the Best Answer
  */
 class BestAnswerButton extends Widget
 {
@@ -38,7 +38,7 @@ class BestAnswerButton extends Widget
      */
     public function run()
     {
-        $button = Label::info(Yii::t('QuestionsModule.base', 'BEST ANSWER'));
+        $button = Badge::info(Yii::t('QuestionsModule.base', 'BEST ANSWER'));
 
         if ($this->allowSelect()) {
             $button->action('best', Url::toSelectBestAnswer($this->answer))
