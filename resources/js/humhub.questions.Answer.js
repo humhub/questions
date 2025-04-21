@@ -95,7 +95,7 @@ humhub.module('questions.Answer', function (module, require, $) {
     }
 
     Answer.prototype.toggleList = function (evt, collapse) {
-        this.Question.answersList().toggleClass('d-none', !collapse);
+        this.Question.answersList().toggleClass('d-none', collapse);
         
         this.$.find('.questions-toggle-btn').removeClass('d-none');
         evt.$target.addClass('d-none');
