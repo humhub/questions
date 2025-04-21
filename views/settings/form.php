@@ -15,7 +15,7 @@ use humhub\widgets\form\ActiveForm;
 <div class="panel panel-default">
     <div class="panel-heading"><?= Yii::t('QuestionsModule.base', '<strong>Questions</strong> settings') ?></div>
     <div class="panel-body">
-        <div class="help-block">
+        <div class="text-body-secondary">
             <?= $settings->contentContainer instanceof Space
                 ? Yii::t('QuestionsModule.base', 'Settings of the "Questions" module for this single Space.')
                 : Yii::t('QuestionsModule.base', 'Settings of the "Questions" module for your Profile.')?>
