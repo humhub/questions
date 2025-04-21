@@ -9,7 +9,7 @@ use humhub\libs\Html;
 use humhub\modules\content\widgets\richtext\RichTextField;
 use humhub\modules\questions\helpers\Url;
 use humhub\modules\questions\models\QuestionAnswer;
-use humhub\modules\ui\form\widgets\ActiveForm;
+use humhub\widgets\form\ActiveForm;
 use humhub\widgets\Button;
 
 /* @var QuestionAnswer $answer */

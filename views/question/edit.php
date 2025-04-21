@@ -11,7 +11,7 @@ use humhub\modules\questions\assets\QuestionsAssets;
 use humhub\modules\questions\helpers\Url;
 use humhub\modules\questions\models\Question;
 use humhub\widgets\Button;
-use yii\bootstrap\ActiveForm;
+use humhub\widgets\form\ActiveForm;
 use yii\web\View;
 
 /* @var View $this */

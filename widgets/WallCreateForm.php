@@ -13,7 +13,7 @@ use humhub\modules\questions\helpers\Url;
 use humhub\modules\questions\models\Question;
 use humhub\modules\questions\permissions\CreateQuestion;
 use humhub\modules\space\models\Space;
-use humhub\modules\ui\form\widgets\ActiveForm;
+use humhub\widgets\form\ActiveForm;
 
 class WallCreateForm extends WallCreateContentForm
 {

@@ -8,7 +8,7 @@
 use humhub\modules\questions\models\forms\ContainerSettings;
 use humhub\modules\space\models\Space;
 use humhub\widgets\Button;
-use yii\bootstrap\ActiveForm;
+use humhub\widgets\form\ActiveForm;
 
 /* @var ContainerSettings $settings */
 ?>
