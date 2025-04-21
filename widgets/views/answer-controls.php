@@ -15,7 +15,7 @@ use humhub\widgets\bootstrap\Badge;
 <?= Html::beginTag('ul', $options) ?>
     <?= Html::beginTag('li', ['class' => 'dropdown']) ?>
         <?= Badge::light()->icon('dropdownToggle')
-            ->cssClass('dropdown-toggle')
+            ->cssClass('dropdown-toggle float-end')
             ->options(['data-bs-toggle' => 'dropdown']) ?>
 
         <ul class="dropdown-menu-end">

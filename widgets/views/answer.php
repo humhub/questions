@@ -21,13 +21,13 @@ use humhub\widgets\TimeAgo;
 ?>
 <?= Html::beginTag('div', $options) ?>
     <?= Html::a('', null, ['id' => 'answer' . $answer->id, 'class' => 'questions-anchor']) ?>
-    <?= AnswerControls::widget(['answer' => $answer]) ?>
-    
+
     <?php if ($enableControls) : ?>
         <?= AnswerVoting::widget(['answer' => $answer]) ?>
     <?php endif; ?>
 
     <div class="questions-answer-content">
+        <?= AnswerControls::widget(['answer' => $answer]) ?>
         <div class="questions-answer-header">
             <?= Image::widget([
                 'user' => $answer->createdBy,
