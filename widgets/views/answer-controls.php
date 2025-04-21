@@ -18,7 +18,7 @@ use humhub\widgets\bootstrap\Badge;
             ->cssClass('dropdown-toggle')
             ->options(['data-bs-toggle' => 'dropdown']) ?>
 
-        <ul class="dropdown-menu-end">
+        <ul class="dropdown-menu">
             <?php foreach ($entries as $entry) : ?>
                 <li><?= $entry->render() ?></li>
             <?php endforeach; ?>
