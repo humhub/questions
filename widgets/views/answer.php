@@ -28,6 +28,7 @@ use humhub\widgets\TimeAgo;
 
     <div class="questions-answer-content">
         <?= AnswerControls::widget(['answer' => $answer]) ?>
+        <?= BestAnswerButton::widget(['answer' => $answer, 'allowSelect' => $enableControls]) ?>
         <div class="questions-answer-header">
             <?= Image::widget([
                 'user' => $answer->createdBy,
@@ -40,7 +41,6 @@ use humhub\widgets\TimeAgo;
             ]) ?></small>
         </div>
         <?= Html::tag('div', RichText::output($answer->answer), $contentAttributes) ?>
-        <?= BestAnswerButton::widget(['answer' => $answer, 'allowSelect' => $enableControls]) ?>
     </div>
 
 <?= Html::endTag('div') ?>
