@@ -9,7 +9,7 @@
 namespace humhub\modules\questions\widgets;
 
 use humhub\components\Widget;
-use humhub\widgets\Button;
+use humhub\widgets\bootstrap\Button;
 use Yii;
 
 class AnswersToggleButton extends Widget

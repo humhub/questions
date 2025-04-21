@@ -5,16 +5,16 @@
  * @license https://www.humhub.com/licences
  */
 
-use humhub\libs\Html;
+use humhub\helpers\Html;
 use humhub\modules\ui\menu\MenuEntry;
-use humhub\widgets\Link;
+use humhub\widgets\bootstrap\Badge;
 
 /* @var MenuEntry[] $entries */
 /* @var array $options */
 ?>
 <?= Html::beginTag('ul', $options) ?>
     <?= Html::beginTag('li', ['class' => 'dropdown']) ?>
-        <?= Link::asLink()->icon('dropdownToggle')
+        <?= Badge::asLink()->icon('dropdownToggle')
             ->cssClass('dropdown-toggle')
             ->options(['data-toggle' => 'dropdown']) ?>
 

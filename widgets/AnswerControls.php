@@ -49,6 +49,7 @@ class AnswerControls extends Menu
             'icon' => 'link',
             'url' => '#',
             'htmlOptions' => [
+                'class' => 'dropdown-item',
                 'data-action-click' => 'content.permalink',
                 'data-content-permalink' => Url::toViewAnswer($this->answer, true),
                 'data-content-permalink-title' => Yii::t('QuestionsModule.base', '<strong>Permalink</strong> to this answer'),
@@ -62,6 +63,7 @@ class AnswerControls extends Menu
                 'icon' => 'edit',
                 'url' => '#',
                 'htmlOptions' => [
+                    'class' => 'dropdown-item',
                     'data-action-click' => 'edit',
                     'data-action-url' => Url::toEditAnswer($this->answer),
                 ],
@@ -73,6 +75,7 @@ class AnswerControls extends Menu
                 'icon' => 'delete',
                 'url' => '#',
                 'htmlOptions' => [
+                    'class' => 'dropdown-item',
                     'data-action-click' => 'delete',
                     'data-action-url' => Url::toDeleteAnswer($this->answer),
                     'data-action-confirm-header' => Yii::t('QuestionsModule.base', '<strong>Delete</strong> Answer'),

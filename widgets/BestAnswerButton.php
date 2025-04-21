@@ -9,10 +9,10 @@
 namespace humhub\modules\questions\widgets;
 
 use humhub\components\Widget;
-use humhub\libs\Html;
+use humhub\helpers\Html;
 use humhub\modules\questions\helpers\Url;
 use humhub\modules\questions\models\QuestionAnswer;
-use humhub\widgets\Label;
+use humhub\widgets\bootstrap\Label;
 use Yii;
 
 /**

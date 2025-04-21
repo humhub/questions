@@ -5,12 +5,12 @@
  * @license https://www.humhub.com/licences
  */
 
-use humhub\libs\Html;
+use humhub\helpers\Html;
 use humhub\modules\content\widgets\richtext\RichTextField;
 use humhub\modules\questions\assets\QuestionsAssets;
 use humhub\modules\questions\helpers\Url;
 use humhub\modules\questions\models\Question;
-use humhub\widgets\Button;
+use humhub\widgets\bootstrap\Button;
 use humhub\widgets\form\ActiveForm;
 use yii\web\View;
 
