@@ -92,7 +92,7 @@ class AnswerControls extends Menu
     public function getAttributes()
     {
         return [
-            'class' => 'nav nav-pills float-end',
+            'class' => 'nav nav-pills preferences',
         ];
     }
 }

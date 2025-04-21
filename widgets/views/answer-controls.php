@@ -13,10 +13,15 @@ use humhub\widgets\bootstrap\Badge;
 /* @var array $options */
 ?>
 <?= Html::beginTag('ul', $options) ?>
-    <?= Html::beginTag('li', ['class' => 'dropdown']) ?>
-        <?= Badge::light()->icon('dropdownToggle')
-            ->cssClass('dropdown-toggle')
-            ->options(['data-bs-toggle' => 'dropdown']) ?>
+    <?= Html::beginTag('li', ['class' => 'nav-item dropdown']) ?>
+        <?= Html::a('', '#', [
+            'class' => 'nav-link dropdown-toggle',
+            'data-bs-toggle' => 'dropdown',
+            'aria-label' => Yii::t('base', 'Toggle answer control menu'),
+            'aria-haspopup' => 'true',
+            'aria-expanded' => 'false',
+            'role' => 'button',
+        ]) ?>
 
         <ul class="dropdown-menu dropdown-menu-end">
             <?php foreach ($entries as $entry) : ?>
