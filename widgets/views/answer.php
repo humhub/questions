@@ -21,7 +21,8 @@ use humhub\widgets\TimeAgo;
 ?>
 <?= Html::beginTag('div', $options) ?>
     <?= Html::a('', null, ['id' => 'answer' . $answer->id, 'class' => 'questions-anchor']) ?>
-
+    <?= AnswerControls::widget(['answer' => $answer]) ?>
+    
     <?php if ($enableControls) : ?>
         <?= AnswerVoting::widget(['answer' => $answer]) ?>
     <?php endif; ?>
@@ -37,7 +38,6 @@ use humhub\widgets\TimeAgo;
             <small><?= Yii::t('QuestionsModule.base', 'answered {date}', [
                 'date' => TimeAgo::widget(['timestamp' => $answer->created_at])
             ]) ?></small>
-            <?= AnswerControls::widget(['answer' => $answer]) ?>
         </div>
         <?= Html::tag('div', RichText::output($answer->answer), $contentAttributes) ?>
         <?= BestAnswerButton::widget(['answer' => $answer, 'allowSelect' => $enableControls]) ?>
