@@ -27,8 +27,6 @@ use humhub\widgets\TimeAgo;
     <?php endif; ?>
 
     <div class="questions-answer-content">
-        <?= AnswerControls::widget(['answer' => $answer]) ?>
-        <?= BestAnswerButton::widget(['answer' => $answer, 'allowSelect' => $enableControls]) ?>
         <div class="questions-answer-header">
             <?= Image::widget([
                 'user' => $answer->createdBy,
@@ -39,7 +37,9 @@ use humhub\widgets\TimeAgo;
             <small><?= Yii::t('QuestionsModule.base', 'answered {date}', [
                 'date' => TimeAgo::widget(['timestamp' => $answer->created_at])
             ]) ?></small>
+            <?= AnswerControls::widget(['answer' => $answer]) ?>
         </div>
+        <?= BestAnswerButton::widget(['answer' => $answer, 'allowSelect' => $enableControls]) ?>
         <?= Html::tag('div', RichText::output($answer->answer), $contentAttributes) ?>
     </div>
 
