@@ -16,9 +16,9 @@ use humhub\widgets\bootstrap\Badge;
     <?= Html::beginTag('li', ['class' => 'dropdown']) ?>
         <?= Badge::light()->icon('dropdownToggle')
             ->cssClass('dropdown-toggle')
-            ->options(['data-toggle' => 'dropdown']) ?>
+            ->options(['data-bs-toggle' => 'dropdown']) ?>
 
-        <ul class="dropdown-menu pull-right">
+        <ul class="dropdown-menu-end">
             <?php foreach ($entries as $entry) : ?>
                 <li><?= $entry->render() ?></li>
             <?php endforeach; ?>
