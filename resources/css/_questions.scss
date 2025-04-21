@@ -6,7 +6,7 @@
   display: flex;
   margin: 0 -5px;
   padding: 20px 5px;
-  border-top: 1px solid var(--background3);
+  border-top: 1px solid var(--hh-background3);
   transition: border, background 2s ease;
   .questions-answer-header {
     padding-bottom: 10px;
@@ -19,13 +19,13 @@
     border-radius: 4px;
     margin: 20px -10px;
     padding: 20px 10px;
-    border: 1px solid var(--info);
-    background: var(--background-color-highlight-soft);
+    border: 1px solid var(--bs-info);
+    background: var(--hh-background-color-highlight-soft);
     .questions-best-answer-button {
       display: block;
     }
     &.questions-deleted-answer {
-      border-color: var(--danger);
+      border-color: var(--bs-danger);
     }
     .questions-answer-voting button {
       background: #fff;
@@ -42,7 +42,7 @@
   }
   &.questions-deleted-answer {
     transition: none;
-    background: var(--background-color-danger);
+    background: var(--hh-background-color-danger);
   }
 }
 
