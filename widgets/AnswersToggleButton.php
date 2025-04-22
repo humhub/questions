@@ -43,7 +43,7 @@ class AnswersToggleButton extends Widget
             ->loader(false);
 
         if (!$this->isVisibleButton('collapse')) {
-            $button->style('display:none');
+            $button->class('d-none');
         }
 
         return $button;
