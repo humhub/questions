@@ -24,7 +24,7 @@ use humhub\widgets\form\ActiveForm;
         <?php $form = ActiveForm::begin() ?>
 
         <?= $form->field($settings, 'showAnswersInStream')->checkbox() ?>
-        
+
         <?= Button::save()->submit() ?>
 
         <?php ActiveForm::end() ?>

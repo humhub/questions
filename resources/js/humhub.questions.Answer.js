@@ -96,7 +96,6 @@ humhub.module('questions.Answer', function (module, require, $) {
 
     Answer.prototype.toggleList = function (evt, collapse) {
         this.Question.answersList().toggleClass('d-none', collapse);
-        
         this.$.find('.questions-toggle-btn').removeClass('d-none');
         evt.$target.addClass('d-none');
     }
@@ -145,7 +144,7 @@ humhub.module('questions.Answer', function (module, require, $) {
 
                 that.Question.getAnswer(response.answer)
                     .addClass('questions-deleted-answer')
-                    .fadeOut('slow', function() {//TODO BS5
+                    .fadeOut('slow', function() {
                         $(this).remove();
                         status.success(response.message);
                     });
