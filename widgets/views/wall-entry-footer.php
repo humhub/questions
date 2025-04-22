@@ -42,7 +42,7 @@ QuestionsAssets::register($this);
             ]))
             ->link(Url::toViewAnswers($question))
             ->options(['target' => '_blank'])
-            ->cssClass('active')
+            ->outline()
             ->loader(false) ?>
     <?php endif; ?>
 
