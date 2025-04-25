@@ -9,7 +9,7 @@
 namespace humhub\modules\questions\widgets;
 
 use humhub\components\Widget;
-use humhub\libs\Html;
+use humhub\helpers\Html;
 use humhub\modules\questions\helpers\Url;
 use humhub\modules\questions\models\Question;
 use Yii;
