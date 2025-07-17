@@ -8,9 +8,6 @@
 
 namespace questions;
 
-use humhub\modules\content\components\ContentContainerActiveRecord;
-use humhub\modules\questions\models\Question;
-
 /**
  * Inherited Methods
  * @method void wantToTest($text)
@@ -71,7 +68,7 @@ class AcceptanceTester extends \AcceptanceTester
     public function vote(int $answerId, string $buttonTitle)
     {
         $this->canVote($answerId);
-        $buttonSelector = $this->getVoteButtonSelector($answerId, '[data-original-title="' . $buttonTitle . '"]');
+        $buttonSelector = $this->getVoteButtonSelector($answerId, '[data-bs-title="' . $buttonTitle . '"]');
         $this->waitForElementVisible($buttonSelector);
         $this->jsClick($buttonSelector);
         $this->waitForElementVisible($buttonSelector . '.active');
