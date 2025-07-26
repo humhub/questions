@@ -8,7 +8,7 @@
 use humhub\modules\content\widgets\richtext\RichTextField;
 use humhub\modules\content\widgets\WallCreateContentFormFooter;
 use humhub\modules\questions\models\Question;
-use humhub\modules\ui\form\widgets\ActiveForm;
+use humhub\widgets\form\ActiveForm;
 
 /* @var $model Question */
 /* @var $form ActiveForm */

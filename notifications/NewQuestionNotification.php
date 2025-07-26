@@ -8,7 +8,7 @@
 
 namespace humhub\modules\questions\notifications;
 
-use humhub\libs\Html;
+use humhub\helpers\Html;
 use humhub\modules\notification\components\BaseNotification;
 use humhub\modules\questions\models\Question;
 use humhub\modules\space\models\Space;
