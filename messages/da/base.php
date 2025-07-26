@@ -1,5 +1,5 @@
 <?php
-return array (
+return [
   '<strong>Delete</strong> Answer' => '',
   '<strong>Permalink</strong> to this answer' => '',
   '<strong>Questions</strong> settings' => '',
@@ -13,7 +13,7 @@ return array (
   'Cannot delete the Answer!' => '',
   'Collapse all answers ({count})' => '',
   'Delete' => 'Slet',
-  'Deleted' => '',
+  'Deleted' => 'Slettet',
   'Description' => 'Beskrivelse',
   'Downvote' => '',
   'Edit' => 'Rediger',
@@ -43,4 +43,4 @@ return array (
   '{displayName} has answered your Question "{contentTitle}".' => '',
   '{displayName} has created the Question "{contentTitle}" in Space {spaceName}.' => '',
   '{displayName} has created the Question "{contentTitle}".' => '',
-);
+];
