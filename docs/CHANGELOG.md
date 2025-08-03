@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.1.1 (Unreleased)
+----------------------
+- Fix: Migration to Bootstrap 5
+
 1.1.0 (July 26, 2025)
 ---------------------
 - Enh #29: Enable the feature to move a content to another space
