@@ -37,17 +37,17 @@ class AcceptanceTester extends \AcceptanceTester
         $this->fillField('#question-description .humhub-ui-richtext', $description);
         $this->jsClick('#post_submit_button');
 
-        $this->waitForText($headline, null, '.wall-entry-header');
+        $this->waitForText($headline, 10, '.wall-entry-header');
         $this->see('Provide an answer', '[data-content-component="questions.Question"]');
         $this->see('View all answers', '[data-content-component="questions.Question"]');
     }
 
     public function provideAnswer(string $answerText)
     {
-        $this->waitForText('Provide an answer', null, '.field-questionanswer-answer');
+        $this->waitForText('Provide an answer', 10, '.field-questionanswer-answer');
         $this->fillField('#answerRichTextField0 .humhub-ui-richtext', $answerText);
         $this->click('Save', '.questions-answer-form');
-        $this->waitForText($answerText, null, '.except-best-answers');
+        $this->waitForText($answerText, 10, '.except-best-answers');
     }
 
     private function getVoteButtonSelector(int $answerId, string $suffix = ''): string
@@ -86,7 +86,7 @@ class AcceptanceTester extends \AcceptanceTester
 
     public function checkVotingSummary(int $answerId, int $summary)
     {
-        $this->waitForText((string)$summary, null, '[data-answer="' . $answerId . '"] .questions-answer-voting div');
+        $this->waitForText((string)$summary, 10, '[data-answer="' . $answerId . '"] .questions-answer-voting div');
     }
 
     public function selectBestAnswer(int $answerId)

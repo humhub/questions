@@ -33,7 +33,7 @@ class QuestionCest
         $I->amOnSpace1();
 
         $I->amGoingTo('provide first Answer from Sara');
-        $I->waitForText('Provide an answer', null, '.wall-entry');
+        $I->waitForText('Provide an answer', 10, '.wall-entry');
         $I->click('Provide an answer');
         $I->switchToNextTab();
         $I->provideAnswer('Second answer text from Sara.');
@@ -48,7 +48,7 @@ class QuestionCest
         $I->amAdmin(true);
         $I->amOnSpace1();
 
-        $I->waitForText('View all answers (2)', null, '.wall-entry');
+        $I->waitForText('View all answers (2)', 10, '.wall-entry');
         $I->click('View all answers (2)');
         $I->switchToNextTab();
 
