@@ -63,6 +63,8 @@ class QuestionCest
         $I->unselectBestAnswer();
         $I->waitForText('Collapse all answers (2)');
         $I->dontSeeElement('.questions-best-answer');
+        $I->scrollToBottom();
+        $I->wait(1);
         $I->selectBestAnswer(1);
         $I->selectBestAnswer(2);
     }
