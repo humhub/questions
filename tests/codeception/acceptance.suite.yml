@@ -8,7 +8,7 @@
 
 # RUN `build` COMMAND AFTER ADDING/REMOVING MODULES.
 
-class_name: AcceptanceTester
+actor: AcceptanceTester
 modules:
   enabled:
     - WebDriver
@@ -18,6 +18,7 @@ modules:
     WebDriver:
       url: 'http://localhost:8080/'
       browser: chrome
+      window_size: maximize
       restart: true
       port: 4444
       capabilities:

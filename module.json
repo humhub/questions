@@ -3,9 +3,9 @@
     "name": "Q&A",
     "description": "Users can ask questions, receive helpful answers, and engage in community discussions.",
     "keywords": ["Q&A", "questions", "answers"],
-    "version": "1.0.8",
+    "version": "1.1.1",
     "humhub": {
-        "minVersion": "1.14"
+        "minVersion": "1.18"
     },
     "homepage": "https://github.com/humhub/questions",
     "authors": [

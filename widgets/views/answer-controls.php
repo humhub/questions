@@ -5,20 +5,25 @@
  * @license https://www.humhub.com/licences
  */
 
-use humhub\libs\Html;
+use humhub\helpers\Html;
 use humhub\modules\ui\menu\MenuEntry;
-use humhub\widgets\Link;
+use humhub\widgets\bootstrap\Badge;
 
 /* @var MenuEntry[] $entries */
 /* @var array $options */
 ?>
 <?= Html::beginTag('ul', $options) ?>
-    <?= Html::beginTag('li', ['class' => 'dropdown']) ?>
-        <?= Link::asLink()->icon('dropdownToggle')
-            ->cssClass('dropdown-toggle')
-            ->options(['data-toggle' => 'dropdown']) ?>
+    <?= Html::beginTag('li', ['class' => 'nav-item dropdown']) ?>
+        <?= Html::a('', '#', [
+            'class' => 'nav-link dropdown-toggle',
+            'data-bs-toggle' => 'dropdown',
+            'aria-label' => Yii::t('base', 'Toggle answer control menu'),
+            'aria-haspopup' => 'true',
+            'aria-expanded' => 'false',
+            'role' => 'button',
+        ]) ?>
 
-        <ul class="dropdown-menu pull-right">
+        <ul class="dropdown-menu dropdown-menu-end">
             <?php foreach ($entries as $entry) : ?>
                 <li><?= $entry->render() ?></li>
             <?php endforeach; ?>
