@@ -34,7 +34,7 @@ class AnswersToggleButton extends Widget
 
     private function renderCollapseButton(): string
     {
-        $button = Button::info(Yii::t('QuestionsModule.base', 'Collapse all answers ({count})', [
+        $button = Button::accent(Yii::t('QuestionsModule.base', 'Collapse all answers ({count})', [
             'count' => '<span class="questions-answers-count">' . $this->count . '</span>',
         ]))
             ->icon('arrow-up')
@@ -51,7 +51,7 @@ class AnswersToggleButton extends Widget
 
     private function renderExpandButton(): string
     {
-        $button = Button::info(Yii::t('QuestionsModule.base', 'Expand all answers ({count})', [
+        $button = Button::accent(Yii::t('QuestionsModule.base', 'Expand all answers ({count})', [
             'count' => '<span class="questions-answers-count">' . $this->count . '</span>',
         ]))
             ->icon('arrow-down')

@@ -38,7 +38,7 @@ class BestAnswerButton extends Widget
      */
     public function run()
     {
-        $button = Badge::info(Yii::t('QuestionsModule.base', 'BEST ANSWER'));
+        $button = Badge::accent(Yii::t('QuestionsModule.base', 'BEST ANSWER'));
 
         if ($this->allowSelect()) {
             $button->action('best', Url::toSelectBestAnswer($this->answer))

@@ -31,13 +31,13 @@ QuestionsAssets::register($this);
     <?php if (!$isDetailView) : ?>
         <br>
         <?php if ($question->canAnswer()) : ?>
-            <?= Button::info(Yii::t('QuestionsModule.base', 'Provide an answer'))
+            <?= Button::accent(Yii::t('QuestionsModule.base', 'Provide an answer'))
                 ->link(Url::toCreateAnswer($question))
                 ->options(['target' => '_blank'])
                 ->loader(false) ?>
         <?php endif; ?>
 
-        <?= Button::info(Yii::t('QuestionsModule.base', 'View all answers ({count})', [
+        <?= Button::accent(Yii::t('QuestionsModule.base', 'View all answers ({count})', [
                 'count' => '<span class="questions-answers-count">' . $question->getAnswerService()->getCount() . '</span>'
             ]))
             ->link(Url::toViewAnswers($question))
