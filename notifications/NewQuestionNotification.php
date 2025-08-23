@@ -73,7 +73,7 @@ class NewQuestionNotification extends BaseNotification
      */
     public function isBlockedForUser(User $user): bool
     {
-        return !$this->source->content->canView($user) &&
-            parent::isBlockedForUser($user);
+        return !$this->source->content->canView($user)
+            && parent::isBlockedForUser($user);
     }
 }

@@ -28,9 +28,9 @@ class AnswerControls extends Menu
      */
     public function beforeRun()
     {
-        return $this->answer instanceof QuestionAnswer &&
-            !$this->answer->isNewRecord &&
-            parent::beforeRun();
+        return $this->answer instanceof QuestionAnswer
+            && !$this->answer->isNewRecord
+            && parent::beforeRun();
     }
 
     /**
