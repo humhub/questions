@@ -82,7 +82,7 @@ class AnsweredNotification extends BaseNotification
      */
     public function isBlockedForUser(User $user): bool
     {
-        return !$this->source->question->content->createdBy->is($user) &&
-            parent::isBlockedForUser($user);
+        return !$this->source->question->content->createdBy->is($user)
+            && parent::isBlockedForUser($user);
     }
 }

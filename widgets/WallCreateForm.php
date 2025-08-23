@@ -47,9 +47,9 @@ class WallCreateForm extends WallCreateContentForm
      */
     public function beforeRun()
     {
-        return $this->contentContainer instanceof Space &&
-            $this->contentContainer->permissionManager->can(CreateQuestion::class) &&
-            parent::beforeRun();
+        return $this->contentContainer instanceof Space
+            && $this->contentContainer->permissionManager->can(CreateQuestion::class)
+            && parent::beforeRun();
     }
 
 }

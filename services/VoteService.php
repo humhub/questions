@@ -103,8 +103,8 @@ class VoteService
     {
         $vote = $this->getVote($user);
 
-        return $vote instanceof QuestionAnswerVote &&
-            $vote->is($this->normalizeVoteType($type));
+        return $vote instanceof QuestionAnswerVote
+            && $vote->is($this->normalizeVoteType($type));
     }
 
     public function getQuery(): ActiveQuery
