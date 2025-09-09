@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.1.2 (Unreleased)
+----------------------
+- Fix: Cancel button color (danger -> light) and position
+
 1.1.1 (August 9, 2025)
 ----------------------
 - Fix: Migration to Bootstrap 5
