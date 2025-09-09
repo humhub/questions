@@ -1,9 +1,10 @@
 Changelog
 =========
 
-1.1.1 (Unreleased)
+1.1.1 (August 9, 2025)
 ----------------------
 - Fix: Migration to Bootstrap 5
+- Fix #25: Update module resources path
 
 1.1.0 (July 26, 2025)
 ---------------------
