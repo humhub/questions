@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @link https://www.humhub.org/
  * @copyright Copyright (c) HumHub GmbH & Co. KG
@@ -32,7 +33,7 @@ class m230626_112542_initial extends Migration
             'created_at' => $this->dateTime()->notNull(),
             'created_by' => $this->integer()->notNull(),
             'updated_at' => $this->dateTime()->notNull(),
-            'updated_by' => $this->integer()->notNull()
+            'updated_by' => $this->integer()->notNull(),
         ]);
         $this->safeAddForeignKey('fk_questions_question_id', 'question_answer', 'question_id', 'question', 'id', 'CASCADE');
         $this->safeCreateIndex('idx_is_best', 'question_answer', 'is_best');
@@ -42,7 +43,7 @@ class m230626_112542_initial extends Migration
         $this->safeCreateTable('question_answer_vote', [
             'answer_id' => $this->integer()->notNull(),
             'user_id' => $this->integer()->notNull(),
-            'type' => $this->tinyInteger(1)->notNull()
+            'type' => $this->tinyInteger(1)->notNull(),
         ]);
         $this->safeAddPrimaryKey('pk_question_answer_vote', 'question_answer_vote', 'answer_id,user_id');
         $this->safeAddForeignKey('fk_questions_answer_id', 'question_answer_vote', 'answer_id', 'question_answer', 'id', 'CASCADE');

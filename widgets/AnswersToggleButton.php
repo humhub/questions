@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @link https://www.humhub.org/
  * @copyright Copyright (c) HumHub GmbH & Co. KG
@@ -8,7 +9,7 @@
 namespace humhub\modules\questions\widgets;
 
 use humhub\components\Widget;
-use humhub\widgets\Button;
+use humhub\widgets\bootstrap\Button;
 use Yii;
 
 class AnswersToggleButton extends Widget
@@ -33,16 +34,16 @@ class AnswersToggleButton extends Widget
 
     private function renderCollapseButton(): string
     {
-        $button = Button::info(Yii::t('QuestionsModule.base', 'Collapse all answers ({count})', [
-                'count' => '<span class="questions-answers-count">' . $this->count . '</span>'
-            ]))
+        $button = Button::accent(Yii::t('QuestionsModule.base', 'Collapse all answers ({count})', [
+            'count' => '<span class="questions-answers-count">' . $this->count . '</span>',
+        ]))
             ->icon('arrow-up')
             ->action('collapse')
             ->sm()->cssClass('active questions-toggle-btn')
             ->loader(false);
 
         if (!$this->isVisibleButton('collapse')) {
-            $button->style('display:none');
+            $button->cssClass('d-none');
         }
 
         return $button;
@@ -50,16 +51,16 @@ class AnswersToggleButton extends Widget
 
     private function renderExpandButton(): string
     {
-        $button = Button::info(Yii::t('QuestionsModule.base', 'Expand all answers ({count})', [
-                'count' => '<span class="questions-answers-count">' . $this->count . '</span>'
-            ]))
+        $button = Button::accent(Yii::t('QuestionsModule.base', 'Expand all answers ({count})', [
+            'count' => '<span class="questions-answers-count">' . $this->count . '</span>',
+        ]))
             ->icon('arrow-down')
             ->action('expand')
             ->sm()->cssClass('active questions-toggle-btn')
             ->loader(false);
 
         if (!$this->isVisibleButton('expand')) {
-            $button->style('display:none');
+            $button->cssClass('d-none');
         }
 
         return $button;

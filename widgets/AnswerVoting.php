@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @link https://www.humhub.org/
  * @copyright Copyright (c) HumHub GmbH & Co. KG
@@ -29,7 +30,7 @@ class AnswerVoting extends Widget
     {
         return $this->render('answer-voting', [
             'answer' => $this->answer,
-            'options' => $this->getOptions()
+            'options' => $this->getOptions(),
         ]);
     }
 

@@ -95,9 +95,9 @@ humhub.module('questions.Answer', function (module, require, $) {
     }
 
     Answer.prototype.toggleList = function (evt, collapse) {
-        this.Question.answersList().toggle(!collapse);
-        this.$.find('.questions-toggle-btn').show();
-        evt.$target.hide();
+        this.Question.answersList().toggleClass('d-none', collapse);
+        this.$.find('.questions-toggle-btn').removeClass('d-none');
+        evt.$target.addClass('d-none');
     }
 
     Answer.prototype.edit = function (evt) {
@@ -134,7 +134,7 @@ humhub.module('questions.Answer', function (module, require, $) {
 
     Answer.prototype.delete = function (evt) {
         const that = this;
-        const answerControls = evt.$target.closest('.nav.preferences');
+        const answerControls = evt.$target.closest('.nav.nav-pills');
 
         loader.set(answerControls, {size: '4px', css: {padding: 0, width: '45px'}});
 

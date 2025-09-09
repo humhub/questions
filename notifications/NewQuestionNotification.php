@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @link https://www.humhub.org/
  * @copyright Copyright (c) HumHub GmbH & Co. KG
@@ -7,7 +8,7 @@
 
 namespace humhub\modules\questions\notifications;
 
-use humhub\libs\Html;
+use humhub\helpers\Html;
 use humhub\modules\notification\components\BaseNotification;
 use humhub\modules\questions\models\Question;
 use humhub\modules\space\models\Space;
@@ -47,13 +48,13 @@ class NewQuestionNotification extends BaseNotification
             return Yii::t('QuestionsModule.base', '{displayName} has created the Question "{contentTitle}" in Space {spaceName}.', [
                 'displayName' => Html::tag('strong', Html::encode($this->originator->displayName)),
                 'contentTitle' => $this->getContentInfo($this->source, false),
-                'spaceName' => Html::encode($this->source->content->container->displayName)
+                'spaceName' => Html::encode($this->source->content->container->displayName),
             ]);
         }
 
         return Yii::t('QuestionsModule.base', '{displayName} has created the Question "{contentTitle}".', [
             'displayName' => Html::tag('strong', Html::encode($this->originator->displayName)),
-            'contentTitle' => $this->getContentInfo($this->source, false)
+            'contentTitle' => $this->getContentInfo($this->source, false),
         ]);
     }
 
@@ -63,7 +64,7 @@ class NewQuestionNotification extends BaseNotification
     public function getMailSubject()
     {
         return Yii::t('QuestionsModule.base', 'New Question "{questionTitle}"', [
-            'questionTitle' => $this->source->question
+            'questionTitle' => $this->source->question,
         ]);
     }
 
@@ -72,7 +73,7 @@ class NewQuestionNotification extends BaseNotification
      */
     public function isBlockedForUser(User $user): bool
     {
-        return !$this->source->content->canView($user) &&
-            parent::isBlockedForUser($user);
+        return !$this->source->content->canView($user)
+            && parent::isBlockedForUser($user);
     }
 }

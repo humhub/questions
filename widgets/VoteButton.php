@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @link https://www.humhub.org/
  * @copyright Copyright (c) HumHub GmbH & Co. KG
@@ -10,7 +11,7 @@ namespace humhub\modules\questions\widgets;
 use humhub\components\Widget;
 use humhub\modules\questions\helpers\Url;
 use humhub\modules\questions\models\QuestionAnswer;
-use humhub\widgets\Button;
+use humhub\widgets\bootstrap\Button;
 use Yii;
 
 class VoteButton extends Widget
@@ -24,9 +25,9 @@ class VoteButton extends Widget
      */
     public function beforeRun()
     {
-        return $this->answer instanceof QuestionAnswer &&
-            $this->answer->question->getAnswerService()->canVote() &&
-            parent::beforeRun();
+        return $this->answer instanceof QuestionAnswer
+            && $this->answer->question->getAnswerService()->canVote()
+            && parent::beforeRun();
     }
 
     /**
@@ -34,7 +35,7 @@ class VoteButton extends Widget
      */
     public function run()
     {
-        return Button::defaultType()
+        return Button::light()
             ->icon($this->getIcon())
             ->action('vote', $this->getUrl())
             ->cssClass($this->getStyleClass())

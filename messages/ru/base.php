@@ -1,11 +1,11 @@
 <?php
 return array (
-  '<strong>Delete</strong> Answer' => '',
-  '<strong>Permalink</strong> to this answer' => '',
+  '<strong>Delete</strong> Answer' => '<strong>Удалить</strong> ответ',
+  '<strong>Permalink</strong> to this answer' => '<strong>Ссылка</strong> на этот ответ',
   '<strong>Questions</strong> settings' => '',
   'Allows to create questions.' => '',
   'Are you sure to delete this Answer?' => '',
-  'BEST ANSWER' => '',
+  'BEST ANSWER' => 'Лучший ответ',
   'Can create questions as well a give answers' => '',
   'Can mark answer as best answer' => '',
   'Can participate in Q&A' => '',

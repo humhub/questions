@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @link https://www.humhub.org/
  * @copyright Copyright (c) HumHub GmbH & Co. KG
@@ -34,7 +35,7 @@ class Answer extends Widget
             'answer' => $this->answer,
             'enableControls' => $this->isDetailView,
             'options' => $this->getOptions(),
-            'contentAttributes' => $this->getContentAttributes()
+            'contentAttributes' => $this->getContentAttributes(),
         ]);
     }
 
@@ -42,7 +43,7 @@ class Answer extends Widget
     {
         return [
             'class' => $this->getStyleClass(),
-            'data-answer' => $this->answer->id
+            'data-answer' => $this->answer->id,
         ];
     }
 

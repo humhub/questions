@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @link https://www.humhub.org/
  * @copyright Copyright (c) HumHub GmbH & Co. KG
@@ -27,8 +28,8 @@ use yii\db\ActiveQuery;
  */
 class QuestionAnswerVote extends ActiveRecord
 {
-    const TYPE_UP = 1;
-    const TYPE_DOWN = -1;
+    public const TYPE_UP = 1;
+    public const TYPE_DOWN = -1;
 
     /**
      * @inheritdoc

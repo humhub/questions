@@ -1,9 +1,19 @@
 Changelog
 =========
 
-1.1.0 (Unreleased)
-------------------------
+1.1.1 (August 9, 2025)
+----------------------
+- Fix: Migration to Bootstrap 5
 - Fix #25: Update module resources path
+
+1.1.0 (July 26, 2025)
+---------------------
+- Enh #29: Enable the feature to move a content to another space
+- Enh #32: Migration to Bootstrap 5 for HumHub 1.18
+
+1.0.7 (October 16, 2024)
+------------------------
+- Enh #26: Use PHP CS Fixer
 
 1.0.6 (March 3, 2023)
 ------------------------

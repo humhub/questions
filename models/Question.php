@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @link https://www.humhub.org/
  * @copyright Copyright (c) HumHub GmbH & Co. KG
@@ -25,7 +26,7 @@ use Yii;
  * Question model class.
  *
  * The followings are the available columns in table 'question':
- * @property integer $id
+ * @property int $id
  * @property string $question
  * @property string $description
  *
@@ -48,6 +49,11 @@ class Question extends ContentActiveRecord implements Searchable
      * @inheritdoc
      */
     public $moduleId = 'questions';
+
+    /**
+     * @inheritdoc
+     */
+    protected $canMove = true;
 
     /**
      * @inheritdoc
@@ -141,7 +147,7 @@ class Question extends ContentActiveRecord implements Searchable
         return [
             'question' => $this->question,
             'description' => $this->description,
-            'itemAnswers' => trim($itemAnswers)
+            'itemAnswers' => trim($itemAnswers),
         ];
     }
 

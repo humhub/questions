@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @link https://www.humhub.org/
  * @copyright Copyright (c) HumHub GmbH & Co. KG
@@ -16,16 +17,15 @@ use Yii;
  */
 class SelectBestAnswer extends BasePermission
 {
-
     /**
      * @inheritdoc
      */
     public $defaultAllowedGroups = [
         Space::USERGROUP_OWNER,
         Space::USERGROUP_ADMIN,
-        Space::USERGROUP_MODERATOR
+        Space::USERGROUP_MODERATOR,
     ];
-    
+
     /**
      * @inheritdoc
      */
@@ -33,7 +33,7 @@ class SelectBestAnswer extends BasePermission
         Space::USERGROUP_OWNER,
         Space::USERGROUP_ADMIN,
         Space::USERGROUP_USER,
-        Space::USERGROUP_GUEST
+        Space::USERGROUP_GUEST,
     ];
 
     /**

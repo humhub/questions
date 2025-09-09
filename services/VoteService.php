@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @link https://www.humhub.org/
  * @copyright Copyright (c) HumHub GmbH & Co. KG
@@ -47,7 +48,7 @@ class VoteService
 
         return QuestionAnswerVote::findOne([
             'answer_id' => $this->answer->id,
-            'user_id' => $user->id
+            'user_id' => $user->id,
         ]);
     }
 
@@ -102,8 +103,8 @@ class VoteService
     {
         $vote = $this->getVote($user);
 
-        return $vote instanceof QuestionAnswerVote &&
-            $vote->is($this->normalizeVoteType($type));
+        return $vote instanceof QuestionAnswerVote
+            && $vote->is($this->normalizeVoteType($type));
     }
 
     public function getQuery(): ActiveQuery
@@ -119,7 +120,7 @@ class VoteService
     public function refreshSummary()
     {
         $this->answer->updateAttributes([
-            'votes_summary' => $this->getSummary()
+            'votes_summary' => $this->getSummary(),
         ]);
     }
 }
