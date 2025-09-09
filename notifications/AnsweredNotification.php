@@ -8,7 +8,7 @@
 
 namespace humhub\modules\questions\notifications;
 
-use humhub\libs\Html;
+use humhub\helpers\Html;
 use humhub\modules\notification\components\BaseNotification;
 use humhub\modules\questions\helpers\Url;
 use humhub\modules\questions\models\QuestionAnswer;
@@ -82,7 +82,7 @@ class AnsweredNotification extends BaseNotification
      */
     public function isBlockedForUser(User $user): bool
     {
-        return !$this->source->question->content->createdBy->is($user) &&
-            parent::isBlockedForUser($user);
+        return !$this->source->question->content->createdBy->is($user)
+            && parent::isBlockedForUser($user);
     }
 }

@@ -5,7 +5,7 @@
  * @license https://www.humhub.com/licences
  */
 
-use humhub\libs\Html;
+use humhub\helpers\Html;
 use humhub\modules\questions\models\Question;
 use humhub\modules\questions\models\QuestionAnswer;
 use humhub\modules\questions\widgets\Answer;

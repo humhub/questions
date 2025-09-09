@@ -117,7 +117,7 @@ humhub.module('questions.Question', function (module, require, $) {
                 const collapseButton = that.$.find('.questions-toggle-btn[data-action-click=collapse]');
                 const expandButton = that.$.find('.questions-toggle-btn[data-action-click=expand]');
                 if (collapseButton.is(':hidden') && expandButton.is(':hidden')) {
-                    collapseButton.show();
+                    collapseButton.removeClass('d-none');
                 }
                 that.answersList().append(response.content);
             } else {

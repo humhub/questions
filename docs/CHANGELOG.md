@@ -1,9 +1,14 @@
 Changelog
 =========
 
-1.0.8 (Unreleased)
-------------------------
+1.1.1 (Unreleased)
+----------------------
+- Fix: Migration to Bootstrap 5
+
+1.1.0 (July 26, 2025)
+---------------------
 - Enh #29: Enable the feature to move a content to another space
+- Enh #32: Migration to Bootstrap 5 for HumHub 1.18
 
 1.0.7 (October 16, 2024)
 ------------------------
