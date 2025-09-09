@@ -9,8 +9,8 @@ use humhub\helpers\Html;
 use humhub\modules\content\widgets\richtext\RichTextField;
 use humhub\modules\questions\helpers\Url;
 use humhub\modules\questions\models\QuestionAnswer;
-use humhub\widgets\form\ActiveForm;
 use humhub\widgets\bootstrap\Button;
+use humhub\widgets\form\ActiveForm;
 
 /* @var QuestionAnswer $answer */
 /* @var array $options */
@@ -32,7 +32,7 @@ use humhub\widgets\bootstrap\Button;
     ])->label($answer->isNewRecord) ?>
 
     <?php if (!$answer->isNewRecord) : ?>
-        <?= Button::danger(Yii::t('QuestionsModule.base', 'Cancel'))
+        <?= Button::light(Yii::t('QuestionsModule.base', 'Cancel'))
             ->action('cancelEdit', Url::toContentAnswer($answer)) ?>
     <?php endif; ?>
 

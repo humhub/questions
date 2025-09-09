@@ -35,12 +35,12 @@ QuestionsAssets::register($this);
             'placeholder' => Yii::t('QuestionsModule.base', 'Question details...')
         ]) ?>
 
+    <?= Button::light(Yii::t('QuestionsModule.base', 'Cancel'))
+        ->action('cancelEditForm') ?>
+
     <?= Button::primary(Yii::t('QuestionsModule.base', 'Save'))
         ->action('submitEditForm', Url::toEditQuestion($question))
         ->submit() ?>
-
-    <?= Button::danger(Yii::t('QuestionsModule.base', 'Cancel'))
-        ->action('cancelEditForm') ?>
 
     <?php ActiveForm::end() ?>
 
