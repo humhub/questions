@@ -45,9 +45,9 @@ class AcceptanceTester extends \AcceptanceTester
     public function provideAnswer(string $answerText)
     {
         $this->waitForText('Provide an answer', 10, '.field-questionanswer-answer');
+        $this->scrollTo('[data-action-click="saveAnswer"]');
         $this->fillField('#answerRichTextField0 .humhub-ui-richtext', $answerText);
         $this->waitForElementVisible('[data-action-click="saveAnswer"]');
-        $this->scrollTo('[data-action-click="saveAnswer"]');
         $this->jsClick('[data-action-click="saveAnswer"]');
         $this->waitForText($answerText, 10, '.questions-answer');
     }
