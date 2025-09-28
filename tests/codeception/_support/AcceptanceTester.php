@@ -48,7 +48,7 @@ class AcceptanceTester extends \AcceptanceTester
         $this->fillField('#answerRichTextField0 .humhub-ui-richtext', $answerText);
         $this->waitForElementVisible('[data-action-click="saveAnswer"]');
         $this->jsClick('[data-action-click="saveAnswer"]');
-        $this->waitForText($answerText, 10, '.except-best-answers');
+        $this->waitForText($answerText, 10, '.questions-answer');
     }
 
     private function getVoteButtonSelector(int $answerId, string $suffix = ''): string
