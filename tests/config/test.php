@@ -10,6 +10,7 @@ use humhub\modules\questions\tests\codeception\fixtures\QuestionFixture;
 
 return [
     'modules' => ['questions'],
+    'humhub_root' => '/app/humhub',
     'fixtures' => [
         'default',
         'question' => QuestionFixture::class,
