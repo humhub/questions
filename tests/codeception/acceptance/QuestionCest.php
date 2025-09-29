@@ -24,9 +24,9 @@ class QuestionCest
         $I->createQuestion('Question headline text?', 'Question description text.');
 
         $I->amGoingTo('provide first Answer from Admin');
-        $I->waitForText('Provide an answer', 10, '.wall-entry');
-        $I->scrollTo('[data-content-component="questions.Question"]');
-        $I->click('[data-content-component="questions.Question"] .btn-accent ');
+        $I->wait(1);
+        $I->scrollTo('.wall-entry-controls ');
+        $I->click('Provide an answer');
         $I->switchToNextTab();
         $I->provideAnswer('First answer text from Admin.');
         $I->cannotVote(1);
@@ -35,9 +35,9 @@ class QuestionCest
         $I->amOnSpace1();
 
         $I->amGoingTo('provide first Answer from Sara');
-        $I->waitForText('Provide an answer', 10, '.wall-entry');
-        $I->scrollTo('[data-content-component="questions.Question"]');
-        $I->click('[data-content-component="questions.Question"] .btn-accent ');
+        $I->wait(1);
+        $I->scrollTo('.wall-entry-controls ');
+        $I->click('Provide an answer');
         $I->switchToNextTab();
         $I->provideAnswer('Second answer text from Sara.');
         $I->cannotVote(2);
