@@ -24,6 +24,7 @@ class QuestionCest
         $I->createQuestion('Question headline text?', 'Question description text.');
 
         $I->amGoingTo('provide first Answer from Admin');
+        $I->scrollTo('[data-content-component="questions.Question"]');
         $I->click('Provide an answer');
         $I->switchToNextTab();
         $I->provideAnswer('First answer text from Admin.');
