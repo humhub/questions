@@ -34,8 +34,8 @@ class QuestionCest
         $I->amOnSpace1();
 
         $I->amGoingTo('provide first Answer from Sara');
-        $I->waitForText('Provide an answer', 10, '.wall-entry');
-        $I->click('Provide an answer');
+        $I->scrollTo('[data-content-component="questions.Question"]');
+        $I->click('[data-content-component="questions.Question"] .btn-accent ');
         $I->switchToNextTab();
         $I->provideAnswer('Second answer text from Sara.');
         $I->cannotVote(2);
