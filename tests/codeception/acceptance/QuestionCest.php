@@ -25,7 +25,7 @@ class QuestionCest
 
         $I->amGoingTo('provide first Answer from Admin');
         $I->scrollTo('[data-content-component="questions.Question"]');
-        $I->click('Provide an answer');
+        $I->click('[data-content-component="questions.Question"] .btn-accent ');
         $I->switchToNextTab();
         $I->provideAnswer('First answer text from Admin.');
         $I->cannotVote(1);
