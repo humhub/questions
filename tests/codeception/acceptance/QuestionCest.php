@@ -54,6 +54,8 @@ class QuestionCest
         $I->amOnSpace1();
 
         $I->waitForText('View all answers (2)', 10, '.wall-entry');
+        $I->wait(1);
+        $I->scrollTo('.wall_humhubmodulesquestionsmodelsQuestion_1');
         $I->click('View all answers (2)');
         $I->switchToNextTab();
 
