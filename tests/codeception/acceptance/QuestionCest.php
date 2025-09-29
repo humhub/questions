@@ -25,8 +25,9 @@ class QuestionCest
 
         $I->amGoingTo('provide first Answer from Admin');
         $I->wait(1);
-        $I->scrollTo('.wall-entry-controls ');
-        $I->click('Provide an answer');
+        $I->scrollTo('.wall-entry-controls');
+        $I->wait(1);
+        $I->click('Provide an answer', '.wall-entry-controls');
         $I->switchToNextTab();
         $I->provideAnswer('First answer text from Admin.');
         $I->cannotVote(1);
@@ -36,8 +37,9 @@ class QuestionCest
 
         $I->amGoingTo('provide first Answer from Sara');
         $I->wait(1);
-        $I->scrollTo('.wall-entry-controls ');
-        $I->click('Provide an answer');
+        $I->scrollTo('.wall-entry-controls');
+        $I->wait(1);
+        $I->click('Provide an answer', '.wall-entry-controls');
         $I->switchToNextTab();
         $I->provideAnswer('Second answer text from Sara.');
         $I->cannotVote(2);
