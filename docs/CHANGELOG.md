@@ -4,6 +4,7 @@ Changelog
 1.1.2 (Unreleased)
 ----------------------
 - Fix: Cancel button color (danger -> light) and position
+- Enh #39: Improved Module Test GitHub Actions
 
 1.1.1 (August 9, 2025)
 ----------------------
