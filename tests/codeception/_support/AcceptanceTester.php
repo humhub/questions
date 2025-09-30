@@ -45,9 +45,14 @@ class AcceptanceTester extends \AcceptanceTester
     public function provideAnswer(string $answerText)
     {
         $this->waitForText('Provide an answer', 10, '.field-questionanswer-answer');
+        $this->scrollTo('[data-action-click="saveAnswer"]');
+        $this->wait(1);
         $this->fillField('#answerRichTextField0 .humhub-ui-richtext', $answerText);
-        $this->click('Save', '.questions-answer-form');
-        $this->waitForText($answerText, 10, '.except-best-answers');
+        $this->wait(1);
+        $this->click('Save');
+        $this->wait(1);
+        $this->scrollTo('.questions-answer');
+        $this->waitForText($answerText, 10);
     }
 
     private function getVoteButtonSelector(int $answerId, string $suffix = ''): string

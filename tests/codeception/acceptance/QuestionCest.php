@@ -24,7 +24,10 @@ class QuestionCest
         $I->createQuestion('Question headline text?', 'Question description text.');
 
         $I->amGoingTo('provide first Answer from Admin');
-        $I->click('Provide an answer');
+        $I->wait(1);
+        $I->scrollTo('.wall_humhubmodulesquestionsmodelsQuestion_1');
+        $I->wait(1);
+        $I->click('Provide an answer', '.wall_humhubmodulesquestionsmodelsQuestion_1');
         $I->switchToNextTab();
         $I->provideAnswer('First answer text from Admin.');
         $I->cannotVote(1);
@@ -33,8 +36,10 @@ class QuestionCest
         $I->amOnSpace1();
 
         $I->amGoingTo('provide first Answer from Sara');
-        $I->waitForText('Provide an answer', 10, '.wall-entry');
-        $I->click('Provide an answer');
+        $I->wait(1);
+        $I->scrollTo('.wall_humhubmodulesquestionsmodelsQuestion_1');
+        $I->wait(1);
+        $I->click('Provide an answer', '.wall_humhubmodulesquestionsmodelsQuestion_1');
         $I->switchToNextTab();
         $I->provideAnswer('Second answer text from Sara.');
         $I->cannotVote(2);
@@ -49,6 +54,9 @@ class QuestionCest
         $I->amOnSpace1();
 
         $I->waitForText('View all answers (2)', 10, '.wall-entry');
+        $I->wait(1);
+        $I->scrollTo('.wall_humhubmodulesquestionsmodelsQuestion_1');
+        $I->wait(1);
         $I->click('View all answers (2)');
         $I->switchToNextTab();
 
