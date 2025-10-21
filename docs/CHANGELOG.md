@@ -5,6 +5,7 @@ Changelog
 ----------------------
 - Fix: Cancel button color (danger -> light) and position
 - Enh #39: Improved Module Test GitHub Actions
+- Enh #40: Implemented `module-coding-standards`
 
 1.1.1 (August 9, 2025)
 ----------------------
