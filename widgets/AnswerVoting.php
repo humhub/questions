@@ -13,7 +13,7 @@ use humhub\modules\questions\models\QuestionAnswer;
 
 class AnswerVoting extends Widget
 {
-    public ?QuestionAnswer $answer;
+    public ?QuestionAnswer $answer = null;
 
     /**
      * @inheritdoc

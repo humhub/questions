@@ -13,7 +13,7 @@ use humhub\modules\questions\models\QuestionAnswer;
 
 class Answer extends Widget
 {
-    public ?QuestionAnswer $answer;
+    public ?QuestionAnswer $answer = null;
 
     public bool $highlight = false;
     public bool $isDetailView = true;

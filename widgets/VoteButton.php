@@ -16,7 +16,7 @@ use Yii;
 
 class VoteButton extends Widget
 {
-    public ?QuestionAnswer $answer;
+    public ?QuestionAnswer $answer = null;
 
     public string $type;
 
