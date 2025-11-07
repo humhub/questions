@@ -17,11 +17,8 @@ use yii\db\ActiveQuery;
 
 class AnswerService
 {
-    public Question $question;
-
-    public function __construct(Question $question)
+    public function __construct(public Question $question)
     {
-        $this->question = $question;
     }
 
     private function getUser(?User $user = null): ?User

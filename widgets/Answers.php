@@ -25,7 +25,7 @@ class Answers extends JsWidget
      */
     public $init = true;
 
-    public ?Question $question;
+    public ?Question $question = null;
 
     public bool $isDetailView = false;
 
