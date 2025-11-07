@@ -16,11 +16,8 @@ use yii\db\ActiveQuery;
 
 class VoteService
 {
-    public QuestionAnswer $answer;
-
-    public function __construct(QuestionAnswer $answer)
+    public function __construct(public QuestionAnswer $answer)
     {
-        $this->answer = $answer;
     }
 
     private function getUser(?User $user = null): ?User

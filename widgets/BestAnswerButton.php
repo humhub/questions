@@ -21,7 +21,7 @@ use Yii;
  */
 class BestAnswerButton extends Widget
 {
-    public ?QuestionAnswer $answer;
+    public ?QuestionAnswer $answer = null;
 
     public bool $allowSelect = true;
 

@@ -13,7 +13,7 @@ use humhub\modules\questions\models\Question;
 
 class AnswersExceptBest extends Widget
 {
-    public ?Question $question;
+    public ?Question $question = null;
 
     public ?int $limit = null;
 
