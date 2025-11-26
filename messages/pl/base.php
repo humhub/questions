@@ -23,7 +23,7 @@ return array (
   'Permalink' => 'Odnośnik',
   'Provide an answer' => 'Dodaj odpowiedź',
   'Provide an answer...' => 'Dodaj odpowiedź...',
-  'Q&A' => 'Q&amp;A',
+  'Q&A' => 'Q&A',
   'Question' => 'Pytanie',
   'Question details...' => 'Szczegóły zapytania...',
   'Question headline...' => 'Nagłówek zapytania...',

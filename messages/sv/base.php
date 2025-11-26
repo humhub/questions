@@ -23,7 +23,7 @@ return array (
   'Permalink' => 'Permalänk',
   'Provide an answer' => 'Bidra med ett svar',
   'Provide an answer...' => 'Bidra med ett svar...',
-  'Q&A' => 'Q&amp;A',
+  'Q&A' => 'Q&A',
   'Question' => 'Fråga',
   'Question details...' => 'Frågedetaljer...',
   'Question headline...' => 'Frågerubrik...',
