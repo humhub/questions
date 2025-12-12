@@ -31,7 +31,7 @@ class Url extends BaseUrl
     public const ROUTE_ANSWER_SELECT_BEST = self::ROUTE_ANSWER . '/select-best';
     public const ROUTE_ANSWER_DELETE = self::ROUTE_ANSWER . '/delete';
 
-    private static function create($route, $params = [], ContentContainerActiveRecord $container = null, bool $scheme = false)
+    private static function create($route, $params = [], ?ContentContainerActiveRecord $container = null, bool $scheme = false)
     {
         if ($container) {
             return $container->createUrl($route, $params, $scheme);
