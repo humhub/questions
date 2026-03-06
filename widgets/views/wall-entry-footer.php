@@ -43,6 +43,7 @@ QuestionsAssets::register($this);
             ->link(Url::toViewAnswers($question))
             ->options(['target' => '_blank'])
             ->outline()
+            ->encodeLabel(false)
             ->loader(false) ?>
     <?php endif; ?>
 

@@ -44,7 +44,8 @@ class BestAnswerButton extends Widget
             $button->action('best', Url::toSelectBestAnswer($this->answer))
                 ->tooltip($this->answer->is_best
                     ? Yii::t('QuestionsModule.base', 'Unselect best answer')
-                    : Yii::t('QuestionsModule.base', 'Select best answer'));
+                    : Yii::t('QuestionsModule.base', 'Select best answer'))
+                ->link->encodeLabel(false);
         }
 
         return Html::tag('div', $button, ['class' => 'questions-best-answer-button']);

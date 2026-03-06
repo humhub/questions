@@ -40,6 +40,7 @@ class AnswersToggleButton extends Widget
             ->icon('arrow-up')
             ->action('collapse')
             ->sm()->cssClass('active questions-toggle-btn')
+            ->encodeLabel(false)
             ->loader(false);
 
         if (!$this->isVisibleButton('collapse')) {
@@ -57,6 +58,7 @@ class AnswersToggleButton extends Widget
             ->icon('arrow-down')
             ->action('expand')
             ->sm()->cssClass('active questions-toggle-btn')
+            ->encodeLabel(false)
             ->loader(false);
 
         if (!$this->isVisibleButton('expand')) {
