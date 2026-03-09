@@ -7,6 +7,7 @@ Changelog
 - Enh #39: Improved Module Test GitHub Actions
 - Enh #40: Implemented `module-coding-standards`
 - Fix #45: Fix translation messages
+- Fix #49: Fix labels encoding
 
 1.1.1 (August 9, 2025)
 ----------------------
