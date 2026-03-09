@@ -1,8 +1,8 @@
 Changelog
 =========
 
-1.1.2 (Unreleased)
-----------------------
+1.1.2 (March 9, 2026)
+---------------------
 - Fix: Cancel button color (danger -> light) and position
 - Enh #39: Improved Module Test GitHub Actions
 - Enh #40: Implemented `module-coding-standards`
