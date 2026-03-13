@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.1.3 (Unreleased)
+---------------------
+- Fix #51: Remove deprecations
+
 1.1.2 (March 9, 2026)
 ---------------------
 - Fix: Cancel button color (danger -> light) and position

@@ -14,7 +14,6 @@ use humhub\modules\questions\notifications\NewQuestionNotification;
 use humhub\modules\questions\permissions\CreateQuestion;
 use humhub\modules\questions\services\AnswerService;
 use humhub\modules\questions\widgets\WallEntry;
-use humhub\modules\search\interfaces\Searchable;
 use humhub\modules\content\components\ContentActiveRecord;
 use humhub\modules\space\models\Membership;
 use humhub\modules\space\models\Space;
@@ -33,7 +32,7 @@ use Yii;
  * @package humhub.modules.questions.models
  * @author Luke
  */
-class Question extends ContentActiveRecord implements Searchable
+class Question extends ContentActiveRecord
 {
     /**
      * @inheritdoc
