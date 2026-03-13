@@ -103,7 +103,7 @@ class QuestionAnswer extends ActiveRecord
         }
 
         // Global Admin can edit arbitrarily content
-        if (Yii::$app->getModule('content')->adminCanEditAllContent && $user->isSystemAdmin()) {
+        if (Yii::$app->getModule('admin')->enableManageAllContentPermission && $user->isSystemAdmin()) {
             return true;
         }
 

@@ -7,7 +7,6 @@
 
 use humhub\helpers\Html;
 use humhub\modules\ui\menu\MenuEntry;
-use humhub\widgets\bootstrap\Badge;
 
 /* @var MenuEntry[] $entries */
 /* @var array $options */
