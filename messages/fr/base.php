@@ -1,5 +1,5 @@
 <?php
-return array (
+return [
   '<strong>Delete</strong> Answer' => '<strong>Supprimer</strong> la réponse',
   '<strong>Permalink</strong> to this answer' => '<strong>Permalien</strong> vers cette réponse',
   '<strong>Questions</strong> settings' => 'Paramètres des <strong>questions</strong>',
@@ -23,11 +23,11 @@ return array (
   'Permalink' => 'Permalien',
   'Provide an answer' => 'Fournir une réponse',
   'Provide an answer...' => 'Fournir une réponse...',
-  'Q&A' => 'FAQ',
+  'Q&A' => 'Q&R',
   'Question' => 'Question',
   'Question details...' => 'Détails de la question...',
   'Question headline...' => 'Titre de la question...',
-  'Questions and Answers' => 'Foire Aux Questions',
+  'Questions and Answers' => 'Questions et réponses',
   'Questions details...' => 'Détails de la question...',
   'Receive notifications when a Question is created or your questions are answered.' => 'Recevoir des notifications lorsque une question est créée ou que vos questions reçoivent des réponses.',
   'Save' => 'Enregistrer',
@@ -43,4 +43,4 @@ return array (
   '{displayName} has answered your Question "{contentTitle}".' => '{displayName} a répondu à votre question « {contentTitle} ».',
   '{displayName} has created the Question "{contentTitle}" in Space {spaceName}.' => '{displayName} a posé la question « {contentTitle} » dans l’Espace {spaceName}.',
   '{displayName} has created the Question "{contentTitle}".' => '{displayName} a posé la question « {contentTitle} ».',
-);
+];
