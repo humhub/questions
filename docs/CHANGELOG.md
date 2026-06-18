@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.1.3 (Unreleased)
+1.1.3 (June 18, 2026)
 ---------------------
 - Fix #51: Remove deprecations
 
