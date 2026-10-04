@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.1.4 (Unreleased)
+------------------
+- Fix: Refined answer form handling
+
 1.1.3 (June 18, 2026)
 ---------------------
 - Fix #51: Remove deprecations

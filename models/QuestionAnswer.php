@@ -52,8 +52,8 @@ class QuestionAnswer extends ActiveRecord
     public function rules()
     {
         return [
-            [['question_id', 'answer'], 'required'],
-            [['question_id'], 'integer'],
+            [['!question_id', 'answer'], 'required'],
+            [['!question_id'], 'integer'],
             [['answer'], 'string'],
         ];
     }
