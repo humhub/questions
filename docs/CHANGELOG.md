@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.1.4 (Unreleased)
+---------------------
+- Fix #54: Extra spaces around the answer count in buttons ("( 2 )") caused by the flex layout of buttons in 1.19
+
 1.1.3 (June 18, 2026)
 ---------------------
 - Fix #51: Remove deprecations
