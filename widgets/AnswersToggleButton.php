@@ -34,9 +34,9 @@ class AnswersToggleButton extends Widget
 
     private function renderCollapseButton(): string
     {
-        $button = Button::accent(Yii::t('QuestionsModule.base', 'Collapse all answers ({count})', [
+        $button = Button::accent('<span>' . Yii::t('QuestionsModule.base', 'Collapse all answers ({count})', [
             'count' => '<span class="questions-answers-count">' . $this->count . '</span>',
-        ]))
+        ]) . '</span>')
             ->icon('arrow-up')
             ->action('collapse')
             ->sm()->cssClass('active questions-toggle-btn')
@@ -52,9 +52,9 @@ class AnswersToggleButton extends Widget
 
     private function renderExpandButton(): string
     {
-        $button = Button::accent(Yii::t('QuestionsModule.base', 'Expand all answers ({count})', [
+        $button = Button::accent('<span>' . Yii::t('QuestionsModule.base', 'Expand all answers ({count})', [
             'count' => '<span class="questions-answers-count">' . $this->count . '</span>',
-        ]))
+        ]) . '</span>')
             ->icon('arrow-down')
             ->action('expand')
             ->sm()->cssClass('active questions-toggle-btn')

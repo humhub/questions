@@ -37,9 +37,9 @@ QuestionsAssets::register($this);
                 ->loader(false) ?>
         <?php endif; ?>
 
-        <?= Button::accent(Yii::t('QuestionsModule.base', 'View all answers ({count})', [
+        <?= Button::accent('<span>' . Yii::t('QuestionsModule.base', 'View all answers ({count})', [
                 'count' => '<span class="questions-answers-count">' . $question->getAnswerService()->getCount() . '</span>'
-            ]))
+            ]) . '</span>')
             ->link(Url::toViewAnswers($question))
             ->options(['target' => '_blank'])
             ->outline()
