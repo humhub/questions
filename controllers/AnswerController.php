@@ -80,7 +80,7 @@ class AnswerController extends ContentContainerController
             throw new NotFoundHttpException();
         }
 
-        if (!$answer->canEdit()) {
+        if (!$question->content->canView() || !$question->isAnswerable() || !$answer->canEdit()) {
             throw new ForbiddenHttpException('Access denied!');
         }
 
@@ -120,7 +120,7 @@ class AnswerController extends ContentContainerController
             throw new NotFoundHttpException();
         }
 
-        if (!$answer->getVoteService()->canVote()) {
+        if (!$answer->question->content->canView() || !$answer->getVoteService()->canVote()) {
             throw new ForbiddenHttpException();
         }
 
@@ -153,7 +153,7 @@ class AnswerController extends ContentContainerController
             throw new NotFoundHttpException();
         }
 
-        if (!$question->getAnswerService()->canSelectBest()) {
+        if (!$question->content->canView() || !$question->getAnswerService()->canSelectBest()) {
             throw new ForbiddenHttpException();
         }
 
@@ -180,13 +180,15 @@ class AnswerController extends ContentContainerController
      */
     public function actionDelete($id)
     {
+        $this->forcePostRequest();
+
         $answer = QuestionAnswer::findOne($id);
 
         if ($answer === null) {
             throw new NotFoundHttpException();
         }
 
-        if (!$answer->canEdit()) {
+        if (!$answer->question->content->canView() || !$answer->canEdit()) {
             throw new ForbiddenHttpException('Access denied!');
         }
 

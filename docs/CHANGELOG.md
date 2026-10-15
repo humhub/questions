@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.1.6 (Unreleased)
+------------------
+- Fix #55: Missing access checks in answer actions; XSS in answer author name; Answer deletion via GET; Answers accepted on archived questions
+
 1.1.5 (October 13, 2026)
 ------------------------
 - Fix #54: Extra spaces around the answer count in buttons ("( 2 )") caused by the flex layout of buttons in 1.19

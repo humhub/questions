@@ -77,7 +77,7 @@ class AnswerService
     {
         $user = $this->getUser($user);
 
-        if ($user === null) {
+        if ($user === null || !$this->question->isAnswerable()) {
             return false;
         }
 
@@ -115,6 +115,6 @@ class AnswerService
 
     public function canVote(?User $user = null): bool
     {
-        return $this->getUser($user) instanceof User;
+        return $this->question->isAnswerable() && $this->getUser($user) instanceof User;
     }
 }

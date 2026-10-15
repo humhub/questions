@@ -155,9 +155,17 @@ class Question extends ContentActiveRecord
         return new AnswerService($this);
     }
 
+    /**
+     * Answers can be added, edited, voted and selected as the best one only for a published and not archived question.
+     */
+    public function isAnswerable(): bool
+    {
+        return $this->content->getStateService()->isPublished() && !$this->content->isArchived();
+    }
+
     public function canAnswer($user = null): bool
     {
-        return (new QuestionAnswer(['question_id' => $this->id]))->canEdit($user);
+        return $this->isAnswerable() && (new QuestionAnswer(['question_id' => $this->id]))->canEdit($user);
     }
 
     public function getUrl(): string
