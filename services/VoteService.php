@@ -33,7 +33,9 @@ class VoteService
     {
         $user = $this->getUser($user);
 
-        return $user instanceof User && $user->id !== $this->answer->created_by;
+        return $user instanceof User
+            && $user->id !== $this->answer->created_by
+            && $this->answer->question->isAnswerable();
     }
 
     public function getVote(?User $user = null): ?QuestionAnswerVote

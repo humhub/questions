@@ -32,7 +32,7 @@ use humhub\widgets\TimeAgo;
                 'user' => $answer->createdBy,
                 'width' => 29
             ]) ?>
-            <strong><?= $answer->createdBy->displayName ?></strong>
+            <strong><?= Html::encode($answer->createdBy->displayName) ?></strong>
             &middot;
             <small><?= Yii::t('QuestionsModule.base', 'answered {date}', [
                 'date' => TimeAgo::widget(['timestamp' => $answer->created_at])

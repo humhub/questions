@@ -24,7 +24,7 @@ QuestionsAssets::register($this);
 ?>
 <?= Html::beginTag('div', $options) ?>
 
-    <?php if ($isDetailView) : ?>
+    <?php if ($isDetailView && $question->canAnswer()) : ?>
         <?= AnswerForm::widget(['question' => $question]) ?>
     <?php endif; ?>
 
