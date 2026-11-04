@@ -1,8 +1,8 @@
 Changelog
 =========
 
-1.1.6 (Unreleased)
-------------------
+1.1.6 (November 4, 2026)
+------------------------
 - Fix #55: Missing access checks in answer actions; XSS in answer author name; Answer deletion via GET; Answers accepted on archived questions
 
 1.1.5 (October 13, 2026)
