@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.2.0 (Unreleased)
+------------------
+- Enh: Colour tokens of the core 1.20 instead of the deprecated ones (humhub/humhub#8707)
+
 1.1.6 (November 4, 2026)
 ------------------------
 - Fix #55: Missing access checks in answer actions; XSS in answer author name; Answer deletion via GET; Answers accepted on archived questions
