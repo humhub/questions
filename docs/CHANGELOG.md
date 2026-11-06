@@ -3,6 +3,7 @@ Changelog
 
 1.2.0 (Unreleased)
 ------------------
+- Enh: Dark mode: hard-coded greys and light backgrounds became colour tokens of the core (humhub/humhub#8710)
 - Enh: Colour tokens of the core 1.20 instead of the deprecated ones (humhub/humhub#8707)
 
 1.1.6 (November 4, 2026)

@@ -30,16 +30,16 @@
   border-color: var(--bs-danger);
 }
 .questions-answer.questions-best-answer .questions-answer-voting button {
-  background: #fff;
+  background: var(--bs-body-bg);
 }
 .questions-answer.questions-best-answer .questions-answer-voting button.active, .questions-answer.questions-best-answer .questions-answer-voting button:active, .questions-answer.questions-best-answer .questions-answer-voting button:hover {
-  background: #bce3e8;
+  background: var(--bs-accent-bg-subtle);
 }
 .questions-answer.questions-best-answer .questions-answer-voting button.active:hover {
-  background: #fff;
+  background: var(--bs-body-bg);
 }
 .questions-answer.questions-highlight-answer {
-  background: #FFF8E0;
+  background: var(--bs-highlight-bg);
 }
 .questions-answer.questions-deleted-answer {
   transition: none;
@@ -52,20 +52,20 @@
 .questions-answer-voting button {
   width: 32px;
   height: 32px;
-  background: #f3f3f3;
+  background: var(--bs-secondary-bg);
   border-radius: 8px;
   box-shadow: none;
 }
 .questions-answer-voting button.active, .questions-answer-voting button:active, .questions-answer-voting button:hover {
-  background: #bce3e8;
+  background: var(--bs-accent-bg-subtle);
   box-shadow: none;
 }
 .questions-answer-voting button.active:hover {
-  background: #f3f3f3;
+  background: var(--bs-secondary-bg);
 }
 .questions-answer-voting button .fa {
   font-size: 24px;
-  color: #333;
+  color: var(--bs-emphasis-color);
   position: relative;
   top: -5px;
   left: -7px;
