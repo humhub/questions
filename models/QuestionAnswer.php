@@ -114,10 +114,11 @@ class QuestionAnswer extends ActiveRecord
     public function sendNotification(bool $isNewRecord = false)
     {
         if ($isNewRecord) {
-            Yii::createObject(['class' => AnsweredNotification::class])
-                ->from(Yii::$app->user->getIdentity())
-                ->about($this)
-                ->sendBulk($this->question->content->getCreatedBy());
+            AnsweredNotification::send(
+                $this->question->content->createdBy,
+                source: $this,
+                originator: Yii::$app->user->getIdentity(),
+            );
         }
     }
 

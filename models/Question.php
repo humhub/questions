@@ -176,10 +176,11 @@ class Question extends ContentActiveRecord
     public function sendNotification(bool $isNewRecord = false)
     {
         if ($isNewRecord) {
-            Yii::createObject(['class' => NewQuestionNotification::class])
-                ->from(Yii::$app->user->getIdentity())
-                ->about($this)
-                ->sendBulk($this->getNotificationUserQuery());
+            NewQuestionNotification::send(
+                $this->getNotificationUserQuery(),
+                source: $this,
+                originator: Yii::$app->user->getIdentity(),
+            );
         }
     }
 

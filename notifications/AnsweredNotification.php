@@ -8,81 +8,76 @@
 
 namespace humhub\modules\questions\notifications;
 
-use humhub\helpers\Html;
-use humhub\modules\notification\components\BaseNotification;
+use humhub\modules\content\interfaces\ContentOwner;
+use humhub\modules\notification\components\MessageParam;
 use humhub\modules\questions\helpers\Url;
+use humhub\modules\questions\models\Question;
 use humhub\modules\questions\models\QuestionAnswer;
 use humhub\modules\space\models\Space;
-use humhub\modules\user\models\User;
 use Yii;
 
 /**
- * Class AnsweredNotification to notify answered to own Questions
+ * Notifies the author of a Question that it was answered. The source is the answer, so the
+ * notification goes with it when the answer is deleted.
  */
-class AnsweredNotification extends BaseNotification
+final class AnsweredNotification extends AbstractQuestionNotification
 {
-    /**
-     * @inheritdoc
-     */
-    public $moduleId = 'questions';
-
-    /**
-     * @inheritdoc
-     * @var QuestionAnswer
-     */
-    public $source;
-
-    /**
-     * @inheritdoc
-     */
-    public function category()
+    protected function getMessage(array $params): string
     {
-        return new QuestionNotificationCategory();
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function html()
-    {
-        if ($this->source->question->content->container instanceof Space) {
-            return Yii::t('QuestionsModule.base', '{displayName} has answered your Question "{contentTitle}" in Space {spaceName}.', [
-                'displayName' => Html::tag('strong', Html::encode($this->originator->displayName)),
-                'contentTitle' => $this->getContentInfo($this->source->question, false),
-                'spaceName' => Html::encode($this->source->question->content->container->displayName),
-            ]);
+        if (isset($params['spaceName'])) {
+            return Yii::t('QuestionsModule.base', '{displayName} has answered your Question "{contentTitle}" in Space {spaceName}.', $params);
         }
 
-        return Yii::t('QuestionsModule.base', '{displayName} has answered your Question "{contentTitle}".', [
-            'displayName' => Html::tag('strong', Html::encode($this->originator->displayName)),
-            'contentTitle' => $this->getContentInfo($this->source->question, false),
-        ]);
+        return Yii::t('QuestionsModule.base', '{displayName} has answered your Question "{contentTitle}".', $params);
+    }
+
+    protected function getMessageParams(): array
+    {
+        $question = $this->getQuestion();
+
+        return [
+            'contentTitle' => $question !== null ? MessageParam::content($question, withType: false) : '',
+            'questionTitle' => MessageParam::text((string) $question?->question),
+        ];
+    }
+
+    protected function getMailSubject(array $params): string
+    {
+        return Yii::t('QuestionsModule.base', 'New answer to your Question "{questionTitle}"', $params);
+    }
+
+    public function getUrl(bool $scheme = false): ?string
+    {
+        $answer = $this->getAnswer();
+
+        return $answer !== null ? Url::toViewAnswer($answer, $scheme) : null;
     }
 
     /**
-     * @inheritdoc
+     * The Question the preview under the sentence is about.
      */
-    public function getMailSubject()
+    public function getSubjectRecord(): ?ContentOwner
     {
-        return Yii::t('QuestionsModule.base', 'New answer to your Question "{questionTitle}"', [
-            'questionTitle' => $this->source->question->question,
-        ]);
+        return $this->getQuestion();
     }
 
     /**
-     * @inheritdoc
+     * The Space of the Question, as the answer itself has no container.
      */
-    public function getUrl()
+    public function getSpace(): ?Space
     {
-        return Url::toViewAnswer($this->source);
+        $container = $this->getQuestion()?->content->container;
+
+        return $container instanceof Space ? $container : null;
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function isBlockedForUser(User $user): bool
+    private function getAnswer(): ?QuestionAnswer
     {
-        return !$this->source->question->content->createdBy->is($user)
-            && parent::isBlockedForUser($user);
+        return $this->sourceRecord instanceof QuestionAnswer ? $this->sourceRecord : null;
+    }
+
+    private function getQuestion(): ?Question
+    {
+        return $this->getAnswer()?->question;
     }
 }
