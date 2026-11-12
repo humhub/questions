@@ -8,12 +8,12 @@
 
 namespace humhub\modules\questions\controllers;
 
+use humhub\modules\content\actions\StreamEntryResponse;
 use humhub\modules\content\components\ContentContainerController;
 use humhub\modules\content\widgets\stream\WallStreamEntryOptions;
 use humhub\modules\questions\models\Question;
 use humhub\modules\questions\widgets\AnswersExceptBest;
 use humhub\modules\questions\widgets\WallCreateForm;
-use humhub\modules\stream\actions\StreamEntryResponse;
 use Yii;
 use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;

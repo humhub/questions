@@ -10,8 +10,8 @@ namespace humhub\modules\questions\widgets;
 
 use humhub\modules\questions\helpers\Url;
 use humhub\modules\questions\models\QuestionAnswer;
-use humhub\modules\ui\menu\MenuLink;
-use humhub\modules\ui\menu\widgets\Menu;
+use humhub\widgets\menu\Menu;
+use humhub\widgets\menu\MenuLink;
 use Yii;
 
 class AnswerControls extends Menu

@@ -6,7 +6,7 @@
   display: flex;
   margin: 0 -5px;
   padding: 20px 5px;
-  border-top: 1px solid var(--hh-border-color-strong);
+  border-top: 1px solid var(--bs-border-color);
   transition: border, background 2s ease;
 }
 .questions-answer .questions-answer-header {
@@ -63,14 +63,14 @@
 .questions-answer-voting button.active:hover {
   background: var(--bs-secondary-bg);
 }
-.questions-answer-voting button .fa {
+.questions-answer-voting button .ti {
   font-size: 24px;
   color: var(--bs-emphasis-color);
   position: relative;
   top: -5px;
   left: -7px;
 }
-.questions-answer-voting button .fa.fa-caret-down {
+.questions-answer-voting button .ti.ti-caret-down-filled {
   margin-top: 2px;
 }
 .questions-answer-voting div {
@@ -110,4 +110,6 @@
 .questions-anchor {
   position: relative;
   top: -120px;
-}/*# sourceMappingURL=questions.css.map */
+}
+
+/*# sourceMappingURL=questions.css.map */

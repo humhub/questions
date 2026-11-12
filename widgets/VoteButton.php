@@ -46,7 +46,7 @@ class VoteButton extends Widget
 
     private function getIcon(): string
     {
-        return $this->type === 'up' ? 'caret-up' : 'caret-down';
+        return $this->type === 'up' ? 'caret-up-filled' : 'caret-down-filled';
     }
 
     private function getUrl(): string

@@ -6,7 +6,7 @@
   display: flex;
   margin: 0 -5px;
   padding: 20px 5px;
-  border-top: 1px solid var(--hh-border-color-strong);
+  border-top: 1px solid var(--bs-border-color);
   transition: border, background 2s ease;
   .questions-answer-header {
     padding-bottom: 10px;
@@ -61,13 +61,13 @@
     &.active:hover {
       background: var(--bs-secondary-bg);
     }
-    .fa {
+    .ti {
       font-size: 24px;
       color: var(--bs-emphasis-color);
       position: relative;
       top: -5px;
       left: -7px;
-      &.fa-caret-down {
+      &.ti-caret-down-filled {
         margin-top: 2px;
       }
     }

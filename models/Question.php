@@ -67,7 +67,7 @@ class Question extends ContentActiveRecord
      */
     public function getIcon()
     {
-        return 'fa-question-circle';
+        return 'help-circle';
     }
 
     /**
