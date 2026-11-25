@@ -1,25 +1,25 @@
 .questions-answers {
-  margin-top: 20px;
+  margin-top: 1rem;
 }
 
 .questions-answer {
   display: flex;
-  margin: 0 -5px;
-  padding: 20px 5px;
+  margin: 0 -0.25rem;
+  padding: 1rem 0.25rem;
   border-top: 1px solid var(--bs-border-color);
   transition: border, background 2s ease;
 }
 .questions-answer .questions-answer-header {
-  padding-bottom: 10px;
+  padding-bottom: 0.5rem;
 }
 .questions-answer .questions-answer-header .nav.preferences {
-  top: -15px;
+  top: -1rem;
   right: 0;
 }
 .questions-answer.questions-best-answer {
-  border-radius: 4px;
-  margin: 20px -10px;
-  padding: 20px 10px;
+  border-radius: var(--bs-border-radius-sm);
+  margin: 1rem -0.5rem;
+  padding: 1rem 0.5rem;
   border: 1px solid var(--bs-info);
   background: var(--hh-accent-bg-soft);
 }
@@ -47,13 +47,13 @@
 }
 
 .questions-answer-voting {
-  width: 32px;
+  width: 2rem;
 }
 .questions-answer-voting button {
-  width: 32px;
-  height: 32px;
+  width: 2rem;
+  height: 2rem;
   background: var(--bs-secondary-bg);
-  border-radius: 8px;
+  border-radius: var(--bs-border-radius-lg);
   box-shadow: none;
 }
 .questions-answer-voting button.active, .questions-answer-voting button:active, .questions-answer-voting button:hover {
@@ -64,25 +64,25 @@
   background: var(--bs-secondary-bg);
 }
 .questions-answer-voting button .ti {
-  font-size: 24px;
+  font-size: 1.5rem;
   color: var(--bs-emphasis-color);
   position: relative;
-  top: -5px;
-  left: -7px;
+  top: -0.3125rem;
+  left: -0.4375rem;
 }
 .questions-answer-voting button .ti.ti-caret-down-filled {
-  margin-top: 2px;
+  margin-top: 0.125rem;
 }
 .questions-answer-voting div {
   text-align: center;
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: 600;
-  padding: 5px 0;
+  padding: 0.25rem 0;
 }
 
 .questions-answer-content {
   width: 100%;
-  padding-left: 10px;
+  padding-left: 0.5rem;
   position: relative;
 }
 .questions-answer-content:hover .questions-best-answer-button {
@@ -90,13 +90,13 @@
 }
 .questions-answer-content .questions-best-answer-button {
   position: absolute;
-  top: -14px;
-  right: 25px;
+  top: -0.875rem;
+  right: 1.5rem;
   display: none;
 }
 .questions-answer-content .questions-best-answer-button span {
-  font-size: 13px !important;
-  font-weight: normal;
+  font-size: var(--hh-font-size-meta) !important;
+  font-weight: 400;
 }
 
 .questions-answer-form .ProsemirrorEditor .ProseMirror {
@@ -104,12 +104,12 @@
 }
 
 .questions-toggle-btn {
-  margin-bottom: 20px;
+  margin-bottom: 1rem;
 }
 
 .questions-anchor {
   position: relative;
-  top: -120px;
+  top: -7.5rem;
 }
 
 /*# sourceMappingURL=questions.css.map */

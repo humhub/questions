@@ -12,11 +12,11 @@ use humhub\widgets\form\ActiveForm;
 
 /* @var ContainerSettings $settings */
 ?>
-<div class="panel panel-default">
+<div class="card content-card">
 
-    <div class="panel-heading"><?= Yii::t('QuestionsModule.base', '<strong>Questions</strong> settings') ?></div>
+    <div class="card-header"><div class="card-title"><?= Yii::t('QuestionsModule.base', '<strong>Questions</strong> settings') ?></div></div>
 
-    <div class="panel-body">
+    <div class="card-body">
         <?php $form = ActiveForm::begin() ?>
         <div class="form-text">
             <?= $settings->contentContainer instanceof Space
